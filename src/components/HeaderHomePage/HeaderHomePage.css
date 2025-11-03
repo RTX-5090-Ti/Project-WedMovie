@@ -1,0 +1,10 @@
+.search {
+  border: 1px solid rgb(255, 255, 255, 0.2);
+  padding: 6px 15px;
+  border-radius: 8px;
+  background-color: transparent;
+  transition: border-color 0.2s linear;
+}
+.search:focus-within {
+  border-color: rgb(255, 255, 255, 0.7);
+}

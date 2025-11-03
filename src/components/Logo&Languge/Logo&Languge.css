@@ -1,0 +1,85 @@
+.head {
+  /* background-color: white; */
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 50px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+}
+
+/* .language {
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background-color: transparent;
+  color: white;
+}
+.language option {
+  background-color: transparent;
+  color: red;
+} */
+.custom-select {
+  position: relative;
+  width: 150px;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.selected {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.2s;
+}
+
+.selected:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.options {
+  list-style: none;
+  margin: 5px 0 0;
+  padding: 0;
+  position: absolute;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  animation: fadeIn 0.2s ease;
+}
+
+.options li {
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.options li:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
