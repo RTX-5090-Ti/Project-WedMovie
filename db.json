@@ -21,8 +21,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/durty-carnival/A-Dirty-CarnivalPOSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/durty-carnival/DVD-A-DIRTY-CARNIVAL-SMALLPOSETR.webp",
+      "poster": "/images/data-json-imgs/durty-carnival/A-Dirty-CarnivalPOSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/durty-carnival/DVD-A-DIRTY-CARNIVAL-SMALLPOSETR.webp",
       "genres": [
         {
           "en": "Action",
@@ -37,7 +37,7 @@
         "en": "A notorious gangster in a small town. Although he has a strong position in the underworld, he only sees this job as a means to earn a living to help his family. After losing his father, his whole family, including his sickly mother and his young underlings, depend on Byeong Du. ",
         "vi": "Một gangster khét tiếng tại một thị trấn nhỏ. Tuy có chỗ đứng vững chắc trong giới xã hội đen, anh ta chỉ xem công việc này là công cụ mưu sinh để giúp đỡ gia đình. Mất bố, cả gia đình gồm người mẹ đau ốm quanh năm cùng đàn em nheo nhóc đều trông cậy vào Byeong Du."
       },
-      "backdrop": "./public/images/data-json-imgs/durty-carnival/mariem-bousselmi-dirty-BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/durty-carnival/mariem-bousselmi-dirty-BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=IyJs-zScIHE",
       "duration": "2h 21m",
       "rating": 7.3,
@@ -60,8 +60,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/prisoner-of-war/Prisoner-of-WarPOSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/prisoner-of-war/Prisoner-of-WarSMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/prisoner-of-war/Prisoner-of-WarPOSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/prisoner-of-war/Prisoner-of-WarSMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Action",
@@ -76,7 +76,7 @@
         "en": "James Wright, a British Royal Air Force squadron leader, was captured by the Japanese during World War II and forced into brutal hand-to-hand combat. What the Japanese soldiers didn't expect was that, with years of martial arts training in Hong Kong, Wright would become a formidable opponent.",
         "vi": "James Wright, chỉ huy phi đội Không quân Hoàng gia Anh, bị quân Nhật bắt giữ trong Thế chiến II và buộc phải tham gia những trận chiến tay đôi tàn khốc. Nhưng những người lính Nhật không ngờ rằng, với nhiều năm khổ luyện võ thuật ở Hồng Kông, Wright trở thành một đối thủ đáng gờm."
       },
-      "backdrop": "./public/images/data-json-imgs/prisoner-of-war/Prisoner-of-WarBACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/prisoner-of-war/Prisoner-of-WarBACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=M1WEz2oZvfM",
       "duration": "1h 53m",
       "rating": 5.7,
@@ -103,8 +103,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/nobody-2/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/nobody-2/SMALLPPOSTER.webp",
+      "poster": "/images/data-json-imgs/nobody-2/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/nobody-2/SMALLPPOSTER.webp",
       "genres": [
         {
           "en": "Action",
@@ -119,7 +119,7 @@
         "en": "Odenkirk plays Hutch Mansell, a seemingly normal father with a dangerous past as an assassin. After the events of the first film, Hutch and his family decide to enjoy a peaceful vacation. However, his dark past quickly returns, bringing with it new threats.",
         "vi": "Odenkirk trong vai Hutch Mansell – người cha tưởng chừng bình thường nhưng ẩn chứa quá khứ sát thủ đầy nguy hiểm. Sau những sự kiện trong phần đầu tiên, Hutch cùng gia đình quyết định tận hưởng một kỳ nghỉ yên bình. Tuy nhiên, quá khứ đen tối của anh nhanh chóng quay trở lại, kéo theo những mối đe dọa mới."
       },
-      "backdrop": "./public/images/data-json-imgs/nobody-2/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/nobody-2/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=GsqO-OiZs3w",
       "duration": "1h 29m",
       "rating": 6.3,
@@ -142,8 +142,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/osiris/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/osiris/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/osiris/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/osiris/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Action",
@@ -162,7 +162,7 @@
         "en": "A team of commandos is abducted by a mysterious spaceship mid-mission. When they wake up on the ship, they find themselves prey to a bloodthirsty alien species — and a brutal fight for survival begins.",
         "vi": "Một đội biệt kích đang thực hiện nhiệm vụ thì bất ngờ bị một con tàu vũ trụ bí ẩn bắt cóc giữa chừng. Khi tỉnh dậy trên con tàu, họ phát hiện ra mình đã trở thành con mồi cho một chủng loài ngoài hành tinh khát máu — và cuộc chiến sinh tồn ác liệt bắt đầu từ đây."
       },
-      "backdrop": "./public/images/data-json-imgs/osiris/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/osiris/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=NX8xhgrMvdc",
       "duration": "1h 45m",
       "rating": 4.7,
@@ -189,8 +189,8 @@
         "vi": "Indonesia, Singapore"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/monster-island/POSTER.webp",
-      "smallPoster": "./public/images/data-json-imgs/monster-island/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/monster-island/POSTER.webp",
+      "smallPoster": "/images/data-json-imgs/monster-island/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Action",
@@ -213,7 +213,7 @@
         "en": "In 1942, a Japanese soldier and a British prisoner of war are locked in a battle for survival against a deadly creature hunting for blood.",
         "vi": "Năm 1942, một người lính Nhật và một tù binh chiến tranh người Anh bị kẹt trong cuộc chiến sinh tồn chống lại một sinh vật chết chóc đang săn lùng máu."
       },
-      "backdrop": "./public/images/data-json-imgs/monster-island/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/monster-island/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=Z1V4mciJa8I",
       "duration": "1h 45m",
       "rating": 4.7,
@@ -236,8 +236,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/olld-guard-2/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/olld-guard-2/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/olld-guard-2/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/olld-guard-2/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Action",
@@ -256,7 +256,7 @@
         "en": "Andy and his team of immortal warriors fight with new purpose as they confront a powerful new enemy that threatens their mission to protect humanity.",
         "vi": "Andy và đội chiến binh bất tử chiến đấu với mục đích mới khi họ đương đầu với một kẻ thù mới hùng mạnh đang đe dọa sứ mệnh bảo vệ nhân loại của họ."
       },
-      "backdrop": "./public/images/data-json-imgs/olld-guard-2/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/olld-guard-2/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=lyivgZ074PY",
       "duration": "1h 44m",
       "rating": 5.1,
@@ -283,8 +283,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/F1/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/F1/SMALLPPOSTER.jpg",
+      "poster": "/images/data-json-imgs/F1/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/F1/SMALLPPOSTER.jpg",
       "genres": [
         {
           "en": "Action",
@@ -303,7 +303,7 @@
         "en": "Brad Pitt plays a former racing driver returning to Formula 1 racing with APXGP, a fictional racing team. Joining Pitt on this journey is Damson Idris, who plays his teammate. Together, they will face off against the biggest names in the sport, conquering new heights.",
         "vi": "Brad Pitt vào vai một cựu tay đua trở lại với đường đua Công thức 1 cùng APXGP, một đội đua giả tưởng. Đồng hành cùng Pitt trên chặng đường này là Damson Idris, vào vai người đồng đội của anh. Cùng nhau, họ sẽ đối đầu với những tay đua máu mặt trong lĩnh vực thể thao, chinh phục những đỉnh cao mới."
       },
-      "backdrop": "./public/images/data-json-imgs/F1/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/F1/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=8yh9BPUBbbQ&t=8s",
       "duration": "1h 40m",
       "rating": 7.7,
@@ -326,8 +326,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/the-roses/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/the-roses/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/the-roses/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/the-roses/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Theaters",
@@ -346,7 +346,7 @@
         "en": "Ivy and Theo's life seems perfect: successful careers, a happy marriage, well-behaved children. But behind the façade of an ideal family, an undercurrent of turmoil is brewing—as Theo's career falters while Ivy's ambitions soar, fanning a simmering fire of rivalry and resentment that threatens to consume everything.",
         "vi": "Cuộc sống của Ivy và Theo tưởng chừng hoàn hảo: sự nghiệp thành công, hôn nhân hạnh phúc, con cái ngoan ngoãn. Nhưng đằng sau lớp vỏ của một gia đình lý tưởng ấy là cơn bão ngầm đang dần hình thành — khi sự nghiệp của Theo tuột dốc trong khi tham vọng của Ivy thăng hoa, thổi bùng lên ngọn lửa ganh đua và oán giận âm ỉ có thể thiêu rụi tất cả."
       },
-      "backdrop": "./public/images/data-json-imgs/the-roses/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/the-roses/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=XkgMaS5gbaA",
       "duration": "1h 45m",
       "rating": 7,
@@ -373,8 +373,8 @@
         "vi": "Hàn Quốc"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/good-new/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/good-new/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/good-new/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/good-new/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Action",
@@ -393,7 +393,7 @@
         "en": "When hijackers take control of a Japanese flight and demand it fly to Pyongyang, a mysterious genius hatches a bizarre plot to divert the plane to Seoul.",
         "vi": "Khi bọn không tặc khống chế một chuyến bay của Nhật Bản và yêu cầu bay tới Bình Nhưỡng, một thiên tài bí ẩn vạch ra mưu đồ kỳ quặc để chuyển hướng máy bay tới Seoul."
       },
-      "backdrop": "./public/images/data-json-imgs/good-new/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/good-new/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=YkyzNk-UJ4o",
       "duration": "2h 16m",
       "rating": 6.5,
@@ -416,8 +416,8 @@
         "vi": "Hà Lan"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/the-ballonist/PPOSSTTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/the-ballonist/SMALLPOSTER.webp",
+      "poster": "/images/data-json-imgs/the-ballonist/PPOSSTTER.jpg",
+      "smallPoster": "/images/data-json-imgs/the-ballonist/SMALLPOSTER.webp",
       "genres": [
         {
           "en": "Family",
@@ -432,7 +432,7 @@
         "en": "Gaby, a woman living peacefully on a traditional chicken farm, suddenly finds her life turned upside down when an arrogant hot air balloon pilot crashes straight into her chicken coop. The bizarre accident unexpectedly reopens the rift in her family, forcing Gaby to face not only the “sky invader”, but also the past she has tried to bury for so long.",
         "vi": "Gaby – người phụ nữ sống yên bình với trang trại gà giống cổ truyền – bỗng thấy cuộc đời mình đảo lộn khi một phi công khinh khí cầu ngạo mạn rơi thẳng xuống chuồng gà của cô. Tai nạn kỳ quái ấy bất ngờ khơi lại những rạn nứt trong gia đình, buộc Gaby phải đối mặt không chỉ với kẻ “xâm lấn bầu trời” kia, mà còn với chính quá khứ mà cô đã cố chôn giấu bấy lâu."
       },
-      "backdrop": "./public/images/data-json-imgs/the-ballonist/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/the-ballonist/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=X1qW2RcsLn4",
       "duration": "1h 52m",
       "rating": 5.7,
@@ -459,8 +459,8 @@
         "vi": "Pháp"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/franch-love/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/franch-love/SMALLPPOSTER.jpg",
+      "poster": "/images/data-json-imgs/franch-love/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/franch-love/SMALLPPOSTER.jpg",
       "genres": [
         {
           "en": "Romance",
@@ -475,7 +475,7 @@
         "en": "When a bored actor meets a down-on-his-luck waitress in Paris, an unlikely romance begins. But can their love survive the bright spotlight?",
         "vi": "Khi một nam diễn viên chán chường gặp một nữ phục vụ lận đận ở Paris, chuyện tình bất ngờ giữa họ mở ra. Nhưng liệu tình yêu ấy có trụ vững trước ánh đèn sân khấu chói lóa?"
       },
-      "backdrop": "./public/images/data-json-imgs/franch-love/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/franch-love/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=41jJ_1s8ZyY",
       "duration": "1h 20m",
       "rating": 6.1,
@@ -498,8 +498,8 @@
         "vi": "Hàn Quốc"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/family-secret/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/family-secret/SMALLPPOSTTER.jpg",
+      "poster": "/images/data-json-imgs/family-secret/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/family-secret/SMALLPPOSTTER.jpg",
       "genres": [
         {
           "en": "Theaters",
@@ -518,7 +518,7 @@
         "en": "Yeon Jung's family slowly falls apart after the shock of losing their eldest son. As each member hides their true purpose in life, lies begin to tear them apart. After betrayals and disappointments are exposed, they slowly find love for each other as they work together to fulfill the promise they made to their late son.",
         "vi": "Gia đình của Yeon Jung dần tan vỡ sau cú sốc mất đi người con trai cả. Khi mỗi thành viên đều giấu diếm mục đích sống thật sự của mình, những lời nói dối bắt đầu khiến họ rạn nứt. Sau những phản bội và thất vọng bị phơi bày, họ dần tìm lại tình yêu thương dành cho nhau khi cùng nhau nỗ lực hoàn thành lời hứa với người con trai quá cố."
       },
-      "backdrop": "./public/images/data-json-imgs/family-secret/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/family-secret/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=LQOsP_wfacQ",
       "duration": "1h 45m",
       "rating": 6.5,
@@ -545,8 +545,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/jurasic-rebirth/POSTER.webp",
-      "smallPoster": "./public/images/data-json-imgs/jurasic-rebirth/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/jurasic-rebirth/POSTER.webp",
+      "smallPoster": "/images/data-json-imgs/jurasic-rebirth/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Theaters",
@@ -565,7 +565,7 @@
         "en": "Jurassic World: Rebirth opens a new action-packed chapter as a mining team races to the most dangerous place on Earth. The main cast of Scarlett Johansson, Mahershala Ali, and Jonathan Bailey embark on a dangerous mission to retrieve DNA that could lead to a medical breakthrough for humanity.",
         "vi": " Thế Giới Khủng Long: Tái Sinh mở ra một chương mới đầy tính hành động, chứng kiến một đội khai thác chạy đua đến nơi nguy hiểm nhất trên Trái Đất. Dàn nhân vật chính là bộ ba Scarlett Johansson, Mahershala Ali và Jonathan Bailey dấn thân vào một nhiệm vụ cực kỳ hiểm nguy, đó chính là cố gắng lấy DNA có thể dẫn đến một bước đột phá y học cho nhân loại."
       },
-      "backdrop": "./public/images/data-json-imgs/jurasic-rebirth/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/jurasic-rebirth/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=jan5CFWs9ic",
       "duration": "2h 10m",
       "rating": 5.9,
@@ -588,8 +588,8 @@
         "vi": "Anh"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/28-years-laster/PPOSSTETR.jpg",
-      "smallPoster": "./public/images/data-json-imgs/28-years-laster/smallpostter.jpg",
+      "poster": "/images/data-json-imgs/28-years-laster/PPOSSTETR.jpg",
+      "smallPoster": "/images/data-json-imgs/28-years-laster/smallpostter.jpg",
       "genres": [
         {
           "en": "Theaters",
@@ -608,7 +608,7 @@
         "en": "The nightmare is not over. The virus returns, bringing darkness to Britain. A life-or-death journey: a boy searches for a doctor to save his mother, traversing a deadly land filled with evolved zombies and dangerous people hiding behind a kind face. Will their last hope be enough to save them from the abyss of despair?",
         "vi": "Cơn ác mộng chưa kết thúc. Virus trở lại, kéo theo bóng tối bao trùm nước Anh. Một hành trình sinh tử: cậu bé tìm kiếm bác sĩ để cứu mẹ mình, băng qua vùng đất chết chóc đầy xác sống tiến hóa và những kẻ nguy hiểm ẩn sau gương mặt tử tế. Liệu niềm hy vọng cuối cùng có đủ để cứu họ khỏi vực thẳm tuyệt vọng?"
       },
-      "backdrop": "./public/images/data-json-imgs/28-years-laster/BBACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/28-years-laster/BBACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=EOwTdTZA8D8",
       "duration": "1h 55m",
       "rating": 6.6,
@@ -631,8 +631,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/venom-last-dance/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/venom-last-dance/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/venom-last-dance/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/venom-last-dance/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Theaters",
@@ -651,7 +651,7 @@
         "en": "After a short trip to Spider-Man: No Way Home (2021), Eddie Brock (Tom Hardy) and Venom are now doing good deeds and cheating the heads of all the criminals in the city. However, as with all good deeds, the US government has discovered the existence of this alien monster.",
         "vi": "Sau chuyến du lịch ngắn sang quê nhà của Spider-Man: No Way Home (2021), Eddie Brock (Tom Hardy) giờ đây cùng Venom “hành hiệp trượng nghĩa” và “nhai đầu” hết đám tội phạm trong thành phố. Tuy nhiên, đi đêm lắm cũng có ngày gặp ma, chính phủ Mỹ đã phát hiện ra sự tồn tại của con quái vật ngoài hành tinh này."
       },
-      "backdrop": "./public/images/data-json-imgs/venom-last-dance/BACKDROP.png",
+      "backdrop": "/images/data-json-imgs/venom-last-dance/BACKDROP.png",
       "trailer": "https://www.youtube.com/watch?v=FKBN1qAzW3s",
       "duration": "1h 49m",
       "rating": 6,
@@ -674,8 +674,8 @@
         "vi": "Mỹ"
       },
       "year": 2017,
-      "poster": "./public/images/data-json-imgs/iT/POSTER.jpeg",
-      "smallPoster": "./public/images/data-json-imgs/iT/SMALLPOSTER.webp",
+      "poster": "/images/data-json-imgs/iT/POSTER.jpeg",
+      "smallPoster": "/images/data-json-imgs/iT/SMALLPOSTER.webp",
       "genres": [
         {
           "en": "Theaters",
@@ -690,7 +690,7 @@
         "en": "It 2017 is based on the famous novel of the same name by writer Stephen King, It is expected to last two episodes. The work revolves around the battle between a group of close friends and Pennywise - a demon disguised as a clown, specializing in killing children. They have two encounters with it, with a time gap of up to 30 years.",
         "vi": "It 2017 được thực hiện dựa trên cuốn tiểu thuyết nổi tiếng cùng tên của nhà văn Stephen King, It dự kiến kéo dài hai tập. Tác phẩm xoay quanh cuộc chiến giữa một nhóm bạn thân với Pennywise - con quỷ đội lốt hình dạng hề, chuyên đi giết hại trẻ em. Họ có hai lần đụng độ nó, với khoảng cách thời gian lên tới 30 năm"
       },
-      "backdrop": "./public/images/data-json-imgs/iT/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/iT/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=l-pMD_2Owas",
       "duration": "2h 14m",
       "rating": 7.3,
@@ -713,8 +713,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/the-conjuring-last/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/the-conjuring-last/SMALLPOSTETR.jpg",
+      "poster": "/images/data-json-imgs/the-conjuring-last/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/the-conjuring-last/SMALLPOSTETR.jpg",
       "genres": [
         {
           "en": "Theaters",
@@ -729,7 +729,7 @@
         "en": "Coming as the final act of The Conjuring universe, The Conjuring: Last Rites follows exorcists Ed and Lorraine Warrent as they confront a demonic force that has terrorized the Smurl family for over a decade.",
         "vi": "Đến với hồi kết của vũ trụ The Conjuring, The Conjuring: Nghi Lễ Cuối Cùng theo chân cặp đôi trừ tà Ed và Lorraine Warrent đối mặt với một thế lực ác quỷ, kẻ đã reo rắc nỗi kinh hoàng cho gia đình Smurl trong suốt hơn một thập kỷ."
       },
-      "backdrop": "./public/images/data-json-imgs/the-conjuring-last/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/the-conjuring-last/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=bMgfsdYoEEo",
       "duration": "1h 50m",
       "rating": 6.2,
@@ -752,8 +752,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/together/poster.jpg",
-      "smallPoster": "./public/images/data-json-imgs/together/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/together/poster.jpg",
+      "smallPoster": "/images/data-json-imgs/together/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Theaters",
@@ -772,7 +772,7 @@
         "en": "A move to the remote countryside is enough to bring this couple's relationship to the brink of collapse—but an unexpected supernatural encounter sets in motion a radical transformation of their love, their lives… and their bodies.",
         "vi": "Việc chuyển về vùng quê hẻo lánh đã đủ khiến mối quan hệ của cặp đôi này đứng bên bờ vực tan vỡ — nhưng một cuộc chạm trán siêu nhiên bất ngờ lại khởi đầu cho một sự biến đổi cực đoan về tình yêu, cuộc sống… và cả thể xác của họ."
       },
-      "backdrop": "./public/images/data-json-imgs/together/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/together/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=bhd-CKFeXM0",
       "duration": "1h 42m",
       "rating": 6.7,
@@ -795,8 +795,8 @@
         "vi": "Hàn Quốc"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/ghost-ggame/POSSTER.webp",
-      "smallPoster": "./public/images/data-json-imgs/ghost-ggame/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/ghost-ggame/POSSTER.webp",
+      "smallPoster": "/images/data-json-imgs/ghost-ggame/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Theaters",
@@ -815,7 +815,7 @@
         "en": "A group of students decided to film a contest video with the theme of “calling spirits” in an abandoned underground water tank. What started out as a prank to attract views quickly spiraled out of control when one member suddenly vomited black water and collapsed mid-ritual.",
         "vi": "Một nhóm học sinh quyết định quay video dự thi với chủ đề “gọi hồn” tại một bể chứa nước ngầm bỏ hoang. Ban đầu chỉ là một trò đùa mang tính câu view, nhưng mọi thứ nhanh chóng vượt khỏi tầm kiểm soát khi một thành viên bất ngờ nôn ra nước đen và gục ngã giữa nghi lễ."
       },
-      "backdrop": "./public/images/data-json-imgs/ghost-ggame/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/ghost-ggame/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=vY7quTRSEl0",
       "duration": "1h 35m",
       "rating": 5.9,
@@ -838,8 +838,8 @@
         "vi": "Nhật Bản"
       },
       "year": 1999,
-      "poster": "./public/images/data-json-imgs/one-piece/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/one-piece/SMALLPOSTER.png",
+      "poster": "/images/data-json-imgs/one-piece/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/one-piece/SMALLPOSTER.png",
       "genres": [
         {
           "en": "Cartoon",
@@ -862,7 +862,7 @@
         "en": "One Piece is a story about a boy named Monkey D. Luffy who accidentally ate a Devil Fruit and was turned into a rubber man and will never be able to swim. 10 years after that incident, he left his hometown and found 10 members to form a pirate crew, nicknamed the Straw Hat Pirates. That's when the adventure to find the treasure One Piece began.",
         "vi": "Phim Đảo Hải Tặc - One Piece là chuyện về cậu bé Monkey D. Luffy do ăn nhầm Trái Ác Quỷ, bị biến thành người cao su và sẽ không bao giờ biết bơi. 10 năm sau sự việc đó, cậu rời quê mình và kiếm đủ 10 thành viên để thành một băng hải tặc, biệt hiệu Hải tặc Mũ Rơm. Khi đó của phiêu lưu tìm kiếm kho báu One Piece bắt đầu. "
       },
-      "backdrop": "./public/images/data-json-imgs/one-piece/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/one-piece/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=mTsFcpUrqjU",
       "duration": "1h 35m",
       "rating": 9,
@@ -885,8 +885,8 @@
         "vi": "Nhật Bản"
       },
       "year": 2024,
-      "poster": "./public/images/data-json-imgs/let-this-grieving/POSSTER.webp",
-      "smallPoster": "./public/images/data-json-imgs/let-this-grieving/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/let-this-grieving/POSSTER.webp",
+      "smallPoster": "/images/data-json-imgs/let-this-grieving/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Cartoon",
@@ -905,7 +905,7 @@
         "en": "Krai Andrey and his friends promise to become treasure hunters, but Krai realizes he doesn't have what it takes, while people's expectations and the dangers around him grow.",
         "vi": "Krai Andrey và bạn bè hứa hẹn trở thành thợ săn kho báu, nhưng Krai nhận ra mình không có tố chất này, trong khi những kỳ vọng của mọi người và nguy hiểm xung quanh anh ngày càng gia tăng."
       },
-      "backdrop": "./public/images/data-json-imgs/let-this-grieving/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/let-this-grieving/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=LtKgt4BBPO8",
       "duration": "1h 35m",
       "rating": 6.5,
@@ -928,8 +928,8 @@
         "vi": "Nhật Bản"
       },
       "year": 2015,
-      "poster": "./public/images/data-json-imgs/one-punch-man/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/one-punch-man/SMALLPOSSTER.webp",
+      "poster": "/images/data-json-imgs/one-punch-man/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/one-punch-man/SMALLPOSSTER.webp",
       "genres": [
         {
           "en": "Cartoon",
@@ -952,7 +952,7 @@
         "en": "The story takes place in the city of Z in Japan at a time when the world is full of mysterious monsters with terrible power that have appeared and caused many disasters. But it is also here that a one-punch superhero appears, who can easily defeat and destroy these monsters.",
         "vi": "Câu chuyện diễn ra tại thành phố Z của Nhật Bản tại thời điểm thế giới đầy những quái vật bí ẩn với sức mạnh ghê gớm đã xuất hiện và gây ra biết bao nhiêu thảm họa. Nhưng cũng chính tại đây xuất hiện 1 siêu anh hùng đấm phát chết luôn, có thể dễ dàng đánh bại và tiêu diệt những con quái vật này."
       },
-      "backdrop": "./public/images/data-json-imgs/one-punch-man/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/one-punch-man/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=oh7bd-CDY6U",
       "duration": "1h 35m",
       "rating": 8.6,
@@ -975,8 +975,8 @@
         "vi": "Nhật Bản"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/gachiakuta/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/gachiakuta/SMALLPOSTER.webp",
+      "poster": "/images/data-json-imgs/gachiakuta/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/gachiakuta/SMALLPOSTER.webp",
       "genres": [
         {
           "en": "Cartoon",
@@ -991,7 +991,7 @@
         "en": "The city, where the civilized classes live - the slums where the descendants of criminals gather, every day they are humiliated and despised by others, called trash, disgusting people, the two dark sides of society are separated by high walls, and below that place - the Abyss - a garbage dump where criminals are exiled.",
         "vi": "Thành phố, nơi các tầng lớp văn minh sinh sống - khu ổ chuột nơi tụ tập các đời con cháu của bọn tội phạm, hằng ngày đều bị người khác sỉ nhục, khinh bỉ, gọi họ là những thứ rác rưởi, lũ dân tộc gớm ghiếc, hai mặt trái của xã hội được ngăn cách bởi những bức tường cao vút, và bên dưới nơi ấy - Abyss - một bãi rác nơi bọn tội phạm bị lưu đày."
       },
-      "backdrop": "./public/images/data-json-imgs/gachiakuta/BACKDROP.png",
+      "backdrop": "/images/data-json-imgs/gachiakuta/BACKDROP.png",
       "trailer": "https://www.youtube.com/watch?v=yeRvDchyo44",
       "duration": "1h 35m",
       "rating": 8.1,
@@ -1014,8 +1014,8 @@
         "vi": "Nhật Bản"
       },
       "year": 2024,
-      "poster": "./public/images/data-json-imgs/dandadan/POSTER.webp",
-      "smallPoster": "./public/images/data-json-imgs/dandadan/SMALLPOSTER.webp",
+      "poster": "/images/data-json-imgs/dandadan/POSTER.webp",
+      "smallPoster": "/images/data-json-imgs/dandadan/SMALLPOSTER.webp",
       "genres": [
         {
           "en": "Cartoon",
@@ -1034,7 +1034,7 @@
         "en": "The story of a girl who believes in ghosts but rejects aliens, and a boy who believes in extraterrestrial life but doesn't believe in souls. Momo and Okarun set out to convince people that aliens and ghosts exist.",
         "vi": "Câu chuyện về một cô gái tin vào ma quỷ nhưng bác bỏ người ngoài hành tinh, và một chàng trai tin có sự sống ngoài trái đất nhưng không tin vào linh hồn. Momo và Okarun lên kế hoạch để thuyết phục mọi người rằng người ngoài hành tinh và ma quỷ tồn tại. "
       },
-      "backdrop": "./public/images/data-json-imgs/dandadan/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/dandadan/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=0XJxfbN36Uw",
       "duration": "1h 35m",
       "rating": 8.3,
@@ -1057,8 +1057,8 @@
         "vi": "Nhật Bản"
       },
       "year": 2024,
-      "poster": "./public/images/data-json-imgs/spy-familly/POSTER.webp",
-      "smallPoster": "./public/images/data-json-imgs/spy-familly/SMALLPOSTETR.jpg",
+      "poster": "/images/data-json-imgs/spy-familly/POSTER.webp",
+      "smallPoster": "/images/data-json-imgs/spy-familly/SMALLPOSTETR.jpg",
       "genres": [
         {
           "en": "Cartoon",
@@ -1081,7 +1081,7 @@
         "en": "In order to prevent extremists from sparking war with the neighboring nation of Ostania, Twilight, Westalis' top spy, must investigate Ostanian politician Donovan Desmond by infiltrating his son's school, the prestigious Eden Academy.",
         "vi": "Nhằm ngăn những kẻ cực đoan châm ngòi cho cuộc chiến với quốc gia láng giềng Ostania, Twilight, điệp viên hàng đầu của Westalis phải điều tra chính trị gia người Ostanian là Donovan Desmond bằng cách xâm nhập vào trường học của con trai ông ta - học viện Eden danh giá."
       },
-      "backdrop": "./public/images/data-json-imgs/spy-familly/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/spy-familly/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=5ASJJI_RkiA",
       "duration": "1h 35m",
       "rating": 8.2,
@@ -1104,8 +1104,8 @@
         "vi": "Nhật Bản"
       },
       "year": 2024,
-      "poster": "./public/images/data-json-imgs/my-hero-academia/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/my-hero-academia/SMALLPOSTER.webp",
+      "poster": "/images/data-json-imgs/my-hero-academia/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/my-hero-academia/SMALLPOSTER.webp",
       "genres": [
         {
           "en": "Cartoon",
@@ -1128,7 +1128,7 @@
         "en": "Adapted from the manga of the same name by author Horikoshi Kohei. Set in the future, 80% of the world's population possesses superpowers, heroism is a thriving profession. This is the story of Midoriya Izuku (Deku), a boy with a strong admiration for heroes. The person Deku idolizes the most is All Might - the greatest hero in the world.",
         "vi": "Chuyển thể từ manga cùng tên của tác giả Horikoshi Kohei. Bối cảnh tương lai, 80% dân số thế giới sở hữu siêu năng lực, anh hùng là một nghề nghiệp phát triển mạnh mẽ. Đây là câu chuyện về Midoriya Izuku (Deku) một cậu nhóc với niềm ngưỡng mộ anh hùng mãnh liệt. Người Deku thần tượng nhất chính là All Might – anh hùng vĩ đại nhất thế giới"
       },
-      "backdrop": "./public/images/data-json-imgs/my-hero-academia/BACKDRROP.jpg",
+      "backdrop": "/images/data-json-imgs/my-hero-academia/BACKDRROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=zz37nGym3OQ",
       "duration": "1h 35m",
       "rating": 8.2,
@@ -1151,8 +1151,8 @@
         "vi": "Nhật Bản"
       },
       "year": 2024,
-      "poster": "./public/images/data-json-imgs/a-gatherer-adventure/poster.jpg",
-      "smallPoster": "./public/images/data-json-imgs/a-gatherer-adventure/smallposter.jpg",
+      "poster": "/images/data-json-imgs/a-gatherer-adventure/poster.jpg",
+      "smallPoster": "/images/data-json-imgs/a-gatherer-adventure/smallposter.jpg",
       "genres": [
         {
           "en": "Cartoon",
@@ -1171,7 +1171,7 @@
         "en": "Takeru Kamishiro, an ordinary office worker, is suddenly summoned to the world of Madeus - a place filled with swords and magic. Here, he discovers that he possesses a series of powerful skills: superior physical strength, magical spells and a special ability to search for hidden treasures.",
         "vi": "Takeru Kamishiro, một nhân viên văn phòng bình thường, bất ngờ bị triệu hồi đến thế giới Madeus - nơi tràn ngập kiếm và ma thuật. Tại đây, anh phát hiện mình sở hữu hàng loạt kỹ năng bá đạo: sức mạnh thể chất vượt trội, phép thuật kỳ diệu và khả năng đặc biệt để “tìm kiếm” kho báu ẩn giấu."
       },
-      "backdrop": "./public/images/data-json-imgs/a-gatherer-adventure/backdrop.webp",
+      "backdrop": "/images/data-json-imgs/a-gatherer-adventure/backdrop.webp",
       "trailer": "https://www.youtube.com/watch?v=Aw8-IHYEgpw",
       "duration": "1h 35m",
       "rating": 8,
@@ -1194,8 +1194,8 @@
         "vi": "Nhật Bản"
       },
       "year": 2019,
-      "poster": "./public/images/data-json-imgs/demon-slayer/POSTERR.webp",
-      "smallPoster": "./public/images/data-json-imgs/demon-slayer/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/demon-slayer/POSTERR.webp",
+      "smallPoster": "/images/data-json-imgs/demon-slayer/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Cartoon",
@@ -1214,7 +1214,7 @@
         "en": "Demon Slayer: Kimetsu no Yaiba is a Japanese manga series written and illustrated by Koyoharu Gotouge. It follows a teenager named Tanjiro Kamado, who attempts to become a demon slayer after his family is massacred and his younger sister, Nezuko, is turned into a demon.",
         "vi": "Demon Slayer: Kimetsu no Yaiba là một bộ truyện tranh Nhật Bản được viết và minh họa bởi Koyoharu Gotouge. Phim kể về cậu thiếu niên Tanjiro Kamado, người cố gắng trở thành một kẻ giết quỷ sau khi gia đình cậu bị tàn sát và em gái cậu, Nezuko, bị biến thành quỷ."
       },
-      "backdrop": "./public/images/data-json-imgs/demon-slayer/BACKDROP.webp",
+      "backdrop": "/images/data-json-imgs/demon-slayer/BACKDROP.webp",
       "trailer": "https://www.youtube.com/watch?v=rf0hW__Skow",
       "duration": "1h 35m",
       "rating": 8.6,
@@ -1237,8 +1237,8 @@
         "vi": "Nhật Bản"
       },
       "year": 2013,
-      "poster": "./public/images/data-json-imgs/akame-ga-kill/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/akame-ga-kill/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/akame-ga-kill/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/akame-ga-kill/SMALLPOSTER.jpg",
       "genres": [
         {
           "en": "Cartoon",
@@ -1257,7 +1257,7 @@
         "en": "Akame ga KILL! is a shōnen manga series written by Takahiro, illustrated by Tetsuya Tashiro, and serialized in Weekly Gangan Joker published by Square Enix since 2010. A prequel manga titled Akame ga Kill! Zero began serialization in Monthly Big Gangan in October 2013.",
         "vi": "Akame ga KILL! là một series manga shōnen được viết bởi Takahiro, minh họa bởi Tetsuya Tashiro, và đăng hằng kỳ trong Weekly Gangan Joker được xuất bản bởi Square Enix từ năm 2010. Một manga tiền truyện với tựa đề Akame ga Kill! Zero bắt đầu được đang hằng kỳ trong Monthly Big Gangan vào tháng 10 năm 2013. "
       },
-      "backdrop": "./public/images/data-json-imgs/akame-ga-kill/BACKDRROP-1.webp",
+      "backdrop": "/images/data-json-imgs/akame-ga-kill/BACKDRROP-1.webp",
       "trailer": "https://www.youtube.com/watch?v=sCGWxQuSoDU",
       "duration": "1h 35m",
       "rating": 8.3,
@@ -1276,8 +1276,8 @@
         "vi": "Mỹ"
       },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/ares/tro-choi-ao-giacPOSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/ares/tro-choi-ao-giacSMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/ares/tro-choi-ao-giacPOSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/ares/tro-choi-ao-giacSMALLPOSTER.jpg",
       "genres": [
         {
           "vi": "Hành động",
@@ -1296,7 +1296,7 @@
         "en": "TRON: Ares follows Ares – a highly sophisticated virtual being sent from the digital world to the real world on a dangerous mission, marking the first encounter between humanity and artificial intelligences.",
         "vi": "Trò Chơi Ảo Giác (TRON: Ares) theo chân Ares – một thực thể ảo cực kỳ tinh vi được cử từ thế giới số đến thế giới thực trong một nhiệm vụ nguy hiểm, đánh dấu cuộc chạm trán đầu tiên giữa loài người và những thực thể trí tuệ nhân tạo."
       },
-      "backdrop": "./public/images/data-json-imgs/ares/tro-choi-ao-giac-tron-ares-BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/ares/tro-choi-ao-giac-tron-ares-BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=Y2Nyq3STFvM",
       "duration": "1h 59m",
       "rating": 6.7,
