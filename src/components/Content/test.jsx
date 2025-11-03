@@ -6,7 +6,7 @@ export function ContentMovie() {
 
       <img
         className="object-contain w-full h-full "
-        src="../../../public/images/test/pacific_rim_uprising_ver25_xlg.jpg"
+        src="/images/test/pacific_rim_uprising_ver25_xlg.jpg"
         alt="logo"
       />
       <div className="absolute z-20 bottom-[15%] left-[80px] flex flex-col gap-5">
@@ -42,7 +42,7 @@ export function ContentMovie() {
         <div className="inline-flex items-center gap-8">
           <img
             className="w-[70px] cursor-pointer"
-            src="../../../public/images/logo-header/play.gif"
+            src="/images/logo-header/play.gif"
             alt="play"
           />
           <span className="group p-[8px] rounded-full border-2 border-[rgba(255,255,255,0.4)] flex items-center justify-center cursor-pointer transition-all duration-300 hover:border-white">

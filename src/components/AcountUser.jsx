@@ -28,18 +28,18 @@ export default function AcountUser() {
 
   // mảng avatar mẫu để người dùng chọn
   const avatarList = [
-    { id: 1, src: "../../public/images/avatarUser/07.jpg" },
-    { id: 2, src: "../../public/images/avatarUser/08.jpg" },
-    { id: 3, src: "../../public/images/avatarUser/11.jpg" },
-    { id: 4, src: "../../public/images/avatarUser/14.jpg" },
-    { id: 5, src: "../../public/images/avatarUser/15.jpg" },
-    { id: 6, src: "../../public/images/avatarUser/16.jpg" },
-    { id: 7, src: "../../public/images/avatarUser/19.jpg" },
-    { id: 8, src: "../../public/images/avatarUser/28.jpg" },
-    { id: 9, src: "../../public/images/avatarUser/37.jpg" },
-    { id: 10, src: "../../public/images/avatarUser/13.jpg" },
-    { id: 11, src: "../../public/images/avatarUser/22.jpg" },
-    { id: 12, src: "../../public/images/avatarUser/21.jpg" },
+    { id: 1, src: "/images/avatarUser/07.jpg" },
+    { id: 2, src: "/images/avatarUser/08.jpg" },
+    { id: 3, src: "/images/avatarUser/11.jpg" },
+    { id: 4, src: "/images/avatarUser/14.jpg" },
+    { id: 5, src: "/images/avatarUser/15.jpg" },
+    { id: 6, src: "/images/avatarUser/16.jpg" },
+    { id: 7, src: "/images/avatarUser/19.jpg" },
+    { id: 8, src: "/images/avatarUser/28.jpg" },
+    { id: 9, src: "/images/avatarUser/37.jpg" },
+    { id: 10, src: "/images/avatarUser/13.jpg" },
+    { id: 11, src: "/images/avatarUser/22.jpg" },
+    { id: 12, src: "/images/avatarUser/21.jpg" },
   ];
 
   // 1) LOAD DỮ LIỆU TỪ localStorage

@@ -13,7 +13,7 @@ export default function LogoAndLanguge() {
 
   return (
     <div className="head">
-      <img src="../../../../public/images/logo/Logo.png" alt="" />
+      <img src="/images/logo/Logo.png" alt="" />
       <div className="custom-select">
         <div
           className="flex items-center justify-between selected"
@@ -22,7 +22,7 @@ export default function LogoAndLanguge() {
           <span>{selected}</span>
           <img
             className="w-[20px]"
-            src="../../../public/images/logo-header/flight_4919659.png"
+            src="/images/logo-header/flight_4919659.png"
             alt="world"
           />
         </div>

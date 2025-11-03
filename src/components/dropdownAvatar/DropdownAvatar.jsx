@@ -89,9 +89,7 @@ export default function UserMenu({ user }) {
       >
         <img
           src={
-            avatar && avatar !== ""
-              ? avatar
-              : "../../../public/images/test/avatar-small.webp"
+            avatar && avatar !== "" ? avatar : "/images/test/avatar-small.webp"
           }
           alt="Avatar"
           className="object-center w-[42px] h-[42px] rounded-full"
@@ -168,7 +166,7 @@ export default function UserMenu({ user }) {
               icon={
                 <img
                   className="w-[35px]"
-                  src="../../../public/images/logo-header/maintenance.gif"
+                  src="/images/logo-header/maintenance.gif"
                   alt="admin-manage"
                 />
               }
@@ -184,7 +182,7 @@ export default function UserMenu({ user }) {
             icon={
               <img
                 className="w-[35px]"
-                src="../../../public/images/logo-header/logout.gif"
+                src="/images/logo-header/logout.gif"
                 alt="log-out"
               />
             }

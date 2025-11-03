@@ -1,0 +1,105 @@
+# Query: public/images
+# ContextLines: 1
+
+31 results - 10 files
+
+src\components\AcountUser.jsx:
+  30    const avatarList = [
+  31:     { id: 1, src: "../../public/images/avatarUser/07.jpg" },
+  32:     { id: 2, src: "../../public/images/avatarUser/08.jpg" },
+  33:     { id: 3, src: "../../public/images/avatarUser/11.jpg" },
+  34:     { id: 4, src: "../../public/images/avatarUser/14.jpg" },
+  35:     { id: 5, src: "../../public/images/avatarUser/15.jpg" },
+  36:     { id: 6, src: "../../public/images/avatarUser/16.jpg" },
+  37:     { id: 7, src: "../../public/images/avatarUser/19.jpg" },
+  38:     { id: 8, src: "../../public/images/avatarUser/28.jpg" },
+  39:     { id: 9, src: "../../public/images/avatarUser/37.jpg" },
+  40:     { id: 10, src: "../../public/images/avatarUser/13.jpg" },
+  41:     { id: 11, src: "../../public/images/avatarUser/22.jpg" },
+  42:     { id: 12, src: "../../public/images/avatarUser/21.jpg" },
+  43    ];
+
+src\components\Content\test.jsx:
+   8          className="object-contain w-full h-full "
+   9:         src="/images/test/pacific_rim_uprising_ver25_xlg.jpg"
+  10          alt="logo"
+
+  44              className="w-[70px] cursor-pointer"
+  45:             src="/images/logo-header/play.gif"
+  46              alt="play"
+
+src\components\dropdownAvatar\DropdownAvatar.jsx:
+   93                ? avatar
+   94:               : "/images/test/avatar-small.webp"
+   95            }
+
+  170                    className="w-[35px]"
+  171:                   src="/images/logo-header/maintenance.gif"
+  172                    alt="admin-manage"
+
+  186                  className="w-[35px]"
+  187:                 src="/images/logo-header/logout.gif"
+  188                  alt="log-out"
+
+src\components\HeaderHomePage\HeaderPage.jsx:
+  243            className="transition-transform cursor-pointer hover:scale-105"
+  244:           src="/images/logo-header/Logo-0.75.png"
+  245            alt="logo"
+
+  252              <img
+  253:               src="/images/logo-header/Icon.png"
+  254                alt="search"
+
+  363              className="w-[12px] cursor-pointer"
+  364:             src="/images/logo-header/downArown.png"
+  365              alt="arrow"
+
+  395              className="w-[12px] cursor-pointer"
+  396:             src="/images/logo-header/downArown.png"
+  397              alt="arrow"
+
+  424                className="w-[20px]"
+  425:               src="/images/logo-header/flight_4919659.png"
+  426                alt="world"
+
+src\components\Logo&Languge\Logo&Languge.jsx:
+  15      <div className="head">
+  16:       <img src="..//images/logo/Logo.png" alt="" />
+  17        <div className="custom-select">
+
+  24              className="w-[20px]"
+  25:             src="/images/logo-header/flight_4919659.png"
+  26              alt="world"
+
+src\components\ManagerAdmin\AddMovieModal.jsx:
+  139                type="text"
+  140:               placeholder="./public/images/..."
+  141                value={form.poster}
+
+  150                type="text"
+  151:               placeholder="./public/images/..."
+  152                value={form.smallPoster}
+
+  161                type="text"
+  162:               placeholder="./public/images/..."
+  163                value={form.backdrop}
+
+src\components\ManagerAdmin\AddNewUser.jsx:
+  148                          className="w-5 cursor-pointer"
+  149:                         src="././public/images/logo-header/letter-x_9313433.png"
+  150                          alt="delete"
+
+src\components\ManagerAdmin\MovieManagerSection.jsx:
+  78                    className="w-5 cursor-pointer"
+  79:                   src="././public/images/logo-header/letter-x_9313433.png"
+  80                    alt="delete"
+
+src\components\ManagerAdmin\UserManagerSection.jsx:
+  34                    className="w-5 cursor-pointer"
+  35:                   src="././public/images/logo-header/letter-x_9313433.png"
+  36                    alt="delete"
+
+src\components\movie-detail\MovieActions.jsx:
+  41            className="w-[30px]"
+  42:           src="../../public/images/logo/plus.gif"
+  43            alt=""

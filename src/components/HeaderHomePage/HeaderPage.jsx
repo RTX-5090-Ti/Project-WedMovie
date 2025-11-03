@@ -241,7 +241,7 @@ export default function HeaderPage() {
       <div className="inline-flex items-center gap-3">
         <img
           className="transition-transform cursor-pointer hover:scale-105"
-          src="../../../public/images/logo-header/Logo-0.75.png"
+          src="/images/logo-header/Logo-0.75.png"
           alt="logo"
           onClick={() => navigate("/home")}
         />
@@ -249,10 +249,7 @@ export default function HeaderPage() {
         {/* Ô tìm kiếm */}
         <div ref={searchRef} className="relative w-[300px]">
           <div className="inline-flex items-center w-full gap-3 search">
-            <img
-              src="../../../public/images/logo-header/Icon.png"
-              alt="search"
-            />
+            <img src="/images/logo-header/Icon.png" alt="search" />
             <input
               className="w-full border-none outline-none"
               type="text"
@@ -361,7 +358,7 @@ export default function HeaderPage() {
               setOpenMenu(openMenu === "country" ? null : "country")
             }
             className="w-[12px] cursor-pointer"
-            src="../../../public/images/logo-header/downArown.png"
+            src="/images/logo-header/downArown.png"
             alt="arrow"
           />
           {openMenu === "country" && (
@@ -393,7 +390,7 @@ export default function HeaderPage() {
           <img
             onClick={() => setOpenMenu(openMenu === "genre" ? null : "genre")}
             className="w-[12px] cursor-pointer"
-            src="../../../public/images/logo-header/downArown.png"
+            src="/images/logo-header/downArown.png"
             alt="arrow"
           />
           {openMenu === "genre" && (
@@ -422,7 +419,7 @@ export default function HeaderPage() {
             <span>{selected}</span>
             <img
               className="w-[20px]"
-              src="../../../public/images/logo-header/flight_4919659.png"
+              src="/images/logo-header/flight_4919659.png"
               alt="world"
             />
           </div>

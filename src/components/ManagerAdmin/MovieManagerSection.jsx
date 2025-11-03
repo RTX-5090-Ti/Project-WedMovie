@@ -76,7 +76,7 @@ export default function MovieManagerSection({
                     e.stopPropagation();
                   }}
                   className="w-5 cursor-pointer"
-                  src="././public/images/logo-header/letter-x_9313433.png"
+                  src="/images/logo-header/letter-x_9313433.png"
                   alt="delete"
                 />
               </div>

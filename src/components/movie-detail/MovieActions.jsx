@@ -37,11 +37,7 @@ export default function DetailActions({
           isFav ? "border-[#d9aa3d]" : ""
         }`}
       >
-        <img
-          className="w-[30px]"
-          src="../../public/images/logo/plus.gif"
-          alt=""
-        />
+        <img className="w-[30px]" src="/images/logo/plus.gif" alt="" />
         <span>{isFav ? "Đã thêm vào yêu thích" : "Add to favorite"}</span>
       </div>
     </Box>
