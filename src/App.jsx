@@ -10,10 +10,20 @@ import AllMoviesClick from "./pages/AllMovieClick/AllMoviesClick";
 import MovieDetail from "./pages/MovieDetail/MovieDetail";
 import AcountUserPage from "./pages/AcountUserPage/AcountUserPage";
 import Manager from "./pages/Manager/Manager";
+import CanvasCursor from "./components/Cursor/CanvasCursor";
 
 function App() {
   return (
     <>
+      <CanvasCursor
+        // optional props: maxParticles, spawnPerMove, size, color, life, blur
+        maxParticles={80}
+        spawnPerMove={1}
+        size={12}
+        color={"0,210,255"} // neon cyan as "r,g,b"
+        life={700}
+        blur={14}
+      />
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />

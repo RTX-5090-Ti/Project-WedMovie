@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import "./HeaderHomePage.css";
 import UserMenu from "../dropdownAvatar/DropdownAvatar";
@@ -35,6 +35,9 @@ export default function HeaderPage() {
   const [allMovies, setAllMovies] = useState([]);
   const searchRef = useRef(null);
   const navigate = useNavigate();
+
+  // Chuẩn hóa tên để so sánh (bỏ dấu + thường hóa)
+  const n = (s) => normalizeText(s || "");
 
   // Load toàn bộ phim 1 lần
   useEffect(() => {
@@ -121,33 +124,87 @@ export default function HeaderPage() {
     setIsOpen(false);
   };
 
-  const genres = [
-    "Hình sự",
-    "Hành động",
-    "Chiến tranh",
-    "Khoa học",
-    "Chiếu rạp",
-    "Kinh dị",
-    "Hài hước",
-    "Phiêu lưu",
-    "Lãng mạn",
-    "Gia đình",
-    "Tâm lý",
-    "Bí ẩn",
-    "Hoạt hình",
-    "Anime",
-  ];
-  const countries = [
-    "Mỹ",
-    "Hàn Quốc",
-    "Nhật Bản",
-    "Anh",
-    "Pháp",
-    "Đức",
-    "Thái Lan",
-    "Đài Loan",
-    "Trung Quốc",
-  ];
+  // const genres = [
+  //   "Hình sự",
+  //   "Hành động",
+  //   "Chiến tranh",
+  //   "Khoa học",
+  //   "Chiếu rạp",
+  //   "Kinh dị",
+  //   "Hài hước",
+  //   "Phiêu lưu",
+  //   "Lãng mạn",
+  //   "Gia đình",
+  //   "Tâm lý",
+  //   "Bí ẩn",
+  //   "Hoạt hình",
+  //   "Anime",
+  //   "Hoàng cung",
+  //   "Cổ trang",
+  //   "Tình cảm",
+  // ];
+
+  // Lấy danh sách thể loại động từ allMovies (hiển thị vi nếu có)
+  const genres = useMemo(() => {
+    const map = new Map();
+
+    allMovies.forEach((m) => {
+      (m?.genres || []).forEach((g) => {
+        const label = g?.vi?.trim() || g?.en?.trim() || "";
+        if (!label) return;
+
+        const key = n(label); // normalizeText
+        if (!map.has(key)) {
+          map.set(key, label);
+        }
+      });
+    });
+
+    return Array.from(map.values());
+  }, [allMovies]);
+
+  // const countries = [
+  //   "Mỹ",
+  //   "Hàn Quốc",
+  //   "Nhật Bản",
+  //   "Anh",
+  //   "Pháp",
+  //   "Đức",
+  //   "Thái Lan",
+  //   "Đài Loan",
+  //   "Trung Quốc",
+  // ];
+
+  // Lấy danh sách quốc gia tự động từ allMovies
+  const countries = useMemo(() => {
+    const map = new Map(); // key = normalized label, value = display label
+
+    allMovies.forEach((m) => {
+      // một số file có 'countries', một số có 'nation' — kiểm tra cả 2
+      const list =
+        Array.isArray(m?.countries) && m.countries.length
+          ? m.countries
+          : Array.isArray(m?.nation) && m.nation.length
+          ? m.nation
+          : m?.nation &&
+            typeof m.nation === "object" &&
+            (m.nation.vi || m.nation.en)
+          ? [m.nation]
+          : [];
+
+      (list || []).forEach((c) => {
+        const label = (c?.vi && c.vi.trim()) || (c?.en && c.en.trim()) || "";
+        if (!label) return;
+
+        const key = n(label);
+        if (!map.has(key)) {
+          map.set(key, label);
+        }
+      });
+    });
+
+    return Array.from(map.values());
+  }, [allMovies]);
 
   // Chuẩn hoá dữ liệu để ShowNewMovie render đúng
   const mapToCard = (m) => ({
@@ -202,9 +259,6 @@ export default function HeaderPage() {
 
     goAllWith("Phim bộ", list);
   };
-
-  // Chuẩn hóa tên để so sánh (bỏ dấu + thường hóa)
-  const n = (s) => normalizeText(s || "");
 
   // Lọc theo QUỐC GIA (so nation.vi / nation.en)
   const goByCountry = (countryLabel) => {
