@@ -107,11 +107,11 @@ export default function AcountUser() {
       );
     }
 
-    // cập nhật UI liền
+    // cập nhật UI ngay
     setAvatar(avatarUrl);
   };
 
-  // 2) CẬP NHẬT THÔNG TIN (tên, giới tính, avatar)
+  // 2) cập nhật thông tin (tên, giới tính, avatar)
   const handleUpdate = () => {
     if (!email) {
       setPassMsg("Không tìm thấy tài khoản để cập nhật.");

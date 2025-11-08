@@ -1,21 +1,37 @@
 {
   "movies": [
     {
-      "id": 1,
+      "id": "1",
       "title": {
         "en": "TRON: Ares",
-        "vi": "Trò Chơi Ảo Giác: Ares"
+        "vi": "Trò Chơi Ảo Giác"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/ares/tro-choi-ao-giacPOSTER.jpg",
       "smallPoster": "/images/data-json-imgs/ares/tro-choi-ao-giacSMALLPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Sci-Fi", "vi": "Khoa học" },
-        { "en": "Theaters", "vi": "Chiếu rạp" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Sci-Fi",
+          "vi": "Khoa học"
+        },
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        }
       ],
       "description": {
         "en": "TRON: Ares follows Ares – a highly sophisticated virtual being sent from the digital world to the real world on a dangerous mission, marking the first encounter between humanity and artificial intelligences.",
@@ -28,23 +44,37 @@
       "featured": true
     },
     {
-      "id": 2,
+      "id": "2",
       "title": {
         "en": "A Dirty Carnival",
         "vi": "Phi Vụ Bẩn"
       },
       "isSeries": false,
       "badges": [
-        { "text": "P.Đề" },
-        { "text": "T.Minh", "color": "bg-green-600/80" }
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
       ],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/durty-carnival/A-Dirty-CarnivalPOSTER.jpg",
       "smallPoster": "/images/data-json-imgs/durty-carnival/DVD-A-DIRTY-CARNIVAL-SMALLPOSETR.webp",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Criminal", "vi": "Hình sự" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Criminal",
+          "vi": "Hình sự"
+        }
       ],
       "description": {
         "en": "A notorious gangster in a small town. Although he has a strong position in the underworld, he only sees this job as a means to earn a living to help his family. After losing his father, his whole family, including his sickly mother and his young underlings, depend on Byeong Du. ",
@@ -57,20 +87,33 @@
       "featured": false
     },
     {
-      "id": 3,
+      "id": "3",
       "title": {
         "en": "Prisoner of War",
         "vi": "Tù Binh Bất Khuất"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/prisoner-of-war/Prisoner-of-WarPOSTER.jpg",
       "smallPoster": "/images/data-json-imgs/prisoner-of-war/Prisoner-of-WarSMALLPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "War", "vi": "Chiến tranh" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "War",
+          "vi": "Chiến tranh"
+        }
       ],
       "description": {
         "en": "James Wright, a British Royal Air Force squadron leader, was captured by the Japanese during World War II and forced into brutal hand-to-hand combat. What the Japanese soldiers didn't expect was that, with years of martial arts training in Hong Kong, Wright would become a formidable opponent.",
@@ -83,23 +126,37 @@
       "featured": false
     },
     {
-      "id": 4,
+      "id": "4",
       "title": {
         "en": "Nobody 2",
         "vi": "Kẻ Vô Danh 2"
       },
       "isSeries": false,
       "badges": [
-        { "text": "P.Đề" },
-        { "text": "T.Minh", "color": "bg-green-600/80" }
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
       ],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/nobody-2/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/nobody-2/SMALLPPOSTER.webp",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Theaters", "vi": "Chiếu rạp" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        }
       ],
       "description": {
         "en": "Odenkirk plays Hutch Mansell, a seemingly normal father with a dangerous past as an assassin. After the events of the first film, Hutch and his family decide to enjoy a peaceful vacation. However, his dark past quickly returns, bringing with it new threats.",
@@ -112,21 +169,37 @@
       "featured": true
     },
     {
-      "id": 5,
+      "id": "5",
       "title": {
         "en": "Osiris",
         "vi": "Osiris"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/osiris/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/osiris/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Sci-Fi", "vi": "Khoa học" },
-        { "en": "Horror", "vi": "Kinh dị" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Sci-Fi",
+          "vi": "Khoa học"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        }
       ],
       "description": {
         "en": "A team of commandos is abducted by a mysterious spaceship mid-mission. When they wake up on the ship, they find themselves prey to a bloodthirsty alien species — and a brutal fight for survival begins.",
@@ -139,25 +212,45 @@
       "featured": true
     },
     {
-      "id": 6,
+      "id": "6",
       "title": {
         "en": "Monster Island",
         "vi": "Đảo quái vật"
       },
       "isSeries": false,
       "badges": [
-        { "text": "P.Đề" },
-        { "text": "T.Minh", "color": "bg-green-600/80" }
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
       ],
-      "nation": { "en": "Indonesia", "vi": "Indonesia" },
+      "nation": {
+        "en": "Indonesia",
+        "vi": "Indonesia"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/monster-island/POSTER.webp",
       "smallPoster": "/images/data-json-imgs/monster-island/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Sci-Fi", "vi": "Khoa học" },
-        { "en": "Horror", "vi": "Kinh dị" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Sci-Fi",
+          "vi": "Khoa học"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "In 1942, a Japanese soldier and a British prisoner of war are locked in a battle for survival against a deadly creature hunting for blood.",
@@ -170,21 +263,37 @@
       "featured": false
     },
     {
-      "id": 7,
+      "id": "7",
       "title": {
         "en": "The Old Guard 2",
         "vi": "Những chiến binh bất tử 2"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/olld-guard-2/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/olld-guard-2/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Sci-Fi", "vi": "Khoa học" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Sci-Fi",
+          "vi": "Khoa học"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "Andy and his team of immortal warriors fight with new purpose as they confront a powerful new enemy that threatens their mission to protect humanity.",
@@ -197,24 +306,41 @@
       "featured": false
     },
     {
-      "id": 8,
+      "id": "8",
       "title": {
         "en": "F1: The Movie",
         "vi": "Tay đua F1"
       },
       "isSeries": false,
       "badges": [
-        { "text": "P.Đề" },
-        { "text": "T.Minh", "color": "bg-green-600/80" }
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
       ],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/F1/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/F1/SMALLPPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Sci-Fi", "vi": "Khoa học" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Sci-Fi",
+          "vi": "Khoa học"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "Brad Pitt plays a former racing driver returning to Formula 1 racing with APXGP, a fictional racing team. Joining Pitt on this journey is Damson Idris, who plays his teammate. Together, they will face off against the biggest names in the sport, conquering new heights.",
@@ -227,21 +353,37 @@
       "featured": true
     },
     {
-      "id": 9,
+      "id": "9",
       "title": {
         "en": "The Roses",
         "vi": "Hoa Hồng Có Gai"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/the-roses/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/the-roses/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Theaters", "vi": "Chiếu rạp" },
-        { "en": "Comedy", "vi": "Hài hước" },
-        { "en": "Romance", "vi": "Lãng mạn" }
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        },
+        {
+          "en": "Romance",
+          "vi": "Lãng mạn"
+        }
       ],
       "description": {
         "en": "Ivy and Theo's life seems perfect: successful careers, a happy marriage, well-behaved children. But behind the façade of an ideal family, an undercurrent of turmoil is brewing—as Theo's career falters while Ivy's ambitions soar, fanning a simmering fire of rivalry and resentment that threatens to consume everything.",
@@ -250,28 +392,45 @@
       "backdrop": "/images/data-json-imgs/the-roses/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=XkgMaS5gbaA",
       "duration": "1h 45m",
-      "rating": 7.0,
+      "rating": 7,
       "featured": true
     },
     {
-      "id": 10,
+      "id": "10",
       "title": {
         "en": "Good news",
         "vi": "Tin Tốt Lành"
       },
       "isSeries": false,
       "badges": [
-        { "text": "P.Đề" },
-        { "text": "T.Minh", "color": "bg-green-600/80" }
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
       ],
-      "nation": { "en": "Korea", "vi": "Hàn Quốc" },
+      "nation": {
+        "en": "Korea",
+        "vi": "Hàn Quốc"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/good-new/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/good-new/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Comedy", "vi": "Hài hước" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "When hijackers take control of a Japanese flight and demand it fly to Pyongyang, a mysterious genius hatches a bizarre plot to divert the plane to Seoul.",
@@ -284,20 +443,33 @@
       "featured": false
     },
     {
-      "id": 11,
+      "id": "11",
       "title": {
         "en": "The Balloonist",
         "vi": "Người Lái Khinh Khí Cầu"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Netherlands", "vi": "Hà Lan" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Netherlands",
+        "vi": "Hà Lan"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/the-ballonist/PPOSSTTER.jpg",
       "smallPoster": "/images/data-json-imgs/the-ballonist/SMALLPOSTER.webp",
       "genres": [
-        { "en": "Family", "vi": "Gia đình" },
-        { "en": "Comedy", "vi": "Hài hước" }
+        {
+          "en": "Family",
+          "vi": "Gia đình"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        }
       ],
       "description": {
         "en": "Gaby, a woman living peacefully on a traditional chicken farm, suddenly finds her life turned upside down when an arrogant hot air balloon pilot crashes straight into her chicken coop. The bizarre accident unexpectedly reopens the rift in her family, forcing Gaby to face not only the “sky invader”, but also the past she has tried to bury for so long.",
@@ -310,23 +482,37 @@
       "featured": false
     },
     {
-      "id": 12,
+      "id": "12",
       "title": {
         "en": "French Lover",
         "vi": "Người Tình Kiểu Pháp"
       },
       "isSeries": false,
       "badges": [
-        { "text": "P.Đề" },
-        { "text": "T.Minh", "color": "bg-green-600/80" }
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
       ],
-      "nation": { "en": "France", "vi": "Pháp" },
+      "nation": {
+        "en": "France",
+        "vi": "Pháp"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/franch-love/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/franch-love/SMALLPPOSTER.jpg",
       "genres": [
-        { "en": "Romance", "vi": "Lãng mạn" },
-        { "en": "Comedy", "vi": "Hài hước" }
+        {
+          "en": "Romance",
+          "vi": "Lãng mạn"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        }
       ],
       "description": {
         "en": "When a bored actor meets a down-on-his-luck waitress in Paris, an unlikely romance begins. But can their love survive the bright spotlight?",
@@ -339,51 +525,41 @@
       "featured": false
     },
     {
-      "id": 13,
-      "title": {
-        "en": "Family Secret",
-        "vi": "Lời Chưa Nói"
-      },
-      "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Korea", "vi": "Hàn Quốc" },
-      "year": 2025,
-      "poster": "/images/data-json-imgs/family-secret/POSTER.jpg",
-      "smallPoster": "/images/data-json-imgs/family-secret/SMALLPPOSTTER.jpg",
-      "genres": [
-        { "en": "Theaters", "vi": "Chiếu rạp" },
-        { "en": "Family", "vi": "Gia đình" },
-        { "en": "Comedy", "vi": "Hài hước" }
-      ],
-      "description": {
-        "en": "Yeon Jung's family slowly falls apart after the shock of losing their eldest son. As each member hides their true purpose in life, lies begin to tear them apart. After betrayals and disappointments are exposed, they slowly find love for each other as they work together to fulfill the promise they made to their late son.",
-        "vi": "Gia đình của Yeon Jung dần tan vỡ sau cú sốc mất đi người con trai cả. Khi mỗi thành viên đều giấu diếm mục đích sống thật sự của mình, những lời nói dối bắt đầu khiến họ rạn nứt. Sau những phản bội và thất vọng bị phơi bày, họ dần tìm lại tình yêu thương dành cho nhau khi cùng nhau nỗ lực hoàn thành lời hứa với người con trai quá cố."
-      },
-      "backdrop": "/images/data-json-imgs/family-secret/BACKDROP.jpg",
-      "trailer": "https://www.youtube.com/watch?v=LQOsP_wfacQ",
-      "duration": "1h 45m",
-      "rating": 6.5,
-      "featured": false
-    },
-    {
-      "id": 14,
+      "id": "14",
       "title": {
         "en": "Jurassic World Rebirth",
         "vi": "Thế Giới Khủng Long: Tái Sinh"
       },
       "isSeries": false,
       "badges": [
-        { "text": "P.Đề" },
-        { "text": "T.Minh", "color": "bg-green-600/80" }
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
       ],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/jurasic-rebirth/POSTER.webp",
       "smallPoster": "/images/data-json-imgs/jurasic-rebirth/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Theaters", "vi": "Chiếu rạp" },
-        { "en": "Sci-Fi", "vi": "Khoa học" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        },
+        {
+          "en": "Sci-Fi",
+          "vi": "Khoa học"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "Jurassic World: Rebirth opens a new action-packed chapter as a mining team races to the most dangerous place on Earth. The main cast of Scarlett Johansson, Mahershala Ali, and Jonathan Bailey embark on a dangerous mission to retrieve DNA that could lead to a medical breakthrough for humanity.",
@@ -396,21 +572,37 @@
       "featured": true
     },
     {
-      "id": 15,
+      "id": "15",
       "title": {
         "en": "28 Years Later",
         "vi": "28 Năm Sau: Hậu Tận Thế"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "England", "vi": "Anh" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "England",
+        "vi": "Anh"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/28-years-laster/PPOSSTETR.jpg",
       "smallPoster": "/images/data-json-imgs/28-years-laster/smallpostter.jpg",
       "genres": [
-        { "en": "Theaters", "vi": "Chiếu rạp" },
-        { "en": "Sci-Fi", "vi": "Khoa học" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        },
+        {
+          "en": "Sci-Fi",
+          "vi": "Khoa học"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "The nightmare is not over. The virus returns, bringing darkness to Britain. A life-or-death journey: a boy searches for a doctor to save his mother, traversing a deadly land filled with evolved zombies and dangerous people hiding behind a kind face. Will their last hope be enough to save them from the abyss of despair?",
@@ -423,21 +615,37 @@
       "featured": true
     },
     {
-      "id": 16,
+      "id": "16",
       "title": {
         "en": "Venom: The Last Dance",
         "vi": "Venom: Kèo Cuối"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/venom-last-dance/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/venom-last-dance/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Theaters", "vi": "Chiếu rạp" },
-        { "en": "Sci-Fi", "vi": "Khoa học" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        },
+        {
+          "en": "Sci-Fi",
+          "vi": "Khoa học"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "After a short trip to Spider-Man: No Way Home (2021), Eddie Brock (Tom Hardy) and Venom are now doing good deeds and cheating the heads of all the criminals in the city. However, as with all good deeds, the US government has discovered the existence of this alien monster.",
@@ -446,24 +654,37 @@
       "backdrop": "/images/data-json-imgs/venom-last-dance/BACKDROP.png",
       "trailer": "https://www.youtube.com/watch?v=FKBN1qAzW3s",
       "duration": "1h 49m",
-      "rating": 6.0,
+      "rating": 6,
       "featured": true
     },
     {
-      "id": 17,
+      "id": "17",
       "title": {
         "en": "It",
         "vi": "Gã Hề Ma Quái"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2017,
       "poster": "/images/data-json-imgs/iT/POSTER.jpeg",
       "smallPoster": "/images/data-json-imgs/iT/SMALLPOSTER.webp",
       "genres": [
-        { "en": "Theaters", "vi": "Chiếu rạp" },
-        { "en": "Horror", "vi": "Kinh dị" }
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        }
       ],
       "description": {
         "en": "It 2017 is based on the famous novel of the same name by writer Stephen King, It is expected to last two episodes. The work revolves around the battle between a group of close friends and Pennywise - a demon disguised as a clown, specializing in killing children. They have two encounters with it, with a time gap of up to 30 years.",
@@ -476,20 +697,33 @@
       "featured": false
     },
     {
-      "id": 18,
+      "id": "18",
       "title": {
         "en": "The Conjuring: Last Rites",
         "vi": "Ám Ảnh Kinh Hoàng: Nghi Lễ Cuối Cùng"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/the-conjuring-last/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/the-conjuring-last/SMALLPOSTETR.jpg",
       "genres": [
-        { "en": "Theaters", "vi": "Chiếu rạp" },
-        { "en": "Horror", "vi": "Kinh dị" }
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        }
       ],
       "description": {
         "en": "Coming as the final act of The Conjuring universe, The Conjuring: Last Rites follows exorcists Ed and Lorraine Warrent as they confront a demonic force that has terrorized the Smurl family for over a decade.",
@@ -502,21 +736,37 @@
       "featured": true
     },
     {
-      "id": 19,
+      "id": "19",
       "title": {
         "en": "Together",
         "vi": "Dính Lẹo"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/together/poster.jpg",
       "smallPoster": "/images/data-json-imgs/together/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Theaters", "vi": "Chiếu rạp" },
-        { "en": "Drama", "vi": "Tâm lý" },
-        { "en": "Horror", "vi": "Kinh dị" }
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        },
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        }
       ],
       "description": {
         "en": "A move to the remote countryside is enough to bring this couple's relationship to the brink of collapse—but an unexpected supernatural encounter sets in motion a radical transformation of their love, their lives… and their bodies.",
@@ -529,21 +779,37 @@
       "featured": false
     },
     {
-      "id": 20,
+      "id": "20",
       "title": {
         "en": "The Ghost Game",
         "vi": "Bẫy Hồi Sinh"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Korea", "vi": "Hàn Quốc" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Korea",
+        "vi": "Hàn Quốc"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/ghost-ggame/POSSTER.webp",
       "smallPoster": "/images/data-json-imgs/ghost-ggame/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Theaters", "vi": "Chiếu rạp" },
-        { "en": "Mystery", "vi": "Bí ẩn" },
-        { "en": "Horror", "vi": "Kinh dị" }
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        },
+        {
+          "en": "Mystery",
+          "vi": "Bí ẩn"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        }
       ],
       "description": {
         "en": "A group of students decided to film a contest video with the theme of “calling spirits” in an abandoned underground water tank. What started out as a prank to attract views quickly spiraled out of control when one member suddenly vomited black water and collapsed mid-ritual.",
@@ -556,22 +822,41 @@
       "featured": false
     },
     {
-      "id": 21,
+      "id": "21",
       "title": {
         "en": "One Piece",
         "vi": "One Piece: Đảo Hải Tặc"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Japan", "vi": "Nhật Bản" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Japan",
+        "vi": "Nhật Bản"
+      },
       "year": 1999,
       "poster": "/images/data-json-imgs/one-piece/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/one-piece/SMALLPOSTER.png",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Anime", "vi": "Anime" },
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Anime",
+          "vi": "Anime"
+        },
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "One Piece is a story about a boy named Monkey D. Luffy who accidentally ate a Devil Fruit and was turned into a rubber man and will never be able to swim. 10 years after that incident, he left his hometown and found 10 members to form a pirate crew, nicknamed the Straw Hat Pirates. That's when the adventure to find the treasure One Piece began.",
@@ -580,25 +865,41 @@
       "backdrop": "/images/data-json-imgs/one-piece/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=mTsFcpUrqjU",
       "duration": "1h 35m",
-      "rating": 9.0,
+      "rating": 9,
       "featured": false
     },
     {
-      "id": 22,
+      "id": "22",
       "title": {
         "en": "Let This Grieving Soul Retire",
         "vi": "Vong Linh Đau Khổ Muốn Giải Nghệ"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Japan", "vi": "Nhật Bản" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Japan",
+        "vi": "Nhật Bản"
+      },
       "year": 2024,
       "poster": "/images/data-json-imgs/let-this-grieving/POSSTER.webp",
       "smallPoster": "/images/data-json-imgs/let-this-grieving/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Anime", "vi": "Anime" },
-        { "en": "Comedy", "vi": "Hài hước" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Anime",
+          "vi": "Anime"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        }
       ],
       "description": {
         "en": "Krai Andrey and his friends promise to become treasure hunters, but Krai realizes he doesn't have what it takes, while people's expectations and the dangers around him grow.",
@@ -611,22 +912,41 @@
       "featured": false
     },
     {
-      "id": 23,
+      "id": "23",
       "title": {
         "en": "One Punch Man",
         "vi": "Nhất Quyền Nhân"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Japan", "vi": "Nhật Bản" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Japan",
+        "vi": "Nhật Bản"
+      },
       "year": 2015,
       "poster": "/images/data-json-imgs/one-punch-man/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/one-punch-man/SMALLPOSSTER.webp",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Anime", "vi": "Anime" },
-        { "en": "Comedy", "vi": "Hài hước" },
-        { "en": "Action", "vi": "Hành động" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Anime",
+          "vi": "Anime"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        },
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        }
       ],
       "description": {
         "en": "The story takes place in the city of Z in Japan at a time when the world is full of mysterious monsters with terrible power that have appeared and caused many disasters. But it is also here that a one-punch superhero appears, who can easily defeat and destroy these monsters.",
@@ -639,20 +959,33 @@
       "featured": false
     },
     {
-      "id": 24,
+      "id": "24",
       "title": {
         "en": "Gachiakuta",
         "vi": "Gachiakuta"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Japan", "vi": "Nhật Bản" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Japan",
+        "vi": "Nhật Bản"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/gachiakuta/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/gachiakuta/SMALLPOSTER.webp",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Anime", "vi": "Anime" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Anime",
+          "vi": "Anime"
+        }
       ],
       "description": {
         "en": "The city, where the civilized classes live - the slums where the descendants of criminals gather, every day they are humiliated and despised by others, called trash, disgusting people, the two dark sides of society are separated by high walls, and below that place - the Abyss - a garbage dump where criminals are exiled.",
@@ -665,21 +998,37 @@
       "featured": false
     },
     {
-      "id": 25,
+      "id": "25",
       "title": {
         "en": "Dandadan",
         "vi": "Dan Da Dan"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Japan", "vi": "Nhật Bản" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Japan",
+        "vi": "Nhật Bản"
+      },
       "year": 2024,
       "poster": "/images/data-json-imgs/dandadan/POSTER.webp",
       "smallPoster": "/images/data-json-imgs/dandadan/SMALLPOSTER.webp",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Comedy", "vi": "Hài hước" },
-        { "en": "Anime", "vi": "Anime" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        },
+        {
+          "en": "Anime",
+          "vi": "Anime"
+        }
       ],
       "description": {
         "en": "The story of a girl who believes in ghosts but rejects aliens, and a boy who believes in extraterrestrial life but doesn't believe in souls. Momo and Okarun set out to convince people that aliens and ghosts exist.",
@@ -692,22 +1041,41 @@
       "featured": false
     },
     {
-      "id": 26,
+      "id": "26",
       "title": {
         "en": "SPY×FAMILY",
         "vi": "SPY×FAMILY"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Japan", "vi": "Nhật Bản" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Japan",
+        "vi": "Nhật Bản"
+      },
       "year": 2024,
       "poster": "/images/data-json-imgs/spy-familly/POSTER.webp",
       "smallPoster": "/images/data-json-imgs/spy-familly/SMALLPOSTETR.jpg",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Comedy", "vi": "Hài hước" },
-        { "en": "Anime", "vi": "Anime" },
-        { "en": "Action", "vi": "Hành động" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        },
+        {
+          "en": "Anime",
+          "vi": "Anime"
+        },
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        }
       ],
       "description": {
         "en": "In order to prevent extremists from sparking war with the neighboring nation of Ostania, Twilight, Westalis' top spy, must investigate Ostanian politician Donovan Desmond by infiltrating his son's school, the prestigious Eden Academy.",
@@ -720,22 +1088,41 @@
       "featured": false
     },
     {
-      "id": 27,
+      "id": "27",
       "title": {
         "en": "My Hero Academia",
         "vi": "Học Viện Siêu Anh Hùng"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Japan", "vi": "Nhật Bản" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Japan",
+        "vi": "Nhật Bản"
+      },
       "year": 2024,
       "poster": "/images/data-json-imgs/my-hero-academia/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/my-hero-academia/SMALLPOSTER.webp",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Comedy", "vi": "Hài hước" },
-        { "en": "Anime", "vi": "Anime" },
-        { "en": "Action", "vi": "Hành động" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        },
+        {
+          "en": "Anime",
+          "vi": "Anime"
+        },
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        }
       ],
       "description": {
         "en": "Adapted from the manga of the same name by author Horikoshi Kohei. Set in the future, 80% of the world's population possesses superpowers, heroism is a thriving profession. This is the story of Midoriya Izuku (Deku), a boy with a strong admiration for heroes. The person Deku idolizes the most is All Might - the greatest hero in the world.",
@@ -748,21 +1135,37 @@
       "featured": false
     },
     {
-      "id": 28,
+      "id": "28",
       "title": {
         "en": "A Gatherer's Adventure in Isekai",
         "vi": "Nhật Ký Du Hành Dị Giới"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Japan", "vi": "Nhật Bản" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Japan",
+        "vi": "Nhật Bản"
+      },
       "year": 2024,
       "poster": "/images/data-json-imgs/a-gatherer-adventure/poster.jpg",
       "smallPoster": "/images/data-json-imgs/a-gatherer-adventure/smallposter.jpg",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Comedy", "vi": "Hài hước" },
-        { "en": "Anime", "vi": "Anime" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        },
+        {
+          "en": "Anime",
+          "vi": "Anime"
+        }
       ],
       "description": {
         "en": "Takeru Kamishiro, an ordinary office worker, is suddenly summoned to the world of Madeus - a place filled with swords and magic. Here, he discovers that he possesses a series of powerful skills: superior physical strength, magical spells and a special ability to search for hidden treasures.",
@@ -771,25 +1174,41 @@
       "backdrop": "/images/data-json-imgs/a-gatherer-adventure/backdrop.webp",
       "trailer": "https://www.youtube.com/watch?v=Aw8-IHYEgpw",
       "duration": "1h 35m",
-      "rating": 8.0,
+      "rating": 8,
       "featured": false
     },
     {
-      "id": 29,
+      "id": "29",
       "title": {
         "en": "Demon Slayer",
         "vi": "Thanh Gươm Diệt Quỷ"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Japan", "vi": "Nhật Bản" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Japan",
+        "vi": "Nhật Bản"
+      },
       "year": 2019,
       "poster": "/images/data-json-imgs/demon-slayer/POSTERR.webp",
       "smallPoster": "/images/data-json-imgs/demon-slayer/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Anime", "vi": "Anime" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Anime",
+          "vi": "Anime"
+        }
       ],
       "description": {
         "en": "Demon Slayer: Kimetsu no Yaiba is a Japanese manga series written and illustrated by Koyoharu Gotouge. It follows a teenager named Tanjiro Kamado, who attempts to become a demon slayer after his family is massacred and his younger sister, Nezuko, is turned into a demon.",
@@ -802,21 +1221,37 @@
       "featured": false
     },
     {
-      "id": 30,
+      "id": "30",
       "title": {
         "en": "Akame ga KILL",
         "vi": "sát Thủ Akame"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Japan", "vi": "Nhật Bản" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Japan",
+        "vi": "Nhật Bản"
+      },
       "year": 2013,
       "poster": "/images/data-json-imgs/akame-ga-kill/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/akame-ga-kill/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Anime", "vi": "Anime" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Anime",
+          "vi": "Anime"
+        }
       ],
       "description": {
         "en": "Akame ga KILL! is a shōnen manga series written by Takahiro, illustrated by Tetsuya Tashiro, and serialized in Weekly Gangan Joker published by Square Enix since 2010. A prequel manga titled Akame ga Kill! Zero began serialization in Monthly Big Gangan in October 2013.",
@@ -829,21 +1264,37 @@
       "featured": false
     },
     {
-      "id": 31,
+      "id": "31",
       "title": {
         "en": "Death by Lightning",
         "vi": "Sét Đánh giữa Trời Quang"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/death-by-lightning/SMALLPOSTER.png",
       "smallPoster": "/images/data-json-imgs/death-by-lightning/POSTER.webp",
       "genres": [
-        { "en": "Drama", "vi": "Tâm lý" },
-        { "en": "Crime", "vi": "Hình Sự" },
-        { "en": "Political", "vi": "Chính trị" }
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        },
+        {
+          "en": "Crime",
+          "vi": "Hình Sự"
+        },
+        {
+          "en": "Political",
+          "vi": "Chính trị"
+        }
       ],
       "description": {
         "en": "The story of James Garfield, who rose from obscurity to become the 20th president of the United States – and Charles Guiteau, his assassin.",
@@ -856,21 +1307,37 @@
       "featured": false
     },
     {
-      "id": 32,
+      "id": "32",
       "title": {
         "en": "The Manipulated",
         "vi": "Trò Chơi Thao Túng"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Korea", "vi": "Hàn Quốc" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Korea",
+        "vi": "Hàn Quốc"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/the-mannipulated/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/the-mannipulated/SMALLPOSTER.png",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Crime", "vi": "Hình Sự" },
-        { "en": "Drama", "vi": "Tâm lý" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Crime",
+          "vi": "Hình Sự"
+        },
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        }
       ],
       "description": {
         "en": "Tae Joong is an ordinary man, living a peaceful life, but everything is turned upside down when he is wrongly convicted of a serious crime. In prison, he discovers that everything was arranged by Yo Han - the mastermind behind it.",
@@ -883,21 +1350,37 @@
       "featured": false
     },
     {
-      "id": 33,
+      "id": "33",
       "title": {
         "en": "Blemish Flaw",
         "vi": "Bí Ẩn Mắt Nâu"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "China", "vi": "Trung Quốc" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "China",
+        "vi": "Trung Quốc"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/blemish-flaw/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/blemish-flaw/SMALLPOSTER.webp",
       "genres": [
-        { "en": "Drama", "vi": "Tâm lý" },
-        { "en": "Crime", "vi": "Hình Sự" },
-        { "en": "Drama", "vi": "Tâm lý" }
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        },
+        {
+          "en": "Crime",
+          "vi": "Hình Sự"
+        },
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        }
       ],
       "description": {
         "en": "Mysterious video blogger Yang Zhenghui investigates the long-running disappearance of his ex-lover Liu Wei, uncovering connections to ceramic artist Zeng Jie and events that occurred a year ago. As Yang Zhenghui digs deeper, the dark logic behind the truth begins to emerge.",
@@ -910,21 +1393,37 @@
       "featured": false
     },
     {
-      "id": 34,
+      "id": "34",
       "title": {
         "en": "Hypnotic",
         "vi": "Thôi Miên Báo Thù"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Thailand", "vi": "Thái Lan" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Thailand",
+        "vi": "Thái Lan"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/hypnotic/POSTER.webp",
       "smallPoster": "/images/data-json-imgs/hypnotic/SMALLPOSTER.webp",
       "genres": [
-        { "en": "Drama", "vi": "Tâm lý" },
-        { "en": "Crime", "vi": "Hình Sự" },
-        { "en": "Drama", "vi": "Tâm lý" }
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        },
+        {
+          "en": "Crime",
+          "vi": "Hình Sự"
+        },
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        }
       ],
       "description": {
         "en": "Holding a grudge since she was a child, child psychologist Sara has long hatched a plan to Hypnotic Revenge. Quiet and reserved, she always hides her true feelings behind a calm, unpredictable appearance.",
@@ -937,21 +1436,37 @@
       "featured": false
     },
     {
-      "id": 35,
+      "id": "35",
       "title": {
         "en": "Robin Hood",
         "vi": "Robin Hood"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/robin-hood-2025/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/robin-hood-2025/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Mythology", "vi": "Thần Thoại" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Mythology",
+          "vi": "Thần Thoại"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "After the Norman invasion of England, Rob, son of a Saxon woodcutter, and Marian, daughter of a Norman lord, fall in love and fight for justice and liberty. When Rob becomes the leader of a band of outlaws, Marian infiltrates the royal court.",
@@ -964,21 +1479,37 @@
       "featured": false
     },
     {
-      "id": 36,
+      "id": "36",
       "title": {
         "en": "My Foxfoe Queen",
         "vi": "Hoàng Tẩu Hồ Yêu"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "China", "vi": "Trung Quốc" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "China",
+        "vi": "Trung Quốc"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/foxfoe-queen/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/foxfoe-queen/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Palace", "vi": "Hoàng Cung" },
-        { "en": "Period", "vi": "Cổ Trang" },
-        { "en": "Romance", "vi": "Tình Cảm" }
+        {
+          "en": "Palace",
+          "vi": "Hoàng Cung"
+        },
+        {
+          "en": "Period",
+          "vi": "Cổ Trang"
+        },
+        {
+          "en": "Romance",
+          "vi": "Tình Cảm"
+        }
       ],
       "description": {
         "en": "The setting of The Fox Demon Princess takes place after the time when Crown Prince Xi Ling Xuan carried out a bloody massacre that destroyed the fox clan. The holy maiden Tu Shan Yue from the clan survived, but her wandering soul entered the body of the late Queen Jiang Xin'er.",
@@ -991,21 +1522,37 @@
       "featured": false
     },
     {
-      "id": 37,
+      "id": "37",
       "title": {
         "en": "The  hunt",
         "vi": "Mệnh Huyền Nhất Sinh"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "China", "vi": "Trung Quốc" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "China",
+        "vi": "Trung Quốc"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/the-hunt/POSTER.webp",
       "smallPoster": "/images/data-json-imgs/the-hunt/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Drama", "vi": "Tâm lý" },
-        { "en": "Mystery", "vi": "Bí ẩn" },
-        { "en": "Criminal", "vi": "Hình sự" }
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        },
+        {
+          "en": "Mystery",
+          "vi": "Bí ẩn"
+        },
+        {
+          "en": "Criminal",
+          "vi": "Hình sự"
+        }
       ],
       "description": {
         "en": "Nghe Huong Dong received a request from his close friend Cao Tieu Quan to bring a wooden box to an abandoned house on a deserted mountain. However, he was surprised to discover that inside the wooden box was Cao Tieu Quan's body. Cao Tieu Quan's wife, Ngo Te Muoi, called the police to look for her missing husband.",
@@ -1018,21 +1565,37 @@
       "featured": false
     },
     {
-      "id": 38,
+      "id": "38",
       "title": {
         "en": "The Day of the Jackal",
         "vi": "Ngày Của Chó Rừng"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "England", "vi": "Anh" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "England",
+        "vi": "Anh"
+      },
       "year": 2024,
       "poster": "/images/data-json-imgs/day-of-jackal/POSTER.webp",
       "smallPoster": "/images/data-json-imgs/day-of-jackal/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Mystery", "vi": "Bí ẩn" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Mystery",
+          "vi": "Bí ẩn"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "The film tells the story of a professional assassin nicknamed Jackal. He is hired to carry out an important assassination mission at a high price. Meanwhile, Bianca Pullman, an MI6 agent, is assigned to stop Jackal.",
@@ -1045,20 +1608,33 @@
       "featured": false
     },
     {
-      "id": 39,
+      "id": "39",
       "title": {
         "en": "The Terminal List",
         "vi": "Danh Sách Tử Thù"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/terminal-list/POSTER.jpg",
       "smallPoster": "/images/data-json-imgs/terminal-list/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "The film revolves around the story of a former Navy Seal officer who is trying to use all the resources and methods at his disposal to find out why his entire platoon was shot down. Although this mission is supposed to be completely secret and no one but the people involved knows.",
@@ -1071,20 +1647,33 @@
       "featured": false
     },
     {
-      "id": 40,
+      "id": "40",
       "title": {
         "en": "Genie, Make a Wish",
         "vi": "Thần Đèn ơi, Ước Đi"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Korea", "vi": "Hàn Quốc" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Korea",
+        "vi": "Hàn Quốc"
+      },
       "year": 2025,
       "poster": "/images/data-json-imgs/genie-make-wish/POSTEER.jpg",
       "smallPoster": "/images/data-json-imgs/genie-make-wish/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Comedy", "vi": "Hài hước" },
-        { "en": "Romance", "vi": "Tình Cảm" }
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        },
+        {
+          "en": "Romance",
+          "vi": "Tình Cảm"
+        }
       ],
       "description": {
         "en": "After a thousand years, the flamboyant genie returns to grant a stoic girl's wishes. Can his magic fill her rigid world with love and fantasy?",
@@ -1097,445 +1686,903 @@
       "featured": true
     },
     {
-      "id": 41,
+      "id": "41",
       "title": {
         "en": "Frankenstein",
         "vi": "Frankenstein"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "USA", "vi": "Mỹ" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/frankenstein/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/frankenstein/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/frankenstein/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/frankenstein/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Sci-Fi", "vi": "Khoa học" },
-        { "en": "Horror", "vi": "Kinh dị" },
-        { "en": "Sci-Fi", "vi": "Khoa học" }
+        {
+          "en": "Sci-Fi",
+          "vi": "Khoa học"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        },
+        {
+          "en": "Sci-Fi",
+          "vi": "Khoa học"
+        }
       ],
       "description": {
         "en": "Oscar-winning director Guillermo del Toro reimagines Mary Shelley's classic tale of a brilliant scientist and the creature his monstrous ambition creates.",
         "vi": "Đạo diễn đoạt giải Oscar Guillermo del Toro tái hiện câu chuyện kinh điển của Mary Shelley về một nhà khoa học lỗi lạc và tạo vật mà tham vọng quái dị của anh tạo ra."
       },
-      "backdrop": "./public/images/data-json-imgs/frankenstein/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/frankenstein/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=8aulMPhE12g",
       "duration": "2h 30m",
       "rating": 7.7,
       "featured": false
     },
     {
-      "id": 42,
+      "id": "42",
       "title": {
         "en": "Dear X",
         "vi": "X Thân Mến!"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Korea", "vi": "Hàn Quốc" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Korea",
+        "vi": "Hàn Quốc"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/dear-X/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/dear-X/SMALLPOSTER.webp",
+      "poster": "/images/data-json-imgs/dear-X/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/dear-X/SMALLPOSTER.webp",
       "genres": [
-        { "en": "Mystery", "vi": "Bí ẩn" },
-        { "en": "Horror", "vi": "Kinh dị" },
-        { "en": "Drama", "vi": "Tâm lý" }
+        {
+          "en": "Mystery",
+          "vi": "Bí ẩn"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        },
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        }
       ],
       "description": {
         "en": "Tác phẩm kể về Baek Ah Jin (Kim Yoo Jung) - nữ diễn viên nổi tiếng đạt được thành công bằng cách lợi dụng người khác và Yoon Joon Seo (Kim Young Dae), Kim Jae Oh (Kim Do Hoon) - hai người đàn ông sẵn sàng dấn thân vào địa ngục để cứu cô.",
         "vi": "Tác phẩm kể về Baek Ah Jin (Kim Yoo Jung) - nữ diễn viên nổi tiếng đạt được thành công bằng cách lợi dụng người khác và Yoon Joon Seo (Kim Young Dae), Kim Jae Oh (Kim Do Hoon) - hai người đàn ông sẵn sàng dấn thân vào địa ngục để cứu cô."
       },
-      "backdrop": "./public/images/data-json-imgs/dear-X/BACKDROP.webp",
+      "backdrop": "/images/data-json-imgs/dear-X/BACKDROP.webp",
       "trailer": "https://www.youtube.com/watch?v=W8ixs0XLKNA",
       "duration": "55m",
       "rating": 9.2,
       "featured": false
     },
     {
-      "id": 43,
+      "id": "43",
       "title": {
         "en": "Zomvivor",
         "vi": "Zomvivor: Ngôi Trường Thây Ma"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Thailand", "vi": "Thái Lan" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Thailand",
+        "vi": "Thái Lan"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/zomvivor/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/zomvivor/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/zomvivor/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/zomvivor/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Mystery", "vi": "Bí ẩn" },
-        { "en": "Horror", "vi": "Kinh dị" }
+        {
+          "en": "Mystery",
+          "vi": "Bí ẩn"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        }
       ],
       "description": {
         "en": "When an apocalyptic virus turns people into zombies and ravages the city, a group of students take refuge in their school and fight to survive.",
         "vi": "Khi một loại virus tận thế biến con người thành thây ma tàn phá thành phố, nhóm học sinh nọ trú ẩn trong trường và chiến đấu để sống sót."
       },
-      "backdrop": "./public/images/data-json-imgs/zomvivor/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/zomvivor/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=4Je_r5uvz24",
       "duration": "1h 00m",
       "rating": 6.4,
       "featured": false
     },
     {
-      "id": 44,
+      "id": "44",
       "title": {
         "en": "The Elixir",
         "vi": "Thuốc Trường Sinh"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "Indonesia", "vi": "Indonesia" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Indonesia",
+        "vi": "Indonesia"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/the-elixir/POSSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/the-elixir/POSSTER.jpg",
+      "poster": "/images/data-json-imgs/the-elixir/POSSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/the-elixir/POSSTER.jpg",
       "genres": [
-        { "en": "Mystery", "vi": "Bí ẩn" },
-        { "en": "Horror", "vi": "Kinh dị" },
-        { "en": "Drama", "vi": "Tâm lý" }
+        {
+          "en": "Mystery",
+          "vi": "Bí ẩn"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        },
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        }
       ],
       "description": {
         "en": "An elixir of life unleashes the undead upon a village. As their hometown slowly falls apart, a dysfunctional family is forced to band together to fight for survival.",
         "vi": "Một loại thuốc trường sinh giải phóng xác sống trong một ngôi làng. Giữa lúc quê nhà dần sụp đổ, một gia đình bất hòa buộc phải hợp sức chiến đấu để sống sót."
       },
-      "backdrop": "./public/images/data-json-imgs/the-elixir/BACKDROP.png",
+      "backdrop": "/images/data-json-imgs/the-elixir/BACKDROP.png",
       "trailer": "https://www.youtube.com/watch?v=XL48F7LGoig",
       "duration": "1h 56m",
       "rating": 5.3,
       "featured": false
     },
     {
-      "id": 45,
+      "id": "45",
       "title": {
         "en": "Down Cemetery Road",
         "vi": "Đường Về Cõi Chết"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "England", "vi": "Anh" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "England",
+        "vi": "Anh"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/down-cemetery-road/POSTER.webp",
-      "smallPoster": "./public/images/data-json-imgs/down-cemetery-road/SMALLPOSTER.png",
+      "poster": "/images/data-json-imgs/down-cemetery-road/POSTER.webp",
+      "smallPoster": "/images/data-json-imgs/down-cemetery-road/SMALLPOSTER.png",
       "genres": [
-        { "en": "Crime", "vi": "Hình Sự" },
-        { "en": "Horror", "vi": "Kinh dị" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Crime",
+          "vi": "Hình Sự"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "When a child goes missing after a house explosion, a frantic neighbor teams up with a private detective to find him. As secrets and a military conspiracy unravel, the sleepy suburb of South Oxford awakens.",
         "vi": "Khi một đứa trẻ mất tích sau vụ nổ nhà, người hàng xóm sốt sắng hợp tác cùng một thám tử tư để đi tìm bé. Khi những bí mật dần hé lộ cùng một âm mưu quân sự, cả vùng ngoại ô Nam Oxford im lìm như choàng tỉnh giấc."
       },
-      "backdrop": "./public/images/data-json-imgs/down-cemetery-road/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/down-cemetery-road/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=0unUwpCfRg0",
       "duration": "50m",
       "rating": 7.2,
       "featured": false
     },
     {
-      "id": 46,
+      "id": "46",
       "title": {
         "en": "The Wonderfully Weird World of Gumball",
         "vi": "Thế Giới Ảo Diệu của Gumball"
       },
       "isSeries": true,
       "badges": [
-        { "text": "P.Đề" },
-        { "text": "T.Minh", "color": "bg-green-600/80" }
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
       ],
-      "nation": { "en": "England", "vi": "Anh" },
+      "nation": {
+        "en": "England",
+        "vi": "Anh"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/worlf-of-gumbal/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/worlf-of-gumbal/SMALLPOSER.webp",
+      "poster": "/images/data-json-imgs/worlf-of-gumbal/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/worlf-of-gumbal/SMALLPOSER.webp",
       "genres": [
-        { "en": "Comedy", "vi": "Hài hước" },
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        },
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "Welcome back to Elmore – where the rules of reality are a joke, and family life is anything but normal! Whether it's battling an evil fast food empire, matching wits with an AI that's infatuated with his mom, or stopping Banana Joe from wearing pants – Gumball Watterson drags his brother Darwin, his sister Anais, and the entire town of Elmore into adventures like no other.",
         "vi": "Chào mừng trở lại Elmore – nơi các quy luật thực tại chỉ là trò đùa, và cuộc sống gia đình thì chẳng hề bình thường chút nào! Dù là chiến đấu với một đế chế đồ ăn nhanh tà ác, đọ trí với một AI si tình mẹ cậu, hay ngăn Banana Joe… mặc quần – Gumball Watterson luôn lôi kéo cậu em Darwin, em gái Anais và cả thị trấn Elmore vào những chuyến phiêu lưu có một không hai."
       },
-      "backdrop": "./public/images/data-json-imgs/worlf-of-gumbal/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/worlf-of-gumbal/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=femYDT6fWAE",
       "duration": "10m",
       "rating": 8.6,
       "featured": false
     },
     {
-      "id": 47,
+      "id": "47",
       "title": {
         "en": "Night Always Comes",
         "vi": "Màn Đêm Luôn Tới"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "England", "vi": "Anh" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "England",
+        "vi": "Anh"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/night-always-comes/SMALLPOSSTTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/night-always-comes/SMALLPOSSTTER.jpg",
+      "poster": "/images/data-json-imgs/night-always-comes/SMALLPOSSTTER.jpg",
+      "smallPoster": "/images/data-json-imgs/night-always-comes/SMALLPOSSTTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Crime", "vi": "Hình Sự" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Crime",
+          "vi": "Hình Sự"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "About to lose her home in a city where her family can no longer afford to stay, a desperate woman spends the night struggling and getting deeper and deeper into danger to earn $25,000.",
         "vi": "Sắp mất nhà giữa một thành phố mà gia đình không còn đủ tiền để lưu lại, suốt đêm cô gái nọ tuyệt vọng xoay xở và ngày càng lún sâu vào nguy hiểm hòng kiếm đủ 25.000 đô la."
       },
-      "backdrop": "./public/images/data-json-imgs/night-always-comes/BACKDROP.webp",
+      "backdrop": "/images/data-json-imgs/night-always-comes/BACKDROP.webp",
       "trailer": "https://www.youtube.com/watch?v=Gd44vTsTUhs",
       "duration": "1h 48m",
       "rating": 5.9,
       "featured": false
     },
     {
-      "id": 48,
+      "id": "48",
       "title": {
         "en": "Bambi: The Reckoning",
         "vi": "Chú Nai Bambi: Nghiệp Báo"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "England", "vi": "Anh" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "England",
+        "vi": "Anh"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/bambi-the-reckoning/POSTTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/bambi-the-reckoning/SMALLPOSSTER.jpg",
+      "poster": "/images/data-json-imgs/bambi-the-reckoning/POSTTER.jpg",
+      "smallPoster": "/images/data-json-imgs/bambi-the-reckoning/SMALLPOSSTER.jpg",
       "genres": [
-        { "en": "Mystery", "vi": "Bí ẩn" },
-        { "en": "Horror", "vi": "Kinh dị" }
+        {
+          "en": "Mystery",
+          "vi": "Bí ẩn"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        }
       ],
       "description": {
         "en": "After a car accident, mother and son unexpectedly become prey to Bambi – a mutant deer, engulfed in grief, who goes on a bloody rampage to avenge the deaths of his mother and wife.",
         "vi": "Sau một vụ tai nạn xe hơi, hai mẹ con bất ngờ trở thành con mồi của Bambi – một con hươu đột biến, chìm trong đau thương, lao vào cơn thịnh nộ đẫm máu để trả thù cho cái chết của mẹ và vợ nó."
       },
-      "backdrop": "./public/images/data-json-imgs/bambi-the-reckoning/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/bambi-the-reckoning/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=j_J2-GafTSQ",
       "duration": "1h 21m",
       "rating": 5.3,
       "featured": false
     },
     {
-      "id": 49,
+      "id": "49",
       "title": {
         "en": "Tin Soldier",
         "vi": "Chiến  Binh Thép"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "England", "vi": "Anh" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "England",
+        "vi": "Anh"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/tin-soldier/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/tin-soldier/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/tin-soldier/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/tin-soldier/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "Tin Soldier revolves around Nash Cavanaugh (Scott Eastwood), a former special forces soldier seeking revenge on Bokushi (Jamie Foxx), the leader of a cult that has recruited American veterans into an extremist training program.",
         "vi": "Tin Soldier xoay quanh nhân vật Nash Cavanaugh (Scott Eastwood thủ vai), một cựu đặc nhiệm tìm cách trả thù Bokushi (Jamie Foxx), thủ lĩnh một giáo phái đã lôi kéo các cựu chiến binh Mỹ vào một chương trình huấn luyện cực đoan."
       },
-      "backdrop": "./public/images/data-json-imgs/tin-soldier/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/tin-soldier/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=laM8IWKbSCo",
       "duration": "1h 27m",
       "rating": 3.3,
       "featured": false
     },
     {
-      "id": 50,
+      "id": "50",
       "title": {
         "en": "A Working Man",
         "vi": "Mật Vụ Phụ Hồ"
       },
       "isSeries": false,
       "badges": [
-        { "text": "P.Đề" },
-        { "text": "T.Minh", "color": "bg-green-600/80" }
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
       ],
-      "nation": { "en": "England", "vi": "Anh" },
+      "nation": {
+        "en": "England",
+        "vi": "Anh"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/working-man/SMALLPOSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/working-man/POSTER.jpg",
+      "poster": "/images/data-json-imgs/working-man/SMALLPOSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/working-man/POSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Crime", "vi": "Hình Sự" },
-        { "en": "Theaters", "vi": "Chiếu rạp" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Crime",
+          "vi": "Hình Sự"
+        },
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        }
       ],
       "description": {
         "en": "Levon Cade - a former elite commando of the British Royal Marines. After retirement, he lives a peaceful life as a construction worker in Chicago (USA). Levon has a very good relationship with the family of his boss Joe Garcia (Michael Peña).",
         "vi": "Levon Cade - cựu biệt kích tinh nhuệ thuộc lực lượng Thủy quân Lục chiến Hoàng gia Anh. Sau khi nghỉ hưu, anh sống cuộc đời yên bình là một công nhân xây dựng tại Chicago (Mỹ). Levon có mối quan hệ rất tốt với gia đình ông chủ Joe Garcia (Michael Peña). "
       },
-      "backdrop": "./public/images/data-json-imgs/working-man/BACKDROP.webp",
+      "backdrop": "/images/data-json-imgs/working-man/BACKDROP.webp",
       "trailer": "https://www.youtube.com/watch?v=zTbgNC42Ops",
       "duration": "1h 56m",
       "rating": 5.7,
       "featured": false
     },
     {
-      "id": 51,
+      "id": "51",
       "title": {
         "en": "Vengeance of the Mountain God",
         "vi": "Sơn Thần Dị Văn Lục"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "China", "vi": "Trung Quốc" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "China",
+        "vi": "Trung Quốc"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/vengeance-of-mountain/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/vengeance-of-mountain/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/vengeance-of-mountain/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/vengeance-of-mountain/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Drama", "vi": "Tâm lý" },
-        { "en": "Mystery", "vi": "Bí ẩn" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        },
+        {
+          "en": "Mystery",
+          "vi": "Bí ẩn"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "Kim Thap Tam is the adopted son of the old mountain chief Kim Bat Hoan. He learned the secret of finding and identifying ginseng from a young age. Three years ago, during the Ginseng Hunting Competition, the entire Kim family was framed by a villain and died tragically at the hands of their opponents. Kim Thap Tam was lucky to survive, but was seriously injured and was forced to become a “blood slave”.",
         "vi": "Kim Thập Tam là con nuôi của lão sơn trưởng Kim Bất Hoán, từ nhỏ đã học được tuyệt kỹ tìm và nhận biết nhân sâm. Ba năm trước, trong Đại hội tìm nhân sâm, toàn bộ gia tộc họ Kim bị kẻ gian bày mưu hãm hại, chết thảm dưới tay đối thủ. Kim Thập Tam may mắn sống sót, nhưng trọng thương và bị bắt làm “huyết nô”. "
       },
-      "backdrop": "./public/images/data-json-imgs/vengeance-of-mountain/POSTER.jpg",
+      "backdrop": "/images/data-json-imgs/vengeance-of-mountain/POSTER.jpg",
       "trailer": "https://www.youtube.com/watch?v=a1TO2ce6D1g",
       "duration": "56m",
       "rating": 5.7,
       "featured": false
     },
     {
-      "id": 52,
+      "id": "52",
       "title": {
         "en": "The Sun in the Dark",
         "vi": "Bạch Dạ Thần Duyên Khời Tam Sinh"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "China", "vi": "Trung Quốc" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "China",
+        "vi": "Trung Quốc"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/the-sun-in-the-dark/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/the-sun-in-the-dark/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/the-sun-in-the-dark/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/the-sun-in-the-dark/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Drama", "vi": "Tâm lý" },
-        { "en": "Period", "vi": "Cổ Trang" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        },
+        {
+          "en": "Period",
+          "vi": "Cổ Trang"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "Bach Tieu Huynh was considered a devil since childhood, and cultivated to become an immortal to avenge her father's death. Her soul was bound to Da Than - Da Than Uyen, and gradually developed feelings for him. Da Than Uyen sacrificed himself to help her awaken, exposing the Immortal King's plot to manipulate Da Than.",
         "vi": "Bạch Tiểu Huỳnh từ nhỏ đã bị xem là ác ma, đã tu luyện thành tiên để báo thù cho cái chết của cha. Cô bị ràng buộc linh hồn với Dạ Thần - Dạ Thần Uyên, và dần nảy sinh tình cảm với anh. Dạ Thần Uyên đã hy sinh bản thân để giúp cô thức tỉnh, vạch trần âm mưu thao túng Dạ Thần của Tiên Vương. "
       },
-      "backdrop": "./public/images/data-json-imgs/the-sun-in-the-dark/BACKDROP.avif",
+      "backdrop": "/images/data-json-imgs/the-sun-in-the-dark/BACKDROP.avif",
       "trailer": "https://www.youtube.com/watch?v=U61CCKGBNBM&list=PLV7fI9wy8e1QGBCFlDDfzNpatoZZpQ9jV&index=1",
       "duration": "35m",
       "rating": 5.9,
       "featured": false
     },
     {
-      "id": 53,
+      "id": "53",
       "title": {
         "en": "Curious Tales of a Temple",
         "vi": "Liêu Trai: Lan Nhược Tự"
       },
       "isSeries": false,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "China", "vi": "Trung Quốc" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "China",
+        "vi": "Trung Quốc"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/curious-tales-of-a-templle/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/curious-tales-of-a-templle/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/curious-tales-of-a-templle/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/curious-tales-of-a-templle/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Comedy", "vi": "Hài hước" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "A nosy scholar went to a temple and met two gossipy monsters, and this strange story began. Scholar Pu Songling spent the night at Lan Ruo Temple and was taken by two monsters, a toad and a turtle, to the bottom of an ancient well to judge the good or bad of the stories there.",
         "vi": "Một thư sinh mê hóng hớt lên chùa gặp 2 con yêu quái nhiều chuyện và bắt đầu câu chuyện đầy quỷ dị này. Thư sinh Bồ Tùng Linh qua đêm tại Lan Nhược Tự, bị hai yêu quái là cóc và rùa bắt xuống đáy giếng cổ để phán xét hay dở của các câu chuyện nơi đây."
       },
-      "backdrop": "./public/images/data-json-imgs/curious-tales-of-a-templle/BACKDROP.webp",
+      "backdrop": "/images/data-json-imgs/curious-tales-of-a-templle/BACKDROP.webp",
       "trailer": "https://www.youtube.com/watch?v=GurVcgDIPeg",
       "duration": "2h 32m",
       "rating": 6.5,
       "featured": false
     },
     {
-      "id": 54,
+      "id": "54",
       "title": {
         "en": "Eclipse of Illusion",
         "vi": "Vân Thâm Bất Tri Mộng"
       },
       "isSeries": true,
-      "badges": [{ "text": "P.Đề" }],
-      "nation": { "en": "China", "vi": "Trung Quốc" },
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "China",
+        "vi": "Trung Quốc"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/eclipse-of-lllusion/POSTER.webp",
-      "smallPoster": "./public/images/data-json-imgs/eclipse-of-lllusion/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/eclipse-of-lllusion/POSTER.webp",
+      "smallPoster": "/images/data-json-imgs/eclipse-of-lllusion/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Drama", "vi": "Tâm lý" },
-        { "en": "Adventure", "vi": "Phiêu lưu" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        },
+        {
+          "en": "Adventure",
+          "vi": "Phiêu lưu"
+        }
       ],
       "description": {
         "en": "Van Vong Thu's lavish wedding suddenly turned into a tragedy, her entire sect and family were destroyed by a pre-planned conspiracy. She dragged her bleeding body to escape. On the brink of life and death, she signed a heart-exchange contract with the mysterious force La Di Cac.",
         "vi": "Hôn lễ xa hoa của Vân Vọng Thư bỗng chốc hóa thành một thảm kịch, cả môn phái và gia tộc nàng đều bị tiêu diệt do một âm mưu đã được giăng sẵn. Nàng lết tấm thân rướm máu chạy trốn. Trên bờ vực sinh tử, nàng ký giao ước đổi tim với thế lực bí ẩn “La Dị Các”."
       },
-      "backdrop": "./public/images/data-json-imgs/eclipse-of-lllusion/BACKDROP.jpg",
+      "backdrop": "/images/data-json-imgs/eclipse-of-lllusion/BACKDROP.jpg",
       "trailer": "https://www.youtube.com/watch?v=0ca_w7MtCDg&list=PLTbLcHjNgGMiAlmnDjCrb5mTRegQpcQz0",
       "duration": "32m",
       "rating": 7.5,
-      "featured": false
+      "featured": true
     },
     {
-      "id": 55,
+      "id": "55",
       "title": {
         "en": "Ne Zha 2",
         "vi": "Na Tra 2: Ma Đồng Náo Hải"
       },
       "isSeries": false,
       "badges": [
-        { "text": "P.Đề" },
-        { "text": "T.Minh", "color": "bg-green-600/80" }
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
       ],
-      "nation": { "en": "China", "vi": "Trung Quốc" },
+      "nation": {
+        "en": "China",
+        "vi": "Trung Quốc"
+      },
       "year": 2025,
-      "poster": "./public/images/data-json-imgs/ne-zha-2/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/ne-zha-2/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/ne-zha-2/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/ne-zha-2/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Cartoon", "vi": "Hoạt Hình" },
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Theaters", "vi": "Chiếu rạp" }
+        {
+          "en": "Cartoon",
+          "vi": "Hoạt Hình"
+        },
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        }
       ],
       "description": {
         "en": "After the tribulation, although Nezha and Ngao Bing's souls were preserved, their bodies would soon be completely destroyed. Taiyi Zhenren planned to use the Seven Colored Lotuses to recreate their bodies.",
         "vi": "Sau kiếp nạn, mặc dù linh hồn của Na Tra và Ngao Bính được bảo toàn, nhưng thân xác của họ sẽ sớm bị hủy hoại hoàn toàn. Thái Ất Chân Nhân dự định sử dụng Bảy Đóa Sen Sắc Màu để tái tạo thân xác cho họ. "
       },
-      "backdrop": "./public/images/data-json-imgs/ne-zha-2/BBACKDROP.jpeg",
+      "backdrop": "/images/data-json-imgs/ne-zha-2/BBACKDROP.jpeg",
       "trailer": "https://www.youtube.com/watch?v=ETlOSBR92Fs",
       "duration": "2h 24m",
       "rating": 8.9,
       "featured": true
     },
     {
-      "id": 56,
+      "id": "56",
       "title": {
         "en": "Twilight of the Warriors: Walled In",
         "vi": "Cửu Long Thành Trại: Vây Thành"
       },
       "isSeries": false,
       "badges": [
-        { "text": "P.Đề" },
-        { "text": "T.Minh", "color": "bg-green-600/80" }
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
       ],
-      "nation": { "en": "China", "vi": "Trung Quốc" },
+      "nation": {
+        "en": "China",
+        "vi": "Trung Quốc"
+      },
       "year": 2024,
-      "poster": "./public/images/data-json-imgs/twilight-of-the-warrious/POSTER.jpg",
-      "smallPoster": "./public/images/data-json-imgs/twilight-of-the-warrious/SMALLPOSTER.jpg",
+      "poster": "/images/data-json-imgs/twilight-of-the-warrious/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/twilight-of-the-warrious/SMALLPOSTER.jpg",
       "genres": [
-        { "en": "Action", "vi": "Hành động" },
-        { "en": "Theaters", "vi": "Chiếu rạp" },
-        { "en": "Criminal", "vi": "Hình sự" }
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        },
+        {
+          "en": "Criminal",
+          "vi": "Hình sự"
+        }
       ],
       "description": {
         "en": "Lac Quan illegally entered Hong Kong and was helped by Quyen Phong to survive in Kowloon Walled City - a complex area with many gangs. During their ordeal, they accidentally discovered the hidden rules amidst the chaos behind it. Facing the evil forces, they stood up against the dark plot of the enemy to keep their oath to protect the peace of this place.",
         "vi": "Lạc Quân nhập cảnh trái phép vào Hồng Kông và được Quyền Phong giúp đỡ để tồn tại ở Cửu Long Thành Trại - khu vực phức tạp có rất nhiều băng đảng xã hội đen. Trong lúc gặp nạn họ vô tình phát hiện ra quy luật ngầm giữa sự hỗn loạn phía sau nó. Đứng trước những thế lực tội ác, họ đứng lên chống lại âm mưu đen tối của kẻ thù để giữ lời thề bảo vệ sự bình yên của nơi này."
       },
-      "backdrop": "./public/images/data-json-imgs/twilight-of-the-warrious/BACKDROP.webp",
+      "backdrop": "/images/data-json-imgs/twilight-of-the-warrious/BACKDROP.webp",
       "trailer": "https://www.youtube.com/watch?v=fuO-Y_6e1lA",
       "duration": "2h 05m",
       "rating": 6.9,
       "featured": false
+    },
+    {
+      "id": "57",
+      "title": {
+        "en": "Gold Rush Gang",
+        "vi": "Băng Trộm Săn Vàng"
+      },
+      "isSeries": false,
+      "badges": [
+        {
+          "text": "P.Đề"
+        },
+        {
+          "text": "T.Minh",
+          "color": "bg-green-600/80"
+        }
+      ],
+      "nation": {
+        "en": "Thailand",
+        "vi": "Thái Lan"
+      },
+      "year": 2025,
+      "poster": "/images/data-json-imgs/gold-rush-gang/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/gold-rush-gang/POSTER.jpg",
+      "genres": [
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Comedy",
+          "vi": "Hài hước"
+        }
+      ],
+      "description": {
+        "en": "At the end of World War II, a bandit leader and his gang confront their sworn enemy and the Japanese army to rob a train full of gold.",
+        "vi": "Cuối Thế chiến II, một thủ lĩnh băng cướp cùng đồng bọn đối đầu với kẻ thù không đội trời chung và quân đội Nhật để cướp chuyến tàu chở đầy vàng."
+      },
+      "backdrop": "/images/data-json-imgs/gold-rush-gang/BACKDROP.jpg",
+      "trailer": "https://www.youtube.com/watch?v=2MVjg_SXjgM",
+      "duration": "1h 59m",
+      "rating": 4.1,
+      "featured": false
+    },
+    {
+      "id": "58",
+      "title": {
+        "en": "Hide & Sis",
+        "vi": "Em Gái Mất Tích"
+      },
+      "isSeries": true,
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Thailand",
+        "vi": "Thái Lan"
+      },
+      "year": 2025,
+      "poster": "/images/data-json-imgs/hide-sis/POSTER.webp",
+      "smallPoster": "/images/data-json-imgs/hide-sis/SMALLPOSTER.jpg",
+      "genres": [
+        {
+          "en": "Drama",
+          "vi": "Tâm lý"
+        },
+        {
+          "en": "Mystery",
+          "vi": "Bí ẩn"
+        }
+      ],
+      "description": {
+        "en": "Chatfah, the youngest sister of the Bupphachinda family, has just received the largest portion of her father's inheritance and is about to get married. However, Chatfah suddenly falls from the top floor of the villa, as her three sisters watch in horror. When her body disappears, the three sisters - Baibua, Chomphu and Picha - become the prime suspects.",
+        "vi": "Chatfah, cô em út của gia đình Bupphachinda, vừa nhận được phần lớn nhất trong khối tài sản thừa kế của cha và chuẩn bị kết hôn. Tuy nhiên, Chatfah bất ngờ ngã từ tầng cao nhất của căn biệt thự nghỉ dưỡng trước ánh mắt kinh hoàng của ba người chị gái. Khi thi thể cô biến mất, ba người chị - Baibua, Chomphu và Picha - trở thành những nghi phạm chính."
+      },
+      "backdrop": "/images/data-json-imgs/hide-sis/BACKDROP.webp",
+      "trailer": "https://www.youtube.com/watch?v=Pu505zkKOyw",
+      "duration": "50m",
+      "rating": 8.4,
+      "featured": false
+    },
+    {
+      "id": "59",
+      "title": {
+        "en": "Pacific Rim: Uprising",
+        "vi": "Pacific Rim: Trỗi Dậy"
+      },
+      "isSeries": false,
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
+      "year": 2025,
+      "poster": "/images/data-json-imgs/uprising/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/uprising/SMALLPOSTER.webp",
+      "genres": [
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Sci-Fi",
+          "vi": "Khoa học"
+        },
+        {
+          "en": "Theaters",
+          "vi": "Chiếu rạp"
+        }
+      ],
+      "description": {
+        "en": "Set 10 years after the events of part 1, Jake Pentecost - the sole successor of the legendary Stacker Pentecost, fulfilled his promise to his father, joining the group of Jaeger pilots including Lambert (Scott Eastwood) and 15-year-old Amara (Cailee Spaeny), together building a front line against Kaiju.",
+        "vi": "Lấy bối cảnh 10 năm sau những sự kiện đã diễn ra ở phần 1, Jake Pentecost – truyền nhân duy nhất của huyền thoại Stacker Pentecost đã thực hiện lời hứa với cha mình, gia nhập nhóm người điều khiển Jaeger gồm có Lambert (Scott Eastwood) và Amara chỉ mới 15 tuổi (Cailee Spaeny), cùng nhau xây dựng nên một chiến tuyến chống lại Kaiju. "
+      },
+      "backdrop": "/images/data-json-imgs/uprising/BACKDROP.webp",
+      "trailer": "https://www.youtube.com/watch?v=_EhiLLOhVis",
+      "duration": "1h 51m",
+      "rating": 6.9,
+      "featured": true
+    },
+    {
+      "id": "60",
+      "title": {
+        "en": "Home Sweet Home: Rebirth",
+        "vi": "Cõi Gián Đoạn: Tái Sinh"
+      },
+      "isSeries": false,
+      "badges": [
+        {
+          "text": "P.Đề"
+        }
+      ],
+      "nation": {
+        "en": "Thailand",
+        "vi": "Thái Lan"
+      },
+      "year": 2025,
+      "poster": "/images/data-json-imgs/home-sweet-home-rebirth/POSTER.jpg",
+      "smallPoster": "/images/data-json-imgs/home-sweet-home-rebirth/SMALLPOSTER.jpg",
+      "genres": [
+        {
+          "en": "Action",
+          "vi": "Hành động"
+        },
+        {
+          "en": "Horror",
+          "vi": "Kinh dị"
+        },
+        {
+          "en": "Mystery",
+          "vi": "Bí ẩn"
+        }
+      ],
+      "description": {
+        "en": "When a city is overrun by demonic mobs, a cop must find the source of the evil to save his family.",
+        "vi": "Khi một thành phố bị đám đông quỷ ám tràn ngập, một cảnh sát phải tìm ra nguồn gốc của cái ác để cứu gia đình mình."
+      },
+      "backdrop": "/images/data-json-imgs/home-sweet-home-rebirth/BACKDROP.jpg",
+      "trailer": "https://www.youtube.com/watch?v=1IAoMyJ8GpI",
+      "duration": "1h 33m",
+      "rating": 4.5,
+      "featured": false
+    },
+    {
+      "id": "61",
+      "title": {
+        "en": "Predator: Badlands",
+        "vi": "Quái Thú Vô Hình: Vùng Đất Chết Chóc"
+      },
+      "isSeries": false,
+      "badges": [],
+      "nation": {
+        "en": "USA",
+        "vi": "Mỹ"
+      },
+      "year": 2025,
+      "poster": "/images/data-json-imgs/predator-badlands/POSTER.webp",
+      "smallPoster": "/images/data-json-imgs/predator-badlands/SMALLPOSTER.jpeg",
+      "genres": [
+        {
+          "vi": "Hành động",
+          "en": "Action"
+        },
+        {
+          "vi": "Khoa học",
+          "en": "Sci-Fi"
+        },
+        {
+          "vi": "Chiếu rạp",
+          "en": "Theaters"
+        }
+      ],
+      "description": {
+        "en": "Set on a remote planet in the future, a fledgling Predator - an outcast from his own race - finds an unlikely ally in Thia and embarks on a life-or-death journey to find the ultimate enemy. Directed by Dan Trachtenberg - director of Prey and part of the Predator franchise.",
+        "vi": "Trong tương lai, tại một hành tinh hẻo lánh, một Predator non nớt - kẻ bị chính tộc của mình ruồng bỏ - tìm thấy một đồng minh không ngờ tới là Thia và bắt đầu hành trình sinh tử nhằm truy tìm kẻ thù tối thượng. Bộ phim do Dan Trachtenberg - đạo diễn của Prey chỉ đạo và nằm trong chuỗi thương hiệu Quái Thú Vô Hình Predator."
+      },
+      "backdrop": "/images/data-json-imgs/predator-badlands/BACKDROP.webp",
+      "trailer": "https://www.youtube.com/watch?v=cDL3Zjdz514",
+      "duration": "1h 50m",
+      "rating": 7.6,
+      "featured": true
     }
   ]
 }
