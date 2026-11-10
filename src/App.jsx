@@ -1,19 +1,22 @@
 import "./App.css";
+import { lazy, Suspense } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { LoginPage } from "./pages/LoginPage/LoginPage";
-import HomePage from "./pages/HomePage/HomePage";
 import ProtectedRoute from "./auth/ProtectedRoute";
 import RoleRoute from "./auth/RoleRoute";
-import AllMoviesClick from "./pages/AllMovieClick/AllMoviesClick";
-import MovieDetail from "./pages/MovieDetail/MovieDetail";
-import AccountUserPage from "./pages/AccountUserPage/AccountUserPage";
-import Manager from "./pages/Manager/Manager";
 import CanvasCursor from "./components/Cursor/CanvasCursor";
+
+const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage").then((module) => ({ default: module.LoginPage })));
+const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
+const AllMoviesClick = lazy(() => import("./pages/AllMovieClick/AllMoviesClick"));
+const MovieDetail = lazy(() => import("./pages/MovieDetail/MovieDetail"));
+const AccountUserPage = lazy(() => import("./pages/AccountUserPage/AccountUserPage"));
+const Manager = lazy(() => import("./pages/Manager/Manager"));
 
 function App() {
   return (
     <>
       <CanvasCursor />
+      <Suspense fallback={<div role="status" aria-live="polite" className="flex min-h-screen items-center justify-center text-white/70">Đang tải trang...</div>}>
       <Routes>
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<LoginPage />} />
@@ -36,6 +39,7 @@ function App() {
 
         <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
+      </Suspense>
     </>
   );
 }
