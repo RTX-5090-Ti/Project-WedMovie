@@ -1,12 +1,13 @@
+import useMovies from "../../lib/useMovies";
+import MovieLoadStatus from "../loading/MovieLoadStatus";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Top10Row from "./Top10Row";
 
-const API = "http://localhost:5000";
 
 // Chuẩn hóa poster: "./public/..." -> "/..."
 function normalizePoster(src) {
-  if (!src) return "/images/default-poster.jpg";
+  if (!src) return "/images/default-poster.svg";
   return src.startsWith("./public/") ? src.replace("./public", "") : src;
 }
 
@@ -14,17 +15,9 @@ export default function Top10Movies() {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
+  const { data, loading, error, retry } = useMovies(true);
+
   useEffect(() => {
-    (async () => {
-      try {
-        // Lấy phim featured
-        const res = await fetch(`${API}/movies?featured=true`);
-        const data = await res.json();
-
-        // Nếu muốn ưu tiên mới nhất có thể sort createdAt/ year ở đây
-        // data.sort((a, b) => (b.createdAt || 0).localeCompare(a.createdAt || 0));
-
-        // Lấy đúng 10 phim (hoặc ít hơn nếu không đủ)
         const top10 = data.slice(0, 10).map((m) => ({
           id: m.id,
           poster: normalizePoster(m.poster),
@@ -41,15 +34,13 @@ export default function Top10Movies() {
         }));
 
         setItems(top10);
-      } catch (err) {
-        console.error("Load featured movies failed:", err);
-      }
-    })();
-  }, []);
+  }, [data]);
 
   const goDetail = (id) => {
     navigate(`/movie/${id}`); // chuyển sang MovieDetail theo id
   };
+
+  if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
 
   return (
     <div className="bg-[#192026] text-white w-full max-w-[100vw] overflow-x-hidden px-6 py-10 mb-[30px]">

@@ -1,5 +1,6 @@
 // ShowNewMovie.jsx
 import { useMemo } from "react";
+import { movieImageFallback } from "../lib/imageFallback";
 import {
   Box,
   Container,
@@ -34,7 +35,7 @@ export default function ShowNewMovie({
     () =>
       (movies || []).map((m) => ({
         ...m,
-        poster: m.poster || "/images/default-poster.jpg",
+        poster: (m.smallPoster || m.poster || "/images/default-poster.svg").replace(/^\.\/public\//, "/"),
         badges: m.badges || [],
       })),
     [movies]
@@ -75,6 +76,7 @@ export default function ShowNewMovie({
                 }}
               >
                 <CardMedia
+                  onError={movieImageFallback}
                   onClick={() => onTitleClick?.(m.id)}
                   component="img"
                   image={m.poster}

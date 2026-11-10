@@ -1,13 +1,15 @@
+import { moviesUrl } from "../../lib/movieFilters";
+import useMovies from "../../lib/useMovies";
+import MovieLoadStatus from "../loading/MovieLoadStatus";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuMovie from "./MenuMovie";
 import ButtonHover from "../ButtonHover";
 
-const API = "http://localhost:5000";
 
 // Chuẩn hóa path ảnh: "./public/xxx" -> "/xxx"
 function normalizePoster(src) {
-  if (!src) return "/images/default-poster.jpg";
+  if (!src) return "/images/default-poster.svg";
   return src.startsWith("./public/") ? src.replace("./public", "") : src;
 }
 
@@ -25,13 +27,9 @@ export default function HomeRowMovie({ titleName }) {
   const [movies, setMovies] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(`${API}/movies`);
-        const data = await res.json();
+  const { data, loading, error, retry } = useMovies();
 
-        // Bỏ phim có thể loại Anime
+  useEffect(() => {
         const noAnime = data.filter(
           (m) =>
             !m.genres?.some(
@@ -54,22 +52,14 @@ export default function HomeRowMovie({ titleName }) {
         }));
 
         setMovies(mapped);
-      } catch (e) {
-        console.error("Fetch movies failed:", e);
-        setMovies([]);
-      }
-    })();
-  }, []);
+  }, [data]);
 
   //  Hàm điều hướng, truyền title + mode để tái sử dụng
-  const goAllMovies = () =>
-    navigate("/all-movies", {
-      state: {
-        title: "Phim điện ảnh mới toanh",
-        movies, // lọc giống section này
-      },
-    });
+  const goAllMovies = () => navigate(moviesUrl({ type: "new" }));
+
   const goDetail = (id) => navigate(`/movie/${id}`);
+
+  if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
 
   return (
     <div className="bg-[#192026] text-white px-6 py-10 w-full max-w-[100vw] overflow-x-hidden">

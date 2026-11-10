@@ -1,9 +1,10 @@
+import { movieImageFallback } from "../../lib/imageFallback";
 // src/components/AnimeShowcase.jsx
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/free-mode";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import ButtonHover from "../ButtonHover";
 
 export default function AnimeShowcase({
@@ -23,7 +24,7 @@ export default function AnimeShowcase({
       <div className="relative rounded-3xl bg-[#1b1e24] ring-1 ring-white/5">
         {/* Background ảnh bên phải */}
         <AnimatePresence mode="wait">
-          <motion.img
+          <Motion.img
             key={data.bg}
             src={data.bg}
             alt=""
@@ -53,7 +54,7 @@ export default function AnimeShowcase({
         {/* Content trái */}
         <div className="relative z-10 px-6 lg:px-10 py-10 lg:py-14 max-w-[760px]">
           <AnimatePresence mode="wait">
-            <motion.h3
+            <Motion.h3
               onClick={onTitleClick}
               key={data.title}
               className="mb-2 text-4xl font-extrabold lg:text-5xl cursor-pointer hover:text-[#f0d25b]"
@@ -63,10 +64,10 @@ export default function AnimeShowcase({
               transition={{ duration: 0.3 }}
             >
               {data.title}
-            </motion.h3>
+            </Motion.h3>
           </AnimatePresence>
 
-          <motion.p
+          <Motion.p
             key={data.subtitle}
             className="mb-4 text-lg text-white/70"
             initial={{ y: 6, opacity: 0 }}
@@ -74,7 +75,7 @@ export default function AnimeShowcase({
             transition={{ duration: 0.28 }}
           >
             {data.subtitle}
-          </motion.p>
+          </Motion.p>
 
           {/* badges hàng 1: IMDb + [year, duration, nation.vi] */}
           <div className="flex flex-wrap gap-2 mb-3">
@@ -106,7 +107,7 @@ export default function AnimeShowcase({
           </div>
 
           <AnimatePresence mode="wait">
-            <motion.p
+            <Motion.p
               key={data.desc}
               className="mb-8 leading-relaxed text-white/80"
               initial={{ opacity: 0 }}
@@ -115,7 +116,7 @@ export default function AnimeShowcase({
               transition={{ duration: 0.25 }}
             >
               {data.desc}
-            </motion.p>
+            </Motion.p>
           </AnimatePresence>
 
           {/* Nút hành động (giữ nguyên) */}
@@ -157,7 +158,7 @@ export default function AnimeShowcase({
                     onClick={() => onSelect && onSelect(t.id)}
                     title={t.title}
                   >
-                    <img
+                    <img onError={movieImageFallback}
                       src={t.poster}
                       alt={t.title}
                       className="w-full aspect-[2/3] object-cover"

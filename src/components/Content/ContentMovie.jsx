@@ -1,9 +1,11 @@
+import { backdropFallback } from "../../lib/imageFallback";
+import useMovies from "../../lib/useMovies";
+import MovieLoadStatus from "../loading/MovieLoadStatus";
 // src/components/Content.Movie.jsx
 import { useEffect, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion as Motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-const API = "http://localhost:5000";
 
 // Chuẩn hóa đường dẫn ảnh: "./public/..." -> "/..."
 function normalizeSrc(src) {
@@ -24,21 +26,19 @@ function shuffle(arr) {
 export default function ContentMovie() {
   const [slides, setSlides] = useState([]); // 5 phim featured ngẫu nhiên
   const [index, setIndex] = useState(0);
-  // const [lang, setLang] = useState("vi"); // "vi" | "en"
   const navigate = useNavigate();
   const lang = "vi";
   const timerRef = useRef(null);
+  const [timerReset, setTimerReset] = useState(0);
 
   // Lấy featured -> chọn ngẫu nhiên 5
+  const { data, loading, error, retry } = useMovies(true);
+
   useEffect(() => {
-    (async () => {
-      const res = await fetch(`${API}/movies?featured=true`);
-      const data = await res.json();
       const picked = shuffle(data).slice(0, 5);
       setSlides(picked);
       setIndex(0);
-    })();
-  }, []);
+  }, [data]);
 
   // Tự chạy 7s đổi slide
   useEffect(() => {
@@ -47,18 +47,19 @@ export default function ContentMovie() {
       setIndex((i) => (i + 1) % slides.length);
     }, 7000);
     return () => clearInterval(timerRef.current);
-  }, [slides.length]);
+  }, [slides.length, timerReset]);
 
   // Cho phép click đổi thủ công (reset timer)
   function goTo(i) {
     clearInterval(timerRef.current);
     setIndex(i);
+    setTimerReset((value) => value + 1);
   }
 
   const current = slides[index] || null;
 
   const backdrop = useMemo(
-    () => normalizeSrc(current?.backdrop) || "/images/default-backdrop.jpg",
+    () => normalizeSrc(current?.backdrop) || "/images/default-backdrop.svg",
     [current]
   );
 
@@ -84,17 +85,17 @@ export default function ContentMovie() {
     current?.description?.en ||
     "No description.";
 
+  if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
+
   return (
     <div className="relative w-full h-[680px] md:h-[720px] overflow-hidden rounded-none md:rounded-2xl mb-8">
       {/* Backdrop + transition */}
       <AnimatePresence mode="wait">
-        <motion.img
+        <Motion.img
           key={backdrop + index}
           src={backdrop}
           alt={title}
-          onError={(e) =>
-            (e.currentTarget.src = "/images/default-backdrop.jpg")
-          }
+          onError={backdropFallback}
           className="absolute inset-0 object-fill w-full h-full"
           initial={{ opacity: 0, scale: 1.04 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -112,7 +113,7 @@ export default function ContentMovie() {
         {/* Title + lang toggle */}
         <div className="flex items-center gap-4 mb-3">
           <AnimatePresence mode="wait">
-            <motion.h1
+            <Motion.h1
               onClick={() => current?.id && navigate(`/movie/${current.id}`)}
               key={title + index}
               className="mb-5 text-2xl font-extrabold cursor-pointer md:text-5xl drop-shadow-md hover:text-[#f0d25b]"
@@ -122,7 +123,7 @@ export default function ContentMovie() {
               transition={{ duration: 0.35 }}
             >
               {title}
-            </motion.h1>
+            </Motion.h1>
           </AnimatePresence>
         </div>
 
@@ -148,7 +149,7 @@ export default function ContentMovie() {
 
         {/* Description */}
         <AnimatePresence mode="wait">
-          <motion.p
+          <Motion.p
             key={desc + index}
             className="max-w-[700px] leading-relaxed text-sm md:text-base text-white/90  mb-5 text-shadow-[0_1px_4px_rgba(0,0,0,0.4)]"
             initial={{ y: 8, opacity: 0 }}
@@ -157,7 +158,7 @@ export default function ContentMovie() {
             transition={{ duration: 0.35 }}
           >
             {desc}
-          </motion.p>
+          </Motion.p>
         </AnimatePresence>
 
         {/* Actions */}
@@ -176,20 +177,7 @@ export default function ContentMovie() {
           </div>
 
           {/* Dots indicator (clickable) */}
-          {/* <div className="flex items-center gap-2 ml-2">
-            {slides.map((_, i) => (
-              <div
-                key={i}
-                aria-label={`Slide ${i + 1}`}
-                onClick={() => goTo(i)}
-                className={`h-[30px] w-[60px]  transition ${
-                  i === index
-                    ? "bg-white scale-110"
-                    : "bg-white/40 hover:bg-white/70"
-                }`}
-              />
-            ))}
-          </div> */}
+          
           <div className="flex items-center gap-2 ml-2">
             {slides.map((m, i) => (
               <div
@@ -204,13 +192,11 @@ export default function ContentMovie() {
                 <img
                   src={
                     (m.backdrop && m.backdrop.replace("./public", "")) ||
-                    "/images/default-backdrop.jpg"
+                    "/images/default-backdrop.svg"
                   }
                   alt={m.title?.vi || m.title?.en}
                   className="object-cover w-full h-full"
-                  onError={(e) =>
-                    (e.currentTarget.src = "/images/default-backdrop.jpg")
-                  }
+                  onError={backdropFallback}
                 />
                 {/* overlay tối nhẹ khi chưa active */}
                 {i !== index && (

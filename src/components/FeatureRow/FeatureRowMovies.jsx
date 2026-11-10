@@ -1,8 +1,10 @@
+import { moviesUrl } from "../../lib/movieFilters";
+import useMovies from "../../lib/useMovies";
+import MovieLoadStatus from "../loading/MovieLoadStatus";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import FeatureRow from "./FeatureRow";
 
-const API = "http://localhost:5000";
 
 // Chuẩn hóa path: "./public/..." -> "/..."
 function normalize(src, fallback = "") {
@@ -14,13 +16,9 @@ export default function FeatureRowMovies() {
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(`${API}/movies`);
-        const data = await res.json();
+  const { data, loading, error, retry } = useMovies();
 
-        // Lọc phim có genre Theaters / Chiếu rạp
+  useEffect(() => {
         const theaters = (data || []).filter((m) =>
           m?.genres?.some(
             (g) =>
@@ -31,10 +29,10 @@ export default function FeatureRowMovies() {
 
         // Map theo cấu trúc FeatureRow cần: { id, banner, poster, badge, title, subtitle, meta }
         const mapped = theaters.map((m) => {
-          const banner = normalize(m.backdrop, "/images/default-backdrop.jpg");
+          const banner = normalize(m.backdrop, "/images/default-backdrop.svg");
           const small = normalize(m.smallPoster);
           const poster =
-            small || normalize(m.poster, "/images/default-poster.jpg");
+            small || normalize(m.poster, "/images/default-poster.svg");
           const badges = Array.isArray(m.badges)
             ? m.badges
             : m.badge
@@ -57,24 +55,15 @@ export default function FeatureRowMovies() {
         });
 
         setItems(mapped);
-      } catch (e) {
-        console.error("Load theaters movies failed:", e);
-      }
-    })();
-  }, []);
+  }, [data]);
 
   //  Khi bấm nút “Xem thêm”
-  const goToAllMovies = () => {
-    navigate("/all-movies", {
-      state: {
-        title: "Mãn Nhãn với Phim Chiếu Rạp",
-        movies: items, // chính danh sách chiếu rạp đã load
-      },
-    });
-  };
+  const goToAllMovies = () => navigate(moviesUrl({ genre: "Chiếu rạp" }));
 
   // Click 1 card -> sang trang chi tiết
   const goDetail = (id) => navigate(`/movie/${id}`);
+
+  if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
 
   return (
     <div className="bg-[#192026] text-white px-6 py-8 mb-[30px]">

@@ -1,10 +1,12 @@
+import MovieLoadStatus from "../loading/MovieLoadStatus";
+import { movieImageFallback } from "../../lib/imageFallback";
 // src/components/MenuMovie/WatchedRow.jsx
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loadHistory, removeFromHistory } from "../../libary/history";
-import { useAuth } from "../../auth/AuthContext";
+import { loadHistory, removeFromHistory } from "../../lib/history";
+import { useAuth } from "../../auth/useAuth";
 
-const API = "http://localhost:5000";
+
 
 // helpers đọc tiêu đề
 const getTitleVi = (x) => x?.title?.vi || x?.titleVi || x?.title_vi || "";
@@ -19,83 +21,45 @@ const withTitleObj = (m) => ({
 
 // poster fallback
 const getPoster = (m) =>
-  m?.poster || m?.backdrop || "/images/default-poster.jpg";
+  m?.poster || m?.backdrop || "/images/default-poster.svg";
 
 export default function WatchedRow({ titleName = "Phim Đã Xem" }) {
   const { user, isGuest } = useAuth();
   const [list, setList] = useState([]);
   const navigate = useNavigate();
 
-  // 1) load từ localStorage
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [attempt, setAttempt] = useState(0);
+  const [removing, setRemoving] = useState(null);
   useEffect(() => {
-    if (isGuest || !user?.email) {
-      setList([]);
-      return;
-    }
-    const raw = loadHistory(user.email) || [];
-    setList(raw.map(withTitleObj));
-  }, [user?.email, isGuest]);
-
-  // 2) nghe sự kiện cập nhật lịch sử để refresh ngay
-  useEffect(() => {
-    if (!user?.email) return;
-    const onUpdate = () => {
-      const raw = loadHistory(user.email) || [];
-      setList(raw.map(withTitleObj));
+    let active = true;
+    let version = 0;
+    setList([]);
+    if (isGuest || !user?.id) { setLoading(false); return; }
+    const refresh = async () => {
+      const requestVersion = ++version;
+      setLoading(true); setError("");
+      try { const movies = await loadHistory(user.id); if (active && requestVersion === version) setList(movies.map(withTitleObj)); }
+      catch (err) { if (active && requestVersion === version) setError(err.message); }
+      finally { if (active && requestVersion === version) setLoading(false); }
     };
+    refresh();
+    const onUpdate = (event) => { if (event.detail?.userId === user.id) refresh(); };
     window.addEventListener("history:updated", onUpdate);
-    return () => window.removeEventListener("history:updated", onUpdate);
-  }, [user?.email]);
-
-  // 3) hydrate: fetch bù những item thiếu VI/EN từ json-server
-  useEffect(() => {
-    if (!list.length) return;
-    const need = list.filter((m) => !getTitleVi(m) || !getTitleEn(m));
-    if (!need.length) return;
-
-    let mounted = true;
-    (async () => {
-      try {
-        const hydrated = await Promise.all(
-          need.map(async (m) => {
-            const r = await fetch(`${API}/movies/${encodeURIComponent(m.id)}`);
-            if (!r.ok) return m;
-            const full = await r.json();
-            // gộp lại, ưu tiên field từ db.json
-            return {
-              ...m,
-              title: {
-                vi: full?.title?.vi || getTitleVi(m),
-                en: full?.title?.en || getTitleEn(m),
-              },
-              poster: m.poster || full?.poster || full?.backdrop,
-              backdrop: m.backdrop || full?.backdrop,
-            };
-          })
-        );
-        if (!mounted) return;
-        // thay thế các item đã hydrate vào list
-        setList((old) => {
-          const map = new Map(old.map((x) => [String(x.id), x]));
-          hydrated.forEach((h) => map.set(String(h.id), h));
-          return Array.from(map.values());
-        });
-      } catch {
-        console.log("Lỗi");
-      }
-    })();
-
-    return () => {
-      mounted = false;
-    };
-  }, [list]);
-
-  if (isGuest || !user?.email) return null;
+    window.addEventListener("focus", refresh);
+    return () => { active = false; window.removeEventListener("history:updated", onUpdate); window.removeEventListener("focus", refresh); };
+  }, [user?.id, isGuest, attempt]);
+  if (isGuest || !user?.id) return null;
+  if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={() => setAttempt((value) => value + 1)} />;
   if (!list.length) return null;
-
-  const handleRemove = (e, id) => {
-    e.stopPropagation();
-    setList(removeFromHistory(user.email, id).map(withTitleObj));
+  const handleRemove = async (event, id) => {
+    event.stopPropagation();
+    if (removing) return;
+    setRemoving(id);
+    try { await removeFromHistory(user.id, id); }
+    catch (err) { setError(err.message); }
+    finally { setRemoving(null); }
   };
 
   const goDetail = (m) => navigate(`/movie/${m.id}`);
@@ -120,7 +84,7 @@ export default function WatchedRow({ titleName = "Phim Đã Xem" }) {
                 className="relative w-[180px] md:w-[200px] shrink-0 cursor-pointer group"
                 title={vi || en || ""}
               >
-                <img
+                <img onError={movieImageFallback}
                   src={getPoster(m)}
                   alt={vi || en || ""}
                   className="w-full aspect-[2/3] object-cover rounded-xl border border-white/10 transition-transform duration-300 group-hover:scale-[1.02]"

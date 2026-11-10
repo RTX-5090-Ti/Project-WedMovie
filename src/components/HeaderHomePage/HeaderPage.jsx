@@ -1,10 +1,13 @@
+import { movieImageFallback } from "../../lib/imageFallback";
+import useMovies from "../../lib/useMovies";
+import MovieLoadStatus from "../loading/MovieLoadStatus";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import "./HeaderHomePage.css";
 import UserMenu from "../dropdownAvatar/DropdownAvatar";
-import { useAuth } from "../../auth/AuthContext";
+import { useAuth } from "../../auth/useAuth";
+import { moviesUrl } from "../../lib/movieFilters";
 
-const API = "http://localhost:5000";
 
 // Chuẩn hoá chữ: bỏ dấu + lowercase
 function normalizeText(str = "") {
@@ -16,7 +19,7 @@ function normalizeText(str = "") {
 }
 
 function normalizePoster(src) {
-  if (!src) return "/images/default-poster.jpg";
+  if (!src) return "/images/default-poster.svg";
   return src.startsWith("./public/") ? src.replace("./public", "") : src;
 }
 
@@ -32,25 +35,12 @@ export default function HeaderPage() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [showPanel, setShowPanel] = useState(false);
-  const [allMovies, setAllMovies] = useState([]);
+  const { data: allMovies, loading, error, retry } = useMovies();
   const searchRef = useRef(null);
   const navigate = useNavigate();
 
   // Chuẩn hóa tên để so sánh (bỏ dấu + thường hóa)
   const n = (s) => normalizeText(s || "");
-
-  // Load toàn bộ phim 1 lần
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(`${API}/movies`);
-        const data = await res.json();
-        setAllMovies(Array.isArray(data) ? data : []);
-      } catch (e) {
-        console.error("Fetch movies failed:", e);
-      }
-    })();
-  }, []);
 
   // chờ user dừng nhập 400ms mới search
   useEffect(() => {
@@ -74,7 +64,7 @@ export default function HeaderPage() {
 
       const mapped = matched.slice(0, 8).map((m) => ({
         id: m.id,
-        poster: normalizePoster(m.smallPoster) || normalizePoster(m.poster),
+        poster: normalizePoster(m.smallPoster || m.poster),
         titleVi: m?.title?.vi || "",
         titleEn: m?.title?.en || "",
         tags: [
@@ -124,25 +114,6 @@ export default function HeaderPage() {
     setIsOpen(false);
   };
 
-  // const genres = [
-  //   "Hình sự",
-  //   "Hành động",
-  //   "Chiến tranh",
-  //   "Khoa học",
-  //   "Chiếu rạp",
-  //   "Kinh dị",
-  //   "Hài hước",
-  //   "Phiêu lưu",
-  //   "Lãng mạn",
-  //   "Gia đình",
-  //   "Tâm lý",
-  //   "Bí ẩn",
-  //   "Hoạt hình",
-  //   "Anime",
-  //   "Hoàng cung",
-  //   "Cổ trang",
-  //   "Tình cảm",
-  // ];
 
   // Lấy danh sách thể loại động từ allMovies (hiển thị vi nếu có)
   const genres = useMemo(() => {
@@ -163,17 +134,6 @@ export default function HeaderPage() {
     return Array.from(map.values());
   }, [allMovies]);
 
-  // const countries = [
-  //   "Mỹ",
-  //   "Hàn Quốc",
-  //   "Nhật Bản",
-  //   "Anh",
-  //   "Pháp",
-  //   "Đức",
-  //   "Thái Lan",
-  //   "Đài Loan",
-  //   "Trung Quốc",
-  // ];
 
   // Lấy danh sách quốc gia tự động từ allMovies
   const countries = useMemo(() => {
@@ -206,94 +166,17 @@ export default function HeaderPage() {
     return Array.from(map.values());
   }, [allMovies]);
 
-  // Chuẩn hoá dữ liệu để ShowNewMovie render đúng
-  const mapToCard = (m) => ({
-    id: m.id,
-    poster: normalizePoster(m.smallPoster) || normalizePoster(m.poster),
-    title: m?.title?.vi || m?.title?.en || "",
-    subtitle: m?.title?.en || m?.title?.vi || "",
-    badges: Array.isArray(m?.badges) ? m.badges : [],
-  });
-
-  // Điều hướng sang /all-movies với dataset đã lọc
-  const goAllWith = (title, list) => {
-    navigate("/all-movies", {
-      state: {
-        title,
-        movies: list.map(mapToCard), // truyền đúng format ShowNewMovie
-      },
-    });
-  };
-
-  const goHot = () => {
-    const list = allMovies
-      .filter((m) => m?.featured === true)
-      .slice() // copy ra mảng mới, tránh mutate allMovies
-      .sort((a, b) => Number(b.id) - Number(a.id)); // id lớn (phim mới) nằm trước
-
-    goAllWith("Phim hot", list);
-  };
-
-  const goSingle = () => {
-    const list = allMovies
-      .filter((m) => m?.isSeries === false)
-      .slice()
-      .sort((a, b) => Number(b.id) - Number(a.id)); //  sắp id giảm dần (phim mới nhất trước)
-
-    goAllWith("Phim lẻ", list);
-  };
-
-  const goSeries = () => {
-    const list = allMovies
-      .filter(
-        (m) =>
-          m?.isSeries === true &&
-          !m?.genres?.some(
-            (g) =>
-              g?.en?.toLowerCase() === "anime" ||
-              g?.vi?.toLowerCase() === "anime"
-          )
-      )
-      .slice()
-      .sort((a, b) => Number(b.id) - Number(a.id)); // sắp id giảm dần
-
-    goAllWith("Phim bộ", list);
-  };
-
-  // Lọc theo QUỐC GIA (so nation.vi / nation.en)
-  const goByCountry = (countryLabel) => {
-    const target = n(countryLabel);
-    const list = allMovies.filter((m) => {
-      const vi = n(m?.nation?.vi);
-      const en = n(m?.nation?.en);
-      return (
-        vi === target ||
-        en === target ||
-        vi.includes(target) ||
-        en.includes(target)
-      );
-    });
-    goAllWith(`Phim ${countryLabel}`, list);
-    setOpenMenu(null); // đóng dropdown
-  };
-
-  // Lọc theo THỂ LOẠI (so sánh genres[].vi / genres[].en)
-  const goByGenre = (genreLabel) => {
-    const target = n(genreLabel);
-    const list = allMovies.filter((m) =>
-      m?.genres?.some(
-        (g) => n(g?.vi).includes(target) || n(g?.en).includes(target)
-      )
-    );
-    goAllWith(`Thể loại: ${genreLabel}`, list);
-    setOpenMenu(null); // đóng dropdown
-  };
+  const goHot = () => navigate(moviesUrl({ type: "hot" }));
+  const goSingle = () => navigate(moviesUrl({ type: "single" }));
+  const goSeries = () => navigate(moviesUrl({ type: "series" }));
+  const goByCountry = (country) => { navigate(moviesUrl({ country })); setOpenMenu(null); };
+  const goByGenre = (genre) => { navigate(moviesUrl({ genre })); setOpenMenu(null); };
 
   return (
     <div className="py-[10px] px-[25px] flex items-center justify-between absolute left-0 right-0 top-0 z-50">
       {/* Logo + Search */}
       <div className="inline-flex items-center gap-3">
-        <img
+        <img onError={movieImageFallback}
           className="transition-transform cursor-pointer hover:scale-105"
           src="/images/logo-header/Logo-0.75.png"
           alt="logo"
@@ -302,8 +185,13 @@ export default function HeaderPage() {
 
         {/* Ô tìm kiếm */}
         <div ref={searchRef} className="relative w-[300px]">
+          {(loading || error) && (
+            <div className="absolute left-0 right-0 top-full z-50">
+              <MovieLoadStatus loading={loading} error={error} retry={retry} />
+            </div>
+          )}
           <div className="inline-flex items-center w-full gap-3 search">
-            <img src="/images/logo-header/Icon.png" alt="search" />
+            <img onError={movieImageFallback} src="/images/logo-header/Icon.png" alt="search" />
             <input
               className="w-full border-none outline-none"
               type="text"
@@ -341,7 +229,7 @@ export default function HeaderPage() {
                       onClick={() => onPickMovie(m.id)}
                       className="grid grid-cols-[48px_1fr] gap-3 items-center cursor-pointer rounded-lg hover:bg-white/5 p-1"
                     >
-                      <img
+                      <img onError={movieImageFallback}
                         src={m.poster}
                         alt={m.titleVi || m.titleEn}
                         className="object-cover w-12 h-16 rounded-md ring-1 ring-black/30"
@@ -407,7 +295,7 @@ export default function HeaderPage() {
           >
             Quốc gia
           </span>
-          <img
+          <img onError={movieImageFallback}
             onClick={() =>
               setOpenMenu(openMenu === "country" ? null : "country")
             }
@@ -441,7 +329,7 @@ export default function HeaderPage() {
           >
             Thể loại
           </span>
-          <img
+          <img onError={movieImageFallback}
             onClick={() => setOpenMenu(openMenu === "genre" ? null : "genre")}
             className="w-[12px] cursor-pointer"
             src="/images/logo-header/downArown.png"
@@ -471,7 +359,7 @@ export default function HeaderPage() {
             onClick={toggleMenu}
           >
             <span>{selected}</span>
-            <img
+            <img onError={movieImageFallback}
               className="w-[20px]"
               src="/images/logo-header/flight_4919659.png"
               alt="world"
@@ -484,7 +372,7 @@ export default function HeaderPage() {
             </ul>
           )}
         </div>
-        {/* <UserMenu /> */}
+        
 
         {isGuest || !user ? (
           <div

@@ -1,15 +1,11 @@
 body {
   background-color: #192026;
   color: #ffffff;
-  /* padding: 15px 83px; */
+  
   font-family: "Poppins", sans-serif;
-  /* cursor: none; */
+  
 }
-/* * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-} */
+
 img {
   display: block;
   max-width: 100%;

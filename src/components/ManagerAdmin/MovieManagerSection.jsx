@@ -1,3 +1,4 @@
+import { movieImageFallback } from "../../lib/imageFallback";
 // render phim ttwf db.json và phân trang
 
 const PAGE_SIZE = 14;
@@ -48,7 +49,7 @@ export default function MovieManagerSection({
             >
               {/* Hình smallPoster bên trái */}
               <div className="flex items-center gap-4">
-                <img
+                <img onError={movieImageFallback}
                   src={m.smallPoster || m.poster}
                   alt={m.title?.vi || m.title?.en || "movie"}
                   className="w-[70px] h-[100px] object-cover rounded-md border border-white/10"
@@ -70,7 +71,7 @@ export default function MovieManagerSection({
                 className="px-2 text-lg font-bold text-red-400 hover:text-red-300"
                 title="Gỡ phim này"
               >
-                <img
+                <img onError={movieImageFallback}
                   onClick={(e) => {
                     onDeleteMovie(m.id);
                     e.stopPropagation();

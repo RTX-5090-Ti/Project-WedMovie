@@ -1,3 +1,4 @@
+import { movieImageFallback } from "../../lib/imageFallback";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -14,7 +15,7 @@ function FeatureCard({ item, onMovieClick }) {
         onClick={go}
         className="relative cursor-pointer rounded-2xl bg-neutral-800"
       >
-        <img
+        <img onError={movieImageFallback}
           src={item.banner}
           alt={item.title}
           className="w-full aspect-[16/6] object-cover transition-transform duration-500 group-hover:scale-[1.02] rounded-2xl"
@@ -22,7 +23,7 @@ function FeatureCard({ item, onMovieClick }) {
 
         {/* Poster nhỏ chồng ở góc trái */}
         <div className="absolute -bottom-6 left-4">
-          <img
+          <img onError={movieImageFallback}
             src={item.poster}
             alt={item.title}
             className="w-16 md:w-20 aspect-[2/3] object-cover rounded-xl shadow-xl ring-1 ring-black/30"

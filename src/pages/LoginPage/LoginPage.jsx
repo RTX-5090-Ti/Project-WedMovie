@@ -1,13 +1,20 @@
-import { useState } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import "./LoginPagge.css";
+import { normalizeEmail, validateAccount } from "../../lib/validation";
+import { useState, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import "./LoginPage.css";
 import { movie } from "../../data/dataMovie";
-import LogoAndLanguge from "../../components/Logo&Languge/Logo&Languge";
-import { useAuth } from "../../auth/AuthContext.jsx";
+import LogoAndLanguage from "../../components/LogoAndLanguage/LogoAndLanguage";
+import { useAuth } from "../../auth/useAuth";
 
 export function LoginPage() {
   const navigate = useNavigate();
-  const { register, login, guestLogin } = useAuth();
+  const { state } = useLocation();
+  const from = state?.from;
+  const destination = from?.pathname?.startsWith("/") && !from.pathname.startsWith("//") && from.pathname !== "/login"
+    ? `${from.pathname}${from.search || ""}${from.hash || ""}` : "/home";
+  const { register, login, guestLogin, notice } = useAuth();
+  const [busy, setBusy] = useState(false);
+  const busyRef = useRef(false);
 
   function getRandomItem(arr) {
     const randomIndex = Math.floor(Math.random() * arr.length);
@@ -21,31 +28,31 @@ export function LoginPage() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    setErr("");
-    if (loginMode) {
-      const res = await login({ email, password: pw });
-      if (!res.ok) return setErr(res.error || "Login failed");
-      navigate("/home", { replace: true });
-    } else {
-      const res = await register({ name, email, password: pw });
-      if (!res.ok) return setErr(res.error || "Register failed");
-      // Đăng ký xong: quay về login
-      setLoginMode(true);
-      setPw("");
-      // (có thể giữ nguyên email để user gõ pass)
-      navigate("/login", { replace: true });
-    }
+    if (busyRef.current) return;
+    const fields = { name, email: normalizeEmail(email), password: pw };
+    const validation = validateAccount(fields, { login: loginMode });
+    if (validation) { setErr(validation); return; }
+    busyRef.current = true; setBusy(true); setErr("");
+    try {
+      const res = await (loginMode ? login(fields) : register(fields));
+      if (!res.ok) { setErr(res.error); return; }
+      if (loginMode) navigate(destination, { replace: true });
+      else { setLoginMode(true); setPw(""); setErr("Đăng ký thành công. Bạn có thể đăng nhập."); }
+    } catch (error) { setErr(error.message); }
+    finally { busyRef.current = false; setBusy(false); }
   }
 
   function handleGuest(e) {
     e.preventDefault();
+    if (busyRef.current) return;
     guestLogin();
-    navigate("/home", { replace: true });
+    navigate(destination.startsWith("/all-movies") || destination.startsWith("/movie/") ? destination : "/home", { replace: true });
   }
 
   return (
     <div className="box">
-      <LogoAndLanguge></LogoAndLanguge>
+      {notice && <p role="status" className="fixed top-0 z-50 p-3 text-white bg-black">{notice}</p>}
+      <LogoAndLanguage></LogoAndLanguage>
       <video className="video" autoPlay loop muted>
         <source src={getRandomItem(movie)} type="video/mp4" />
         Trình duyệt của bạn không hỗ trợ video.
@@ -58,7 +65,7 @@ export function LoginPage() {
             <h2>Login</h2>
             <div className="input-field">
               <input
-                type="text"
+                type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -81,7 +88,7 @@ export function LoginPage() {
               </label>
               <a href="#">Forgot password?</a>
             </div>
-            <button type="submit">Log In</button>
+            <button type="submit" disabled={busy}>Log In</button>
             {err && (
               <p className="err" style={{ color: "red" }}>
                 {err}
@@ -95,6 +102,8 @@ export function LoginPage() {
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
+                    if (busyRef.current) return;
+                    setErr("");
                     setLoginMode(false);
                   }}
                 >
@@ -124,7 +133,7 @@ export function LoginPage() {
             </div>
             <div className="input-field">
               <input
-                type="text"
+                type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -141,13 +150,16 @@ export function LoginPage() {
               <label>Enter your password</label>
             </div>
             <div className="forget"></div>
-            <button type="submit">Create acount</button>
+            <button type="submit" disabled={busy}>{busy ? "Đang gửi..." : "Create account"}</button>
+            {err && <p role="alert" className="text-red-400">{err}</p>}
             <div className="register">
               <p>
                 <a
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
+                    if (busyRef.current) return;
+                    setErr("");
                     setLoginMode(true);
                   }}
                 >

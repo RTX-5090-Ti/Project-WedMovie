@@ -1,13 +1,15 @@
+import { moviesUrl } from "../../lib/movieFilters";
+import useMovies from "../../lib/useMovies";
+import MovieLoadStatus from "../loading/MovieLoadStatus";
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import MenuMovie from "./MenuMovie";
 import ButtonHover from "../ButtonHover";
 
-const API = "http://localhost:5000";
 
 // Chuẩn hóa path ảnh
 function normalizePoster(src) {
-  if (!src) return "/images/default-poster.jpg";
+  if (!src) return "/images/default-poster.svg";
   return src.startsWith("./public/") ? src.replace("./public", "") : src;
 }
 
@@ -48,15 +50,9 @@ export default function GenreRowMovie({ titleName, genre, limit = 10 }) {
     return arr.filter(Boolean).map(toKey);
   }, [genre]);
 
+  const { data, loading, error, retry } = useMovies();
+
   useEffect(() => {
-    let ignore = false;
-
-    (async () => {
-      try {
-        const res = await fetch(`${API}/movies`);
-        const data = await res.json();
-
-        // lấy các phim khớp thể loại
         const filtered = (data || []).filter((m) =>
           matchByGenres(m, genreKeys)
         );
@@ -70,55 +66,15 @@ export default function GenreRowMovie({ titleName, genre, limit = 10 }) {
           badges: m?.badges || [],
         }));
 
-        if (!ignore) setMovies(mapped);
-      } catch (e) {
-        console.error("Fetch movies failed:", e);
-        if (!ignore) setMovies([]);
-      }
-    })();
-
-    return () => {
-      ignore = true;
-    };
-  }, [genreKeys, limit]);
+        setMovies(mapped);
+  }, [data, genreKeys, limit]);
 
   // Điều hướng qua trang all-movies và truyền full list (không cắt limit)
-  const goAllMovies = async () => {
-    try {
-      const res = await fetch(`${API}/movies`);
-      const data = await res.json();
-      const filteredFull = (data || [])
-        .filter((m) => matchByGenres(m, genreKeys))
-        .map((m) => ({
-          id: m.id,
-          poster: normalizePoster(m.poster),
-          title: m?.title?.vi || m?.title?.en || "",
-          subtitle: m?.title?.en || m?.title?.vi || "",
-          badges: m?.badges || [],
-        }));
-
-      navigate("/all-movies", {
-        state: {
-          title:
-            titleName ||
-            `Danh sách: ${Array.isArray(genre) ? genre.join(", ") : genre}`,
-          movies: filteredFull,
-        },
-      });
-    } catch (e) {
-      console.error("Go all movies failed:", e);
-      navigate("/all-movies", {
-        state: {
-          title:
-            titleName ||
-            `Danh sách: ${Array.isArray(genre) ? genre.join(", ") : genre}`,
-          movies: [],
-        },
-      });
-    }
-  };
+  const goAllMovies = () => navigate(moviesUrl({ genre }));
 
   const goDetail = (id) => navigate(`/movie/${id}`);
+
+  if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
 
   return (
     <div className="bg-[#192026] text-white px-6 py-10 w-full max-w-[100vw] overflow-x-hidden">

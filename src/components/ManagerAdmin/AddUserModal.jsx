@@ -2,8 +2,11 @@
 
 export default function AddUserModal({
   open,
+  busy = false,
   newName,
   newEmail,
+  newPassword,
+  onChangePassword,
   error,
   onChangeName,
   onChangeEmail,
@@ -40,26 +43,25 @@ export default function AddUserModal({
             />
           </div>
 
-          <p className="text-xs text-white/60">
-            Mật khẩu mặc định:{" "}
-            <span className="font-semibold text-yellow-300">1</span>
-          </p>
+          <label className="block text-sm">Mật khẩu (ít nhất 6 ký tự)
+            <input type="password" value={newPassword} onChange={(e) => onChangePassword(e.target.value)} className="w-full px-3 py-2 bg-transparent border rounded-lg" />
+          </label>
 
           {error && <p className="text-sm text-red-400">{error}</p>}
 
           <div className="flex justify-end gap-3 pt-2 mt-4">
-            <div
-              onClick={onClose}
+            <button type="button" disabled={busy}
+            onClick={onClose}
               className="px-4 py-2 text-sm border cursor-pointer rounded-xl border-white/30 hover:bg-white/10"
             >
               Đóng
-            </div>
-            <div
-              onClick={onCreate}
+            </button>
+            <button type="button" disabled={busy}
+            onClick={onCreate}
               className="px-4 py-2 text-sm font-semibold text-black cursor-pointer rounded-xl bg-yellow-500/80 hover:bg-yellow-400"
             >
               Tạo
-            </div>
+            </button>
           </div>
         </div>
       </div>

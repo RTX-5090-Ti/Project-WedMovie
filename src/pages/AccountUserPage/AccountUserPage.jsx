@@ -1,12 +1,12 @@
 import HeaderPage from "../../components/HeaderHomePage/HeaderPage";
-import AcountUser from "../../components/AcountUser";
+import AccountUser from "../../components/AccountUser";
 
-export default function AcountUserPage() {
+export default function AccountUserPage() {
   return (
     <>
       <div className=" text-white mt-[200px]">
         <HeaderPage />
-        <AcountUser />
+        <AccountUser />
       </div>
     </>
   );

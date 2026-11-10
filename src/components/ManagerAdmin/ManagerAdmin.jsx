@@ -1,373 +1,105 @@
-import { useState } from "react";
+import { useState, useRef, useMemo } from "react";
 import ManagerTabs from "./ManagerTabs";
 import UserManagerSection from "./UserManagerSection";
 import AddUserModal from "./AddUserModal";
 import MovieManagerSection from "./MovieManagerSection";
 import MovieEditModal from "./MovieEditModal";
 import AddMovieModal from "./AddMovieModal";
-
-const API = import.meta.env?.VITE_API_BASE || "http://localhost:5000";
-
+import { newestMovieFirst } from "../../lib/movieSort";
+import useMovies from "../../lib/useMovies";
+import { saveMovie, deleteMovie } from "../../lib/movieStore";
+import { listUsers, createUser, deleteUser } from "../../lib/users";
+import { validateMovie } from "../../lib/validation";
+const emptyMovie = { titleVi: "", titleEn: "", isSeries: false, featured: false, nationVi: "", nationEn: "", year: "", poster: "", smallPoster: "", backdrop: "", genresVi: "", genresEn: "", descVi: "", descEn: "", trailer: "", duration: "", rating: "" };
 export default function ManagerAdmin() {
-  const [activeTab, setActiveTab] = useState("movies"); // "movies" | "users"
-
+  const [activeTab, setActiveTab] = useState("movies");
+  const catalog = useMovies();
+  const movies = useMemo(() => [...catalog.data].sort(newestMovieFirst), [catalog.data]);
+  const { loading: moviesLoading, error: moviesError, retry: loadMovies } = catalog;
   const [users, setUsers] = useState([]);
+  const [usersLoading, setUsersLoading] = useState(false);
+  const [usersError, setUsersError] = useState("");
   const [showAddBox, setShowAddBox] = useState(false);
   const [newName, setNewName] = useState("");
   const [newEmail, setNewEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
   const [error, setError] = useState("");
-
-  // state cho phim + trang hiện tại
-  const [movies, setMovies] = useState([]);
+  const [movieError, setMovieError] = useState("");
+  const [busy, setBusy] = useState(false);
+  const busyRef = useRef(false);
   const [currentPage, setCurrentPage] = useState(1);
-
-  // state cho popup thêm phim
   const [showAddMovie, setShowAddMovie] = useState(false);
-  const [newMovieForm, setNewMovieForm] = useState({
-    titleVi: "",
-    titleEn: "",
-    isSeries: false,
-    featured: false,
-    nationVi: "",
-    nationEn: "",
-    year: "",
-    poster: "",
-    smallPoster: "",
-    backdrop: "",
-    genresVi: "",
-    genresEn: "",
-    descVi: "",
-    descEn: "",
-    trailer: "",
-    duration: "",
-    rating: "",
-  });
-
-  // state cho popup edit phim
+  const [newMovieForm, setNewMovieForm] = useState(emptyMovie);
   const [editingMovie, setEditingMovie] = useState(null);
-  const [editForm, setEditForm] = useState({
-    titleVi: "",
-    titleEn: "",
-    isSeries: false,
-    descVi: "",
-    descEn: "",
-    featured: false,
-  });
-
-  // Lấy danh sách user từ localStorage (bỏ admin)
-  const loadUsers = () => {
-    try {
-      const raw = localStorage.getItem("users_db") || "[]";
-      const db = JSON.parse(raw);
-      const filtered = db.filter((u) => u.email !== "admin@gmail.com");
-      setUsers(filtered);
-    } catch (e) {
-      console.error("Lỗi đọc users_db:", e);
-      setUsers([]);
-    }
+  const [editForm, setEditForm] = useState(emptyMovie);
+  const begin = () => { if (busyRef.current) return false; busyRef.current = true; setBusy(true); return true; };
+  const finish = () => { busyRef.current = false; setBusy(false); };
+  const loadUsers = async () => {
+    setUsersLoading(true); setUsersError("");
+    try { setUsers(await listUsers()); } catch (err) { setUsersError(err.message); }
+    finally { setUsersLoading(false); }
   };
-
-  // Lấy danh sách phim từ JSON-server (db.json)
-  const loadMovies = async () => {
-    try {
-      // const res = await fetch(`${API}/movies`);
-      const res = await fetch(`${API}/movies?_sort=id&_order=desc`);
-
-      if (!res.ok) throw new Error("Không fetch được movies");
-      const data = await res.json();
-      setMovies(Array.isArray(data) ? data : []);
-      setCurrentPage(1); // reset về trang 1 mỗi lần load
-    } catch (e) {
-      console.error("Lỗi đọc movies:", e);
-      setMovies([]);
-    }
-  };
-
-  const handleOpenAddMovie = () => {
-    setNewMovieForm({
-      titleVi: "",
-      titleEn: "",
-      isSeries: false,
-      featured: false,
-      nationVi: "",
-      nationEn: "",
-      year: "",
-      poster: "",
-      smallPoster: "",
-      backdrop: "",
-      genresVi: "",
-      genresEn: "",
-      descVi: "",
-      descEn: "",
-      trailer: "",
-      duration: "",
-      rating: "",
-    });
-    setShowAddMovie(true);
-  };
-
+  const handleOpenAddMovie = () => { setMovieError(""); setNewMovieForm({ ...emptyMovie }); setShowAddMovie(true); };
   const handleCreateMovie = async () => {
-    const {
-      titleVi,
-      titleEn,
-      isSeries,
-      featured,
-      nationVi,
-      nationEn,
-      year,
-      poster,
-      smallPoster,
-      backdrop,
-      genresVi,
-      genresEn,
-      descVi,
-      descEn,
-      trailer,
-      duration,
-      rating,
-    } = newMovieForm;
-
-    if (!titleVi.trim() || !titleEn.trim()) {
-      alert("Vui lòng nhập tiêu đề tiếng Việt và tiếng Anh");
-      return;
-    }
-
-    // parse year & rating
-    const yearNum = year ? Number(year) : null;
-    const ratingNum = rating ? Number(rating) : null;
-
-    // genres: tách bằng dấu phẩy
-    const viArr = genresVi
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-    const enArr = genresEn
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean);
-
-    const genres = viArr.map((vi, idx) => ({
-      vi,
-      en: enArr[idx] || enArr[enArr.length - 1] || vi,
-    }));
-
-    // auto tạo id mới dạng string
-    const nextIdNumber =
-      movies.reduce((max, m) => {
-        const n = Number(m.id);
-        if (!isNaN(n) && n > max) return n;
-        return max;
-      }, 0) + 1;
-
-    const payload = {
-      id: String(nextIdNumber),
-      title: {
-        en: titleEn,
-        vi: titleVi,
-      },
-      isSeries,
-      badges: [], // có thể thêm sau
-      nation: {
-        en: nationEn || nationVi,
-        vi: nationVi || nationEn,
-      },
-      year: yearNum || new Date().getFullYear(),
-      poster,
-      smallPoster,
-      genres,
-      description: {
-        en: descEn,
-        vi: descVi,
-      },
-      backdrop,
-      trailer,
-      duration,
-      rating: ratingNum || 0,
-      featured,
-    };
-
+    const validation = validateMovie(newMovieForm);
+    if (validation) { setMovieError(validation); return; }
+    if (!begin()) return;
+    setMovieError("");
+    const f = Object.fromEntries(Object.entries(newMovieForm).map(([key, value]) => [key, typeof value === "string" ? value.trim() : value]));
+    const vi = f.genresVi.split(",").map((value) => value.trim()).filter(Boolean);
+    const en = f.genresEn.split(",").map((value) => value.trim()).filter(Boolean);
     try {
-      const res = await fetch(`${API}/movies`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) throw new Error("Thêm phim thất bại");
-
-      const created = (await res.json().catch(() => null)) || payload;
-
-      // cập nhật state movies để thấy ngay trên UI
-      // setMovies((prev) => [...prev, created]);
-      setMovies((prev) => [created, ...prev]);
-
-      setShowAddMovie(false);
-      alert("Thêm phim mới thành công!");
-    } catch (e) {
-      console.error("Lỗi thêm movie:", e);
-      alert("Không thêm được phim. Kiểm tra lại JSON-server.");
-    }
+      await saveMovie({ id: crypto.randomUUID(), createdAt: new Date().toISOString(),
+        title: { vi: f.titleVi, en: f.titleEn }, description: { vi: f.descVi, en: f.descEn },
+        nation: { vi: f.nationVi || f.nationEn, en: f.nationEn || f.nationVi },
+        genres: vi.map((value, index) => ({ vi: value, en: en[index] || value })), badges: [],
+        year: f.year ? Number(f.year) : new Date().getFullYear(), rating: f.rating ? Number(f.rating) : 0,
+        poster: f.poster, smallPoster: f.smallPoster, backdrop: f.backdrop, trailer: f.trailer,
+        duration: f.duration, isSeries: f.isSeries, featured: f.featured,
+      }, true);
+      setCurrentPage(1); setShowAddMovie(false);
+    } catch (err) { setMovieError(err.message); } finally { finish(); }
   };
-
   const openEditMovie = (movie) => {
-    setEditingMovie(movie);
-    setEditForm({
-      titleVi: movie.title?.vi || "",
-      titleEn: movie.title?.en || "",
-      isSeries: !!movie.isSeries,
-      descVi: movie.description?.vi || "",
-      descEn: movie.description?.en || "",
-      featured: !!movie.featured,
-    });
+    setMovieError(""); setEditingMovie(movie);
+    setEditForm({ titleVi: movie.title?.vi || "", titleEn: movie.title?.en || "", descVi: movie.description?.vi || "", descEn: movie.description?.en || "", isSeries: !!movie.isSeries, featured: !!movie.featured });
   };
-
-  const closeEditMovie = () => {
-    setEditingMovie(null);
-  };
-
+  const closeEditMovie = () => { if (!busyRef.current) setEditingMovie(null); };
   const handleUpdateMovie = async () => {
     if (!editingMovie) return;
-
-    const id = editingMovie.id;
-
-    // chuẩn bị payload mới, giữ lại các field khác (year, rating, ...),
-    // chỉ sửa title, isSeries, description
-    const payload = {
-      ...editingMovie,
-      title: {
-        ...(editingMovie.title || {}),
-        vi: editForm.titleVi,
-        en: editForm.titleEn,
-      },
-      isSeries: editForm.isSeries,
-      featured: editForm.featured,
-      description: {
-        ...(editingMovie.description || {}),
-        vi: editForm.descVi,
-        en: editForm.descEn,
-      },
-    };
-
+    const validation = validateMovie(editForm);
+    if (validation) { setMovieError(validation); return; }
+    if (!begin()) return;
+    setMovieError("");
     try {
-      const res = await fetch(`${API}/movies/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
+      await saveMovie({ id: editingMovie.id,
+        title: { vi: editForm.titleVi.trim(), en: editForm.titleEn.trim() },
+        description: { vi: editForm.descVi.trim(), en: editForm.descEn.trim() },
+        isSeries: editForm.isSeries, featured: editForm.featured,
       });
-
-      if (!res.ok) throw new Error("Cập nhật thất bại");
-
-      // JSON-server thường trả về object mới, nhưng nếu không thì dùng payload
-      const updated = (await res.json().catch(() => null)) || payload;
-
-      // cập nhật lại state movies
-      setMovies((prev) => prev.map((m) => (m.id === id ? updated : m)));
-
       setEditingMovie(null);
-      alert("Cập nhật thông tin phim thành công!");
-    } catch (e) {
-      console.error("Lỗi cập nhật movie:", e);
-      alert("Không cập nhật được phim. Kiểm tra lại JSON-server.");
-    }
+    } catch (err) { setMovieError(err.message); } finally { finish(); }
   };
-
-  // đổi tab
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-    if (tab === "users") {
-      loadUsers();
-    }
-    if (tab === "movies") {
-      loadMovies();
-    }
+  const handleTabChange = (tab) => { if (busyRef.current) return; setActiveTab(tab); if (tab === "users") loadUsers(); };
+  const handleDeleteUser = async (email) => {
+    const user = users.find((item) => item.email === email);
+    if (!user || !window.confirm("Bạn có chắc muốn xóa tài khoản này?") || !begin()) return;
+    try { await deleteUser(user.id); await loadUsers(); }
+    catch (err) { setUsersError(err.message); } finally { finish(); }
   };
-
-  // Xoá 1 tài khoản theo email
-  const handleDeleteUser = (email) => {
-    const raw = localStorage.getItem("users_db") || "[]";
-    let db = [];
-    try {
-      db = JSON.parse(raw);
-    } catch {
-      db = [];
-    }
-
-    const next = db.filter((u) => u.email !== email);
-    localStorage.setItem("users_db", JSON.stringify(next));
-    setUsers(next.filter((u) => u.email !== "admin@gmail.com"));
-  };
-
-  // mở box thêm tài khoản
-  const handleOpenAddBox = () => {
-    setNewName("");
-    setNewEmail("");
+  const handleOpenAddBox = () => { setNewName(""); setNewEmail(""); setNewPassword(""); setError(""); setShowAddBox(true); };
+  const handleCreateUser = async () => {
+    if (!begin()) return;
     setError("");
-    setShowAddBox(true);
+    try { await createUser({ name: newName, email: newEmail, password: newPassword }); setShowAddBox(false); await loadUsers(); }
+    catch (err) { setError(err.message); } finally { finish(); }
   };
-
-  // tạo user mới (mật khẩu mặc định = "1")
-  const handleCreateUser = () => {
-    const email = newEmail.trim();
-    const name = newName.trim();
-
-    if (!email) {
-      setError("Vui lòng nhập email");
-      return;
-    }
-
-    const raw = localStorage.getItem("users_db") || "[]";
-    let db = [];
-    try {
-      db = JSON.parse(raw);
-    } catch {
-      db = [];
-    }
-
-    if (db.some((u) => u.email === email)) {
-      setError("Email đã tồn tại");
-      return;
-    }
-
-    const fallbackName = name || email.split("@")[0] || "User";
-    const newUser = {
-      email,
-      password: "1",
-      name: fallbackName,
-      role: "user",
-      avatar: "",
-      gender: "unknown",
-    };
-
-    db.push(newUser);
-    localStorage.setItem("users_db", JSON.stringify(db));
-
-    loadUsers();
-    setShowAddBox(false);
-  };
-
-  // Xoá 1 phim theo id
   const handleDeleteMovie = async (id) => {
-    const ok = window.confirm("Bạn có chắc muốn gỡ phim này không?");
-    if (!ok) return;
-
-    try {
-      const res = await fetch(`${API}/movies/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Xoá thất bại");
-
-      // Xoá trong state hiện tại
-      setMovies((prev) => prev.filter((m) => m.id !== id));
-    } catch (e) {
-      console.error("Lỗi xoá movie:", e);
-      alert("Không xoá được phim. Kiểm tra lại JSON-server.");
-    }
+    if (!window.confirm("Bạn có chắc muốn gỡ phim này không?") || !begin()) return;
+    setMovieError("");
+    try { await deleteMovie(id); setCurrentPage((page) => Math.min(page, Math.max(1, Math.ceil((movies.length - 1) / 14)))); }
+    catch (err) { setMovieError(err.message); } finally { finish(); }
   };
-
   return (
     <div className="mt-[100px] p-10 text-white">
       <h1 className="mb-5 text-3xl font-bold">Trang Quản Lý</h1>
@@ -377,16 +109,33 @@ export default function ManagerAdmin() {
       {/* 2 nút tab có active state */}
       <ManagerTabs activeTab={activeTab} onChange={handleTabChange} />
 
+      {movieError && !showAddMovie && !editingMovie && <p role="alert" className="text-red-400">{movieError}</p>}
+      {busy && <p role="status">Đang lưu thay đổi...</p>}
       {/* Nội dung mỗi tab */}
-      {activeTab === "users" && (
+      {activeTab === "users" && (usersLoading ? <p role="status">Đang tải tài khoản...</p> : usersError ? <div role="alert"><p>{usersError}</p><button onClick={loadUsers}>Thử lại</button></div> : (
         <UserManagerSection
           users={users}
           onDeleteUser={handleDeleteUser}
           onOpenAddBox={handleOpenAddBox}
         />
-      )}
+      ))}
 
-      {activeTab === "movies" && (
+      {activeTab === "movies" && (moviesLoading ? (
+        <p role="status" className="mt-8 text-white/70">
+          Đang tải danh sách phim...
+        </p>
+      ) : moviesError ? (
+        <div role="alert" className="mt-8">
+          <p className="text-red-400">{moviesError}</p>
+          <button
+            type="button"
+            onClick={loadMovies}
+            className="px-4 py-2 mt-3 font-semibold text-black bg-yellow-400 rounded-lg cursor-pointer hover:bg-yellow-300"
+          >
+            Thử lại
+          </button>
+        </div>
+      ) : (
         <MovieManagerSection
           movies={movies}
           currentPage={currentPage}
@@ -395,7 +144,7 @@ export default function ManagerAdmin() {
           onSelectMovie={openEditMovie}
           onOpenAddMovie={handleOpenAddMovie}
         />
-      )}
+      ))}
 
       {/* Popup thêm tài khoản */}
       <AddUserModal
@@ -403,9 +152,12 @@ export default function ManagerAdmin() {
         newName={newName}
         newEmail={newEmail}
         error={error}
+        busy={busy}
+        newPassword={newPassword}
+        onChangePassword={setNewPassword}
         onChangeName={setNewName}
         onChangeEmail={setNewEmail}
-        onClose={() => setShowAddBox(false)}
+        onClose={() => { if (!busy) setShowAddBox(false); }}
         onCreate={handleCreateUser}
       />
       {/* Edit phim */}
@@ -414,6 +166,8 @@ export default function ManagerAdmin() {
         form={editForm}
         onChange={setEditForm}
         onClose={closeEditMovie}
+        error={movieError}
+        busy={busy}
         onSubmit={handleUpdateMovie}
       />
       {/* Add phim mơi */}
@@ -421,7 +175,9 @@ export default function ManagerAdmin() {
         open={showAddMovie}
         form={newMovieForm}
         onChange={setNewMovieForm}
-        onClose={() => setShowAddMovie(false)}
+        onClose={() => { if (!busy) setShowAddMovie(false); }}
+        error={movieError}
+        busy={busy}
         onSubmit={handleCreateMovie}
       />
     </div>

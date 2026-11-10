@@ -1,9 +1,11 @@
+import { moviesUrl } from "../../lib/movieFilters";
+import useMovies from "../../lib/useMovies";
+import MovieLoadStatus from "../loading/MovieLoadStatus";
 // src/components/AnimeShowcaseMovies.jsx
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AnimeShowcase from "./AnimeShowcase";
 
-const API = "http://localhost:5000";
 
 // Chuẩn hóa path "./public/..." -> "/..."
 function normalize(src, fallback = "") {
@@ -14,7 +16,7 @@ function normalize(src, fallback = "") {
 // Map 1 movie từ DB -> dữ liệu hero AnimeShowcase cần
 function toHeroData(m) {
   return {
-    bg: normalize(m.backdrop, "/images/default-backdrop.jpg"),
+    bg: normalize(m.backdrop, "/images/default-backdrop.svg"),
     title: m?.title?.vi || m?.title?.en || "",
     subtitle: m?.title?.en || m?.title?.vi || "",
     score:
@@ -39,20 +41,7 @@ function toThumb(m) {
   return {
     id: m.id,
     title: m?.title?.vi || m?.title?.en || "",
-    poster: small || normalize(m.poster, "/images/default-poster.jpg"),
-  };
-}
-
-function toAllMoviesItem(m) {
-  const poster =
-    normalize(m.smallPoster) ||
-    normalize(m.poster, "/images/default-poster.jpg");
-  return {
-    id: m.id,
-    poster,
-    title: m?.title?.vi || m?.title?.en || "",
-    subtitle: m?.title?.en || m?.title?.vi || "",
-    badges: m?.badges || [],
+    poster: small || normalize(m.poster, "/images/default-poster.svg"),
   };
 }
 
@@ -61,12 +50,9 @@ export default function AnimeShowcaseMovies() {
   const [index, setIndex] = useState(0);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    (async () => {
-      const res = await fetch(`${API}/movies`);
-      const data = await res.json();
+  const { data, loading, error, retry } = useMovies();
 
-      // Lọc phim có genre Anime (vi hoặc en)
+  useEffect(() => {
       const onlyAnime = (data || []).filter((m) =>
         m?.genres?.some(
           (g) =>
@@ -77,8 +63,7 @@ export default function AnimeShowcaseMovies() {
 
       setAnime(onlyAnime);
       setIndex(0);
-    })();
-  }, []);
+  }, [data]);
 
   const hero = useMemo(
     () => (anime[index] ? toHeroData(anime[index]) : null),
@@ -88,21 +73,15 @@ export default function AnimeShowcaseMovies() {
   const thumbs = useMemo(() => anime.map(toThumb), [anime]);
 
   //  Khi bấm nút “Xem thêm”
-  const goToAllMovies = () => {
-    const listForAll = anime.map(toAllMoviesItem); //  có cả subtitle (EN)
-    navigate("/all-movies", {
-      state: {
-        title: "Kho Tàng Anime Mới Nhất",
-        movies: listForAll,
-      },
-    });
-  };
+  const goToAllMovies = () => navigate(moviesUrl({ genre: "Anime" }));
 
   // handler: click title -> đi chi tiết theo id hiện tại
   const goDetailFromTitle = () => {
     const m = anime[index];
     if (m?.id) navigate(`/movie/${m.id}`);
   };
+
+  if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
 
   return (
     <div className="bg-[#192026] text-white mb-[60px] p-6 ">

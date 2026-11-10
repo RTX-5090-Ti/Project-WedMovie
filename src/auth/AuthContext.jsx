@@ -1,148 +1,61 @@
-// src/auth/AuthContext.jsx
-import { createContext, useContext, useEffect, useState } from "react";
-
-const AuthCtx = createContext(null);
-export const useAuth = () => useContext(AuthCtx);
-
-// chuẩn hoá đường dẫn avatar kiểu ../../public/... -> /images/...
-function normalizeAvatar(path) {
-  if (!path) return "";
-  return path.replace("../../public", "").replace("public/", "");
-}
-
+import { useEffect, useState } from "react";
+import { authenticate, createUser, getUser, publicUser, updateProfile, changePassword as savePassword } from "../lib/users";
+import { AuthCtx } from "./useAuth";
+const session = (user, isGuest = false) => ({ user, role: user?.role || null, isGuest });
 export default function AuthProvider({ children }) {
-  const [user, setUser] = useState(null); // { email, name }
-  const [role, setRole] = useState(null); // 'admin' | 'user' | null
-  const [isGuest, setIsGuest] = useState(false);
+  const [auth, setAuth] = useState(session(null));
   const [loading, setLoading] = useState(true);
-
+  const [authError, setAuthError] = useState("");
+  const [notice, setNotice] = useState("");
+  const [attempt, setAttempt] = useState(0);
+  const persist = (next) => { setAuth(next); localStorage.setItem("auth", JSON.stringify(next)); };
   useEffect(() => {
-    const raw = localStorage.getItem("auth");
-    if (raw) {
+    let active = true;
+    async function restore() {
+      setAuthError("");
       try {
-        const saved = JSON.parse(raw);
-        setUser(saved.user || null);
-        setRole(saved.role || null);
-        setIsGuest(!!saved.isGuest);
-      } catch (err) {
-        console.log(err);
-      }
+        const saved = JSON.parse(localStorage.getItem("auth") || "null");
+        if (!saved) { if (active) setAuth(session(null)); return; }
+        if (saved.isGuest) { if (active) setAuth(session(null, true)); return; }
+        if (!saved.user?.id) {
+          if (active) { setAuth(session(null)); setNotice("Vui lòng đăng nhập lại để chuyển tài khoản và dữ liệu cũ lên server."); }
+          return;
+        }
+        const record = await getUser(saved.user.id);
+        if (!active) return;
+        if (record.deleted) { localStorage.removeItem("auth"); setAuth(session(null)); return; }
+        persist(session(publicUser(record)));
+      } catch (error) {
+        if (!active) return;
+        if (error.status === 404 || error instanceof SyntaxError) {
+          localStorage.removeItem("auth"); setAuth(session(null));
+        } else setAuthError(error.message);
+      } finally { if (active) setLoading(false); }
     }
-    seedAdmin();
-    setLoading(false);
-  }, []);
-
-  function seedAdmin() {
-    const RAW = localStorage.getItem("users_db") || "[]";
-    const db = JSON.parse(RAW);
-    const exists = db.some((u) => u.email === "admin@gmail.com");
-    if (!exists) {
-      db.push({
-        email: "admin@gmail.com",
-        password: "123",
-        name: "Admin",
-        role: "admin",
-        avatar: "/images/test/avatar-small.webp",
-        gender: "unknown",
-      });
-      localStorage.setItem("users_db", JSON.stringify(db));
-    }
+    restore();
+    const refresh = () => setAttempt((value) => value + 1);
+    const storage = (event) => { if (event.key === "auth") refresh(); };
+    window.addEventListener("focus", refresh);
+    window.addEventListener("storage", storage);
+    return () => { active = false; window.removeEventListener("focus", refresh); window.removeEventListener("storage", storage); };
+  }, [attempt]);
+  async function register(fields) {
+    try { await createUser(fields); return { ok: true }; }
+    catch (error) { return { ok: false, error: error.message }; }
   }
-
-  function persist(next) {
-    localStorage.setItem("auth", JSON.stringify(next));
-  }
-
-  // ========== REGISTER ==========
-  async function register({ name, email, password }) {
-    const raw = localStorage.getItem("users_db") || "[]";
-    const db = JSON.parse(raw);
-    if (db.some((u) => u.email === email)) {
-      return { ok: false, error: "Email đã tồn tại" };
-    }
-    const fallbackName = (email?.split?.("@")?.[0] || "User").trim();
-    const newUser = {
-      email,
-      password,
-      name: name?.trim() || fallbackName,
-      role: "user",
-      avatar: "", // 👈 thêm
-      gender: "unknown", // 👈 thêm
-    };
-    db.push(newUser);
-    localStorage.setItem("users_db", JSON.stringify(db));
-    return { ok: true };
-  }
-
-  // ========== LOGIN ==========
-  async function login({ email, password }) {
-    // ADMIN CỨNG
-    if (email === "admin@gmail.com" && password === "123") {
-      const next = {
-        user: { email, name: "Admin" },
-        role: "admin",
-        isGuest: false,
-        avatar: "/images/test/avatar-small.webp",
-        gender: "unknown",
-      };
-      setUser(next.user);
-      setRole(next.role);
-      setIsGuest(false);
-      persist(next);
+  async function login(fields) {
+    try {
+      const { user, warning } = await authenticate(fields);
+      setNotice(warning); setAuthError(""); persist(session(user));
       return { ok: true };
-    }
-
-    // USER THƯỜNG
-    const raw = localStorage.getItem("users_db") || "[]";
-    const db = JSON.parse(raw);
-    const found = db.find((u) => u.email === email && u.password === password);
-    if (!found) return { ok: false, error: "Email hoặc mật khẩu sai" };
-
-    const name = found.name?.trim() || email.split("@")[0] || "User";
-    const role = found.role || "user";
-    const avatar = normalizeAvatar(found.avatar || "");
-    const gender = found.gender || "unknown";
-
-    const next = {
-      user: { email, name },
-      role,
-      isGuest: false,
-      avatar,
-      gender,
-    };
-
-    setUser(next.user);
-    setRole(next.role);
-    setIsGuest(false);
-    persist(next);
-    return { ok: true };
+    } catch (error) { return { ok: false, error: error.message }; }
   }
-
-  function guestLogin() {
-    const next = { user: null, role: null, isGuest: true };
-    setUser(null);
-    setRole(null);
-    setIsGuest(true);
-    persist(next);
+  async function updateUser(fields) {
+    const user = await updateProfile(auth.user.id, fields);
+    persist(session(user)); return user;
   }
-
-  function logout() {
-    setUser(null);
-    setRole(null);
-    setIsGuest(false);
-    localStorage.removeItem("auth");
-  }
-
-  const value = {
-    user,
-    role,
-    isGuest,
-    loading,
-    register,
-    login,
-    guestLogin,
-    logout,
-  };
-
-  return <AuthCtx.Provider value={value}>{children}</AuthCtx.Provider>;
+  const changePassword = (oldPassword, newPassword) => savePassword(auth.user.id, oldPassword, newPassword);
+  function guestLogin() { setAuthError(""); setNotice(""); persist(session(null, true)); }
+  function logout() { setAuth(session(null)); setNotice(""); setAuthError(""); localStorage.removeItem("auth"); }
+  return <AuthCtx.Provider value={{ ...auth, loading, authError, notice, retryAuth: () => setAttempt((value) => value + 1), register, login, guestLogin, logout, updateUser, changePassword }}>{children}</AuthCtx.Provider>;
 }

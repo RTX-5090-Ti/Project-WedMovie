@@ -1,7 +1,7 @@
-import "./Logo&Languge.css";
+import "./LogoAndLanguage.css";
 import { useState } from "react";
 
-export default function LogoAndLanguge() {
+export default function LogoAndLanguage() {
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("English");
 

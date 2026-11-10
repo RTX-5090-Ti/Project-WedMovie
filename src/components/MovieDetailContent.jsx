@@ -1,3 +1,5 @@
+import { getMovie } from "../lib/api";
+import { movieImageFallback } from "../lib/imageFallback";
 import { useEffect, useMemo, useState, useRef } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -17,14 +19,14 @@ import StarIcon from "@mui/icons-material/Star";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import Slide from "@mui/material/Slide";
-import { useAuth } from "../auth/AuthContext";
-import { isFav, toggleFav } from "../libary/favorites";
-import { pushHistory } from "../libary/history";
+import { useAuth } from "../auth/useAuth";
+import { isFav, toggleFav } from "../lib/favorites";
+import { pushHistory } from "../lib/history";
 
-const API = "http://localhost:5000";
+
 
 // Chuẩn hoá đường dẫn ảnh
-function normPath(s, fallback = "/images/default-poster.jpg") {
+function normPath(s, fallback = "/images/default-poster.svg") {
   if (!s) return fallback;
   return s.startsWith("./public/") ? s.replace("./public", "") : s;
 }
@@ -61,6 +63,7 @@ export default function MovieDetailContent() {
   const [raw, setRaw] = useState(movieFromState);
   const [loading, setLoading] = useState(!movieFromState);
   const [error, setError] = useState("");
+  const [retryCount, setRetryCount] = useState(0);
   const [openPlayer, setOpenPlayer] = useState(false);
   // set cho  Thông báo "toast notification" hoặc "toast message"
   const [toastOpen, setToastOpen] = useState(false);
@@ -68,9 +71,10 @@ export default function MovieDetailContent() {
   const [toastKey, setToastKey] = useState(0);
   const toastResetRef = useRef(null);
   //
-  // const { isGuest } = useAuth();
   const { user, isGuest } = useAuth();
   const [fav, setFav] = useState(false);
+  const [favoriteBusy, setFavoriteBusy] = useState(false);
+  const favoriteLock = useRef(false);
 
   function ToastTransition(props) {
     return <Slide {...props} direction="up" />;
@@ -95,7 +99,7 @@ export default function MovieDetailContent() {
     return {
       id: raw.id,
       backdrop: normPath(raw.backdrop, ""),
-      poster: normPath(raw.smallPoster) || normPath(raw.poster),
+      poster: normPath(raw.smallPoster || raw.poster),
       titleMain: raw?.title?.en || raw?.title?.vi || "",
       subtitle:
         (raw?.title?.vi || raw?.title?.en || "") +
@@ -110,7 +114,8 @@ export default function MovieDetailContent() {
     };
   }, [raw]);
 
-  const handleAddFavorite = () => {
+  const handleAddFavorite = async () => {
+    if (favoriteLock.current) return;
     if (isGuest) {
       showToast("Bạn cần đăng nhập để sử dụng tính năng này.");
       return;
@@ -121,30 +126,38 @@ export default function MovieDetailContent() {
     }
     const favPayload = {
       id: m.id,
-      title: { vi: m?.title?.vi || m.titleMain || "", en: m?.title?.en || "" },
+      title: { vi: raw?.title?.vi || "", en: raw?.title?.en || "" },
       poster: m.poster,
       backdrop: m.backdrop,
     };
-    const { added } = toggleFav(user.email, favPayload);
-    setFav(added);
-    showToast(added ? "Đã thêm vào Yêu thích" : "Đã bỏ khỏi Yêu thích");
+    favoriteLock.current = true; setFavoriteBusy(true);
+    try {
+      const { added } = await toggleFav(user.id, favPayload);
+      setFav(added);
+      showToast(added ? "Đã thêm vào Yêu thích" : "Đã bỏ khỏi Yêu thích");
+    } catch (error) { showToast(error.message); }
+    finally { favoriteLock.current = false; setFavoriteBusy(false); }
   };
-
-  // Khi movie hoặc user đổi, kiểm tra lại trạng thái yêu thích
   useEffect(() => {
-    if (!m) return;
-    if (!user || isGuest) {
-      setFav(false);
-      return;
-    }
-    setFav(isFav(user.email, m.id));
-  }, [m?.id, user?.email, isGuest]);
+    let active = true;
+    setFav(false);
+    if (!m || !user?.id || isGuest) return;
+    const refresh = () => {
+      isFav(user.id, m.id).then((value) => { if (active) setFav(value); }).catch(() => {
+        if (active) { setToastMsg("Không tải được trạng thái yêu thích. Bạn có thể thử lại bằng nút Yêu thích."); setToastOpen(true); }
+      });
+    };
+    refresh();
+    window.addEventListener("focus", refresh);
+    return () => { active = false; window.removeEventListener("focus", refresh); };
+  }, [m, user?.id, isGuest]);
 
-  // Fetch theo id (có fallback /movies?id=...) khi không nhận state.movie
+  // Tải chi tiết theo ID khi không có dữ liệu điều hướng.
   useEffect(() => {
     let mounted = true;
 
-    if (movieFromState) {
+    if (movieFromState && retryCount === 0) {
+      setRaw(movieFromState);
       setLoading(false);
       setError("");
       return;
@@ -152,41 +165,34 @@ export default function MovieDetailContent() {
 
     if (!id) return;
 
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
+
     (async () => {
       setLoading(true);
       setError("");
       try {
-        // 1) /movies/:id
-        let res = await fetch(`${API}/movies/${encodeURIComponent(id)}`);
-        if (res.status === 404) {
-          // 2) fallback /movies?id=...
-          res = await fetch(`${API}/movies?id=${encodeURIComponent(id)}`);
-          const arr = await res.json();
-          if (!mounted) return;
-          if (Array.isArray(arr) && arr.length) {
-            setRaw(arr[0]);
-            return;
-          }
-          throw new Error("NOT_FOUND");
-        }
-        if (!res.ok) throw new Error(`HTTP_${res.status}`);
-        const json = await res.json();
+        const json = await getMovie(id, { signal: controller.signal });
+        if (!json || Array.isArray(json) || json.id == null) throw new Error("INVALID_MOVIE");
         if (!mounted) return;
         setRaw(json);
       } catch (e) {
         if (!mounted) return;
         console.error("Load movie failed:", e);
         setRaw(null);
-        setError("Không tìm thấy phim hoặc dữ liệu đã thay đổi.");
+        setError("Không tải được phim. Phim có thể đã bị xóa hoặc kết nối đang gặp lỗi.");
       } finally {
+        clearTimeout(timeout);
         if (mounted) setLoading(false);
       }
     })();
 
     return () => {
       mounted = false;
+      clearTimeout(timeout);
+      controller.abort();
     };
-  }, [id, movieFromState]);
+  }, [id, movieFromState, retryCount]);
 
   const videoId = useMemo(() => getYouTubeId(m?.trailer || ""), [m]);
   const embedUrl = videoId
@@ -220,6 +226,9 @@ export default function MovieDetailContent() {
           <Typography variant="h6" color="error">
             {error || "Không tìm thấy phim."}
           </Typography>
+          <Button onClick={() => setRetryCount((count) => count + 1)}>
+            Thử lại
+          </Button>
           <Button
             variant="contained"
             sx={{ mt: 2 }}
@@ -285,15 +294,15 @@ export default function MovieDetailContent() {
                 setOpenPlayer(true);
                 // ghi lịch sử nếu user thật
                 if (!isGuest && user) {
-                  pushHistory(user.email, {
+                  pushHistory(user.id, {
                     id: m.id,
                     title: {
-                      vi: m?.title?.vi || m.titleMain || "",
-                      en: m?.title?.en || "",
+                      vi: raw?.title?.vi || "",
+                      en: raw?.title?.en || "",
                     },
                     poster: m.poster,
                     backdrop: m.backdrop,
-                  });
+                  }).catch((error) => showToast(error.message));
                 }
               }}
               disabled={!videoId}
@@ -384,6 +393,7 @@ export default function MovieDetailContent() {
             </Stack>
 
             <div
+              disabled={favoriteBusy}
               onClick={handleAddFavorite}
               className={`group inline-flex items-center gap-3 mt-5 rounded-[12px] p-2 cursor-pointer
               transition-all duration-300 active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/20
@@ -400,7 +410,7 @@ export default function MovieDetailContent() {
                   : "Thêm vào Yêu thích"
               }
             >
-              <img
+              <img onError={movieImageFallback}
                 className={`w-[30px] transition-transform duration-300 ${
                   fav ? "rotate-90" : "group-hover:rotate-90"
                 }`}

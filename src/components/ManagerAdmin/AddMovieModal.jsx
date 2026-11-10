@@ -1,7 +1,9 @@
 // AddMovieModal.jsx
 export default function AddMovieModal({
   open,
+  busy = false,
   form,
+  error,
   onChange,
   onClose,
   onSubmit,
@@ -225,20 +227,21 @@ export default function AddMovieModal({
           />
         </div>
 
+        {error && <p role="alert" className="mt-3 text-red-400">{error}</p>}
         {/* Buttons */}
         <div className="flex justify-end gap-3 pt-2 mt-4">
-          <div
+          <button type="button" disabled={busy}
             onClick={onClose}
             className="px-4 py-2 text-sm border cursor-pointer rounded-xl border-white/30 hover:bg-white/10"
           >
             Đóng
-          </div>
-          <div
+          </button>
+          <button type="button" disabled={busy}
             onClick={onSubmit}
             className="px-4 py-2 text-sm font-semibold text-black cursor-pointer rounded-xl bg-yellow-500/80 hover:bg-yellow-400"
           >
             Add
-          </div>
+          </button>
         </div>
       </div>
     </div>

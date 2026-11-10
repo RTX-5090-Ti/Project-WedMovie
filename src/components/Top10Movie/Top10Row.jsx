@@ -1,3 +1,4 @@
+import { movieImageFallback } from "../../lib/imageFallback";
 // Top10Row.jsx
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
@@ -24,7 +25,7 @@ export default function Top10Row({ title, items = [], onMovieClick }) {
                 onClick={() => onMovieClick?.(m.id)}
                 className="relative overflow-hidden transition-transform duration-300 shadow-lg cursor-pointer rounded-3xl ring-1 ring-white/10 bg-neutral-800 group-hover:-translate-y-1"
               >
-                <img
+                <img onError={movieImageFallback}
                   src={m.poster}
                   alt={m.title}
                   className="w-full aspect-[3/4] object-cover transition-transform duration-300 

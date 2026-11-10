@@ -2584,5 +2584,73 @@
       "rating": 7.6,
       "featured": true
     }
+  ],
+  "users": [
+    {
+      "id": "admin",
+      "email": "admin@gmail.com",
+      "password": "123",
+      "name": "Admin",
+      "role": "admin",
+      "avatar": "/images/test/avatar-small.webp",
+      "gender": "unknown"
+    },
+    {
+      "id": "4173e07f-90b6-4f8b-87c6-bfb6c9ef3de5",
+      "email": "quocvuong99er@gmail.com",
+      "name": "Vương",
+      "password": "123456",
+      "role": "user",
+      "avatar": "/images/avatarUser/11.jpg",
+      "gender": "unknown"
+    }
+  ],
+  "favorites": [],
+  "history": [
+    {
+      "id": "4173e07f-90b6-4f8b-87c6-bfb6c9ef3de5:60",
+      "userId": "4173e07f-90b6-4f8b-87c6-bfb6c9ef3de5",
+      "movieId": "60",
+      "movie": {
+        "id": "60",
+        "title": {
+          "vi": "Home Sweet Home: Rebirth",
+          "en": ""
+        },
+        "poster": "/images/data-json-imgs/home-sweet-home-rebirth/SMALLPOSTER.jpg",
+        "backdrop": "/images/data-json-imgs/home-sweet-home-rebirth/BACKDROP.jpg"
+      },
+      "updatedAt": 1794314992531
+    },
+    {
+      "id": "4173e07f-90b6-4f8b-87c6-bfb6c9ef3de5:55",
+      "userId": "4173e07f-90b6-4f8b-87c6-bfb6c9ef3de5",
+      "movieId": "55",
+      "movie": {
+        "id": "55",
+        "title": {
+          "vi": "Ne Zha 2",
+          "en": ""
+        },
+        "poster": "/images/data-json-imgs/ne-zha-2/SMALLPOSTER.jpg",
+        "backdrop": "/images/data-json-imgs/ne-zha-2/BBACKDROP.jpeg"
+      },
+      "updatedAt": 1794314992593
+    },
+    {
+      "id": "4173e07f-90b6-4f8b-87c6-bfb6c9ef3de5:54",
+      "userId": "4173e07f-90b6-4f8b-87c6-bfb6c9ef3de5",
+      "movieId": "54",
+      "movie": {
+        "id": "54",
+        "title": {
+          "vi": "Vân Thâm Bất Tri Mộng",
+          "en": "Eclipse of Illusion"
+        },
+        "poster": "/images/data-json-imgs/eclipse-of-lllusion/SMALLPOSTER.jpg",
+        "backdrop": "/images/data-json-imgs/eclipse-of-lllusion/BACKDROP.jpg"
+      },
+      "updatedAt": 1794315043023
+    }
   ]
 }

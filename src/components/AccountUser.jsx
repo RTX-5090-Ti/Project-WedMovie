@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import { useAuth } from "../auth/AuthContext";
+import { useState, useEffect, useRef } from "react";
+import { useAuth } from "../auth/useAuth";
 
-export default function AcountUser() {
-  const { user } = useAuth(); // user trong auth: { email, name } hoặc null
+export default function AccountUser() {
+  const { user, updateUser, changePassword } = useAuth(); // user trong auth: { email, name } hoặc null
   const [open, setOpen] = useState(false);
   const [openImg, setOpenImg] = useState(false);
 
@@ -42,192 +42,32 @@ export default function AcountUser() {
     { id: 12, src: "/images/avatarUser/21.jpg" },
   ];
 
-  // 1) LOAD DỮ LIỆU TỪ localStorage
+  const [busy, setBusy] = useState(false);
+  const busyRef = useRef(false);
   useEffect(() => {
-    const raw = localStorage.getItem("auth");
-    if (raw) {
-      try {
-        const saved = JSON.parse(raw);
-        const u = saved.user || {};
-        setEmail(u.email || "");
-        setDisplayName(u.name || "");
-        setGender(saved.gender || "unknown");
-        setAvatar(saved.avatar || "");
-      } catch (err) {
-        console.log("parse auth error", err);
-      }
-    } else if (user) {
-      setEmail(user.email || "");
-      setDisplayName(user.name || "");
-      setGender("unknown");
-    }
+    setEmail(user?.email || ""); setDisplayName(user?.name || "");
+    setGender(user?.gender || "unknown"); setAvatar(user?.avatar || "");
   }, [user]);
-
-  // lưu avatar cho đúng user
-  const saveAvatarForUser = (avatarUrl) => {
-    if (!email) return;
-
-    // 1. users_db
-    const usersRaw = localStorage.getItem("users_db") || "[]";
-    const users = JSON.parse(usersRaw);
-    const idx = users.findIndex((u) => u.email === email);
-    if (idx !== -1) {
-      users[idx] = {
-        ...users[idx],
-        avatar: avatarUrl,
-      };
-      localStorage.setItem("users_db", JSON.stringify(users));
-    }
-
-    // 2. auth
-    const authRaw = localStorage.getItem("auth");
-    if (authRaw) {
-      const auth = JSON.parse(authRaw);
-      const nextAuth = {
-        ...auth,
-        avatar: avatarUrl,
-        user: {
-          ...(auth.user || {}),
-          email,
-          name: displayName,
-        },
-      };
-      localStorage.setItem("auth", JSON.stringify(nextAuth));
-    } else {
-      // fallback
-      localStorage.setItem(
-        "auth",
-        JSON.stringify({
-          user: { email, name: displayName },
-          role: "user",
-          isGuest: false,
-          gender,
-          avatar: avatarUrl,
-        })
-      );
-    }
-
-    // cập nhật UI ngay
-    setAvatar(avatarUrl);
-  };
-
-  // 2) cập nhật thông tin (tên, giới tính, avatar)
-  const handleUpdate = () => {
-    if (!email) {
-      setPassMsg("Không tìm thấy tài khoản để cập nhật.");
-      return;
-    }
-
-    // cập nhật vào users_db nếu có
-    const usersRaw = localStorage.getItem("users_db") || "[]";
-    const users = JSON.parse(usersRaw);
-    const idx = users.findIndex((u) => u.email === email);
-    if (idx !== -1) {
-      users[idx] = {
-        ...users[idx],
-        name: displayName,
-        gender: gender,
-        avatar: selected?.src || avatar || users[idx].avatar,
-      };
-      localStorage.setItem("users_db", JSON.stringify(users));
-    }
-
-    // cập nhật vào auth
-    const authRaw = localStorage.getItem("auth");
-    if (authRaw) {
-      const auth = JSON.parse(authRaw);
-      const nextAuth = {
-        ...auth,
-        gender: gender,
-        avatar: selected?.src || avatar || auth.avatar,
-        user: {
-          ...(auth.user || {}),
-          email: email,
-          name: displayName,
-        },
-      };
-      localStorage.setItem("auth", JSON.stringify(nextAuth));
-    } else {
-      // chưa có thì tạo mới
-      const nextAuth = {
-        user: { email, name: displayName },
-        role: "user",
-        isGuest: false,
-        gender: gender,
-        avatar: selected?.src || avatar || "",
-      };
-      localStorage.setItem("auth", JSON.stringify(nextAuth));
-    }
-
-    setAvatar(selected?.src || avatar);
-    setPassMsg("Đã cập nhật thông tin ✅");
-  };
-
-  // ĐỔI MẬT KHẨU
+  async function save(action, success) {
+    if (busyRef.current) return;
+    busyRef.current = true; setBusy(true); setPassMsg("");
+    try { await action(); setPassMsg(success); }
+    catch (error) { setPassMsg(error.message); }
+    finally { busyRef.current = false; setBusy(false); }
+  }
+  const saveAvatarForUser = (avatarUrl) => save(async () => {
+    await updateUser({ avatar: avatarUrl }); setAvatar(avatarUrl);
+  }, "Đã cập nhật ảnh đại diện.");
+  const handleUpdate = () => save(() => updateUser({ name: displayName, gender, avatar: selected?.src || avatar }), "Đã cập nhật thông tin.");
   const handleChangePassword = () => {
-    if (!email) {
-      setPassMsg("Không tìm thấy tài khoản.");
-      return;
-    }
-
-    if (!oldPass || !newPass || !confirmPass) {
-      setPassMsg("Vui lòng nhập đủ 3 ô.");
-      return;
-    }
-
-    if (newPass !== confirmPass) {
-      setPassMsg("Mật khẩu xác nhận không khớp.");
-      return;
-    }
-
-    // đọc users_db
-    const usersRaw = localStorage.getItem("users_db") || "[]";
-    const users = JSON.parse(usersRaw);
-
-    // tìm user theo email
-    const idx = users.findIndex((u) => u.email === email);
-    if (idx === -1) {
-      setPassMsg("Không tìm thấy người dùng trong hệ thống.");
-      return;
-    }
-
-    const userInDb = users[idx];
-
-    // nếu user có password thì bắt check, còn không thì cho đổi luôn
-    if (userInDb.password && userInDb.password !== oldPass) {
-      setPassMsg("Mật khẩu cũ không đúng.");
-      return;
-    }
-
-    // cập nhật mật khẩu mới
-    users[idx] = {
-      ...userInDb,
-      password: newPass,
-    };
-    localStorage.setItem("users_db", JSON.stringify(users));
-
-    // optional: ghi chú vô auth
-    const authRaw = localStorage.getItem("auth");
-    if (authRaw) {
-      const auth = JSON.parse(authRaw);
-      localStorage.setItem(
-        "auth",
-        JSON.stringify({
-          ...auth,
-          lastPasswordChange: Date.now(),
-        })
-      );
-    }
-
-    setPassMsg("Đổi mật khẩu thành công ✅");
-    setOldPass("");
-    setNewPass("");
-    setConfirmPass("");
-    setOpen(false); // đóng modal luôn cho dễ thấy
+    if (!oldPass || !newPass || !confirmPass) { setPassMsg("Vui lòng nhập đủ 3 ô mật khẩu."); return; }
+    if (newPass !== confirmPass) { setPassMsg("Mật khẩu xác nhận không khớp."); return; }
+    save(async () => { await changePassword(oldPass, newPass); setOldPass(""); setNewPass(""); setConfirmPass(""); setOpen(false); }, "Đổi mật khẩu thành công.");
   };
 
   return (
-    <div className="flex max-w-6xl gap-12 px-6 py-10 mx-auto">
+    <div className="flex max-w-6xl gap-12 px-6 py-10 mx-auto" aria-busy={busy}>
+      {busy && <p role="status">Đang lưu...</p>}
       {/* Cột trái: form */}
       <div className="flex-1">
         <h1 className="mb-2 text-2xl font-bold">Tài khoản</h1>
@@ -287,12 +127,12 @@ export default function AcountUser() {
         </div>
 
         {/* nút cập nhật */}
-        <div
-          onClick={handleUpdate}
+        <button type="button" disabled={busy}
+                onClick={handleUpdate}
           className="bg-[#d9aa3d] hover:bg-[#c49731] transition-colors text-sm font-semibold px-8 py-3 rounded-md inline-block cursor-pointer"
         >
           Cập nhật
-        </div>
+        </button>
 
         {passMsg ? (
           <p className="mt-3 text-sm text-green-400">{passMsg}</p>
@@ -360,20 +200,19 @@ export default function AcountUser() {
               />
             </div>
 
-            {/* nếu muốn tách message riêng cho modal thì để ở đây */}
             {passMsg ? (
               <p className="mb-4 text-xs text-center text-red-300">{passMsg}</p>
             ) : null}
 
             {/* Nút hành động */}
             <div className="flex justify-between">
-              <div
+              <button type="button" disabled={busy}
                 onClick={handleChangePassword}
                 className="bg-[#f0d25b] text-black font-semibold px-5 py-2 rounded-md hover:bg-[#d9aa3d] transition-colors cursor-pointer inline-flex items-center justify-center"
               >
                 Đổi mật khẩu
-              </div>
-              <div
+              </button>
+              <button type="button" disabled={busy}
                 onClick={() => {
                   setOpen(false);
                   setPassMsg("");
@@ -384,7 +223,7 @@ export default function AcountUser() {
                 className="inline-flex items-center justify-center px-5 py-2 transition-colors border rounded-md cursor-pointer border-white/10 hover:bg-white/10"
               >
                 Đóng
-              </div>
+              </button>
             </div>
           </div>
         </div>
@@ -402,13 +241,13 @@ export default function AcountUser() {
         </div>
 
         {/* Nút mở modal */}
-        <div
-          onClick={() => setOpenImg(true)}
+        <button type="button" disabled={busy}
+                onClick={() => setOpenImg(true)}
           className="flex items-center gap-2 bg-[#12151b] border border-white/5 hover:border-[#d9aa3d] px-4 py-2 rounded-md text-sm cursor-pointer"
         >
           <span className="text-lg">▦</span>
           Ảnh có sẵn
-        </div>
+        </button>
 
         <p className="text-xs text-center text-white/30">Chọn ảnh có sẵn</p>
 
@@ -432,7 +271,7 @@ export default function AcountUser() {
                     }`}
                   >
                     <img
-                      src={ava.src || "/images/default-avatar.png"}
+                      src={ava.src || "/images/test/avatar-small.webp"}
                       alt={`avatar-${ava.id}`}
                       className="object-cover w-full h-full"
                     />
@@ -441,14 +280,14 @@ export default function AcountUser() {
               </div>
 
               <div className="flex justify-end gap-4">
-                <div
-                  onClick={() => setOpenImg(false)}
+                <button type="button" disabled={busy}
+                onClick={() => setOpenImg(false)}
                   className="inline-flex items-center justify-center px-5 py-2 text-sm transition-colors border rounded-md cursor-pointer border-white/10 hover:bg-white/10"
                 >
                   Đóng
-                </div>
-                <div
-                  onClick={() => {
+                </button>
+                <button type="button" disabled={busy}
+                onClick={() => {
                     if (selected?.src) {
                       // chuẩn hoá đường dẫn, bỏ ../../public đi
                       const normalized = selected.src.replace(
@@ -462,7 +301,7 @@ export default function AcountUser() {
                   className="px-5 py-2 rounded-md text-sm bg-[#f0d25b] text-black font-semibold hover:bg-[#d9aa3d] transition-colors cursor-pointer inline-flex  items-center justify-center"
                 >
                   Xác nhận
-                </div>
+                </button>
               </div>
             </div>
           </div>

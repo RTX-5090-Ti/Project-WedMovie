@@ -1,3 +1,4 @@
+import { movieImageFallback } from "../../lib/imageFallback";
 // MovieRow.jsx
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode } from "swiper/modules";
@@ -7,9 +8,7 @@ import "swiper/css/free-mode";
 export default function MenuMovie({ movies = [], onMovieClick }) {
   return (
     <section className="w-full">
-      {/* <div className="flex items-center justify-between mb-3">
-        <h2 className="text-2xl font-bold">{title}</h2>
-      </div> */}
+      
 
       <Swiper
         modules={[FreeMode]}
@@ -26,7 +25,7 @@ export default function MenuMovie({ movies = [], onMovieClick }) {
                 onClick={() => onMovieClick?.(m.id)}
                 className="relative overflow-hidden shadow-md cursor-pointer rounded-2xl ring-1 ring-white/5 bg-neutral-800"
               >
-                <img
+                <img onError={movieImageFallback}
                   src={m.poster}
                   alt={m.title}
                   className="aspect-[2/3] w-full object-cover transition-transform duration-300 
