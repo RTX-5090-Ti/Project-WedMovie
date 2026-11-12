@@ -19,7 +19,11 @@ export default function AllMoviesClick() {
   const isFavorites = params.get("type") === "favorites";
   const typeTitles = { hot: "Phim hot", single: "Phim lẻ", series: "Phim bộ", new: "Phim điện ảnh mới toanh", favorites: "Phim yêu thích" };
   const title = typeTitles[params.get("type")] || (params.has("genre") ? `Thể loại: ${params.getAll("genre").join(", ")}` : params.has("country") ? `Phim ${params.get("country")}` : "Tất cả phim");
-  useEffect(() => { document.title = title; }, [title]);
+  useEffect(() => {
+    const previousTitle = document.title;
+    document.title = title;
+    return () => { document.title = previousTitle; };
+  }, [title]);
   useEffect(() => {
     let active = true;
     setFavorites([]); setError(""); setLoading(true);

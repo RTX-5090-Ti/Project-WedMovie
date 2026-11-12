@@ -1,0 +1,62 @@
+.language-select {
+  position: relative;
+  width: 150px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-family: sans-serif;
+  user-select: none;
+}
+
+.language-select__selected {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: background 0.2s;
+}
+
+.language-select__selected:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.language-select__options {
+  list-style: none;
+  margin: 5px 0 0;
+  padding: 0;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  z-index: 60;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  overflow: hidden;
+  animation: languageSelectFadeIn 0.2s ease;
+}
+
+.language-select__options li {
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.language-select__options li:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes languageSelectFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

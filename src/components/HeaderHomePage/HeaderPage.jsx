@@ -1,3 +1,4 @@
+import "../LanguageSelect/LanguageSelect.css";
 import { movieImageFallback } from "../../lib/imageFallback";
 import useMovies from "../../lib/useMovies";
 import MovieLoadStatus from "../loading/MovieLoadStatus";
@@ -353,9 +354,9 @@ export default function HeaderPage() {
 
       {/* Language + Avatar */}
       <div className="inline-flex items-center gap-3">
-        <div className="custom-select">
+        <div className="language-select">
           <div
-            className="flex items-center justify-between selected"
+            className="flex items-center justify-between language-select__selected"
             onClick={toggleMenu}
           >
             <span>{selected}</span>
@@ -366,7 +367,7 @@ export default function HeaderPage() {
             />
           </div>
           {isOpen && (
-            <ul className="options">
+            <ul className="language-select__options">
               <li onClick={() => selectOption("English")}>English</li>
               <li onClick={() => selectOption("Vietnamese")}>Vietnamese</li>
             </ul>

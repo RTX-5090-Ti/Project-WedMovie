@@ -5,6 +5,8 @@ import "./LoginPage.css";
 import { movie } from "../../data/dataMovie";
 import LogoAndLanguage from "../../components/LogoAndLanguage/LogoAndLanguage";
 import { useAuth } from "../../auth/useAuth";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 export function LoginPage() {
   const navigate = useNavigate();
@@ -25,6 +27,15 @@ export function LoginPage() {
   const [pw, setPw] = useState("");
   const [err, setErr] = useState("");
   const [name, setName] = useState("");
+  const [backgroundVideo] = useState(() => getRandomItem(movie));
+  const [toastOpen, setToastOpen] = useState(false);
+  const [toastKey, setToastKey] = useState(0);
+
+  function handleForgotPassword(event) {
+    event.preventDefault();
+    setToastKey((value) => value + 1);
+    setToastOpen(true);
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -54,7 +65,7 @@ export function LoginPage() {
       {notice && <p role="status" className="fixed top-0 z-50 p-3 text-white bg-black">{notice}</p>}
       <LogoAndLanguage></LogoAndLanguage>
       <video className="video" autoPlay loop muted>
-        <source src={getRandomItem(movie)} type="video/mp4" />
+        <source src={backgroundVideo} type="video/mp4" />
         Trình duyệt của bạn không hỗ trợ video.
       </video>
       <div className="overlay"></div>
@@ -86,7 +97,7 @@ export function LoginPage() {
                 <input type="checkbox" id="remember" />
                 <p>Remember me</p>
               </label>
-              <a href="#">Forgot password?</a>
+              <a href="#" onClick={handleForgotPassword}>Forgot password?</a>
             </div>
             <button type="submit" disabled={busy}>Log In</button>
             {err && (
@@ -170,6 +181,31 @@ export function LoginPage() {
           </form>
         </div>
       )}
+      <Snackbar
+        key={toastKey}
+        open={toastOpen}
+        autoHideDuration={5000}
+        onClose={(_, reason) => {
+          if (reason !== "clickaway") setToastOpen(false);
+        }}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          severity="info"
+          variant="filled"
+          onClose={() => setToastOpen(false)}
+          sx={{
+            bgcolor: "rgba(17,24,39,0.9)",
+            color: "#fff",
+            border: "1px solid rgba(255,255,255,0.1)",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+            backdropFilter: "blur(6px)",
+            "& .MuiAlert-icon": { color: "#facc15" },
+          }}
+        >
+          Tính năng này đang phát triển
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

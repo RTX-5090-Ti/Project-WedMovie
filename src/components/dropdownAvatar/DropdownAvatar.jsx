@@ -1,10 +1,23 @@
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "../../auth/useAuth";
 import { useNavigate } from "react-router-dom";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 
 export default function UserMenu({ user }) {
   const [open, setOpen] = useState(false);
+  const [toastOpen, setToastOpen] = useState(false);
+  const [toastKey, setToastKey] = useState(0);
+
+  const showDevelopmentToast = () => {
+    setOpen(false);
+    setToastKey((value) => value + 1);
+    setToastOpen(true);
+  };
+  const closeToast = (_, reason) => {
+    if (reason !== "clickaway") setToastOpen(false);
+  };
 
   const ref = useRef(null);
   const { logout, role, user: currentUser } = useAuth();
@@ -51,8 +64,8 @@ export default function UserMenu({ user }) {
             text="Yêu thích"
             onClick={() => { setOpen(false); navigate("/all-movies?type=favorites"); }}
           />
-          <DropdownItem icon="➕" text="Danh sách" />
-          <DropdownItem icon="🔁" text="Xem tiếp" />
+          <DropdownItem icon="➕" text="Danh sách" onClick={showDevelopmentToast} />
+          <DropdownItem icon="🔁" text="Xem tiếp" onClick={showDevelopmentToast} />
 
           <DropdownItem
             icon="👤"
@@ -91,6 +104,29 @@ export default function UserMenu({ user }) {
           />
         </div>
       )}
+      <Snackbar
+        key={toastKey}
+        open={toastOpen}
+        autoHideDuration={5000}
+        onClose={closeToast}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          severity="info"
+          variant="filled"
+          onClose={() => setToastOpen(false)}
+          sx={{
+            bgcolor: "rgba(17,24,39,0.9)",
+            color: "#fff",
+            border: "1px solid rgba(255,255,255,0.1)",
+            boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
+            backdropFilter: "blur(6px)",
+            "& .MuiAlert-icon": { color: "#facc15" },
+          }}
+        >
+          Tính năng này đang phát triển
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

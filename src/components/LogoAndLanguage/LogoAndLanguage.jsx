@@ -1,3 +1,4 @@
+import "../LanguageSelect/LanguageSelect.css";
 import "./LogoAndLanguage.css";
 import { useState } from "react";
 
@@ -14,9 +15,9 @@ export default function LogoAndLanguage() {
   return (
     <div className="head">
       <img src="/images/logo/Logo.png" alt="" />
-      <div className="custom-select">
+      <div className="language-select">
         <div
-          className="flex items-center justify-between selected"
+          className="flex items-center justify-between language-select__selected"
           onClick={toggleMenu}
         >
           <span>{selected}</span>
@@ -28,7 +29,7 @@ export default function LogoAndLanguage() {
         </div>
 
         {isOpen && (
-          <ul className="options">
+          <ul className="language-select__options">
             <li onClick={() => selectOption("English")}>English</li>
             <li onClick={() => selectOption("Vietnamese")}>Vietnamese</li>
           </ul>
