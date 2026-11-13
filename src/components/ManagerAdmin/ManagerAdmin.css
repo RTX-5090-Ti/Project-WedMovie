@@ -1,0 +1,55 @@
+.admin-page { min-width: 0; max-width: 1600px; margin-left: auto; margin-right: auto; }
+.admin-page button, .admin-dialog button { min-height: 44px; }
+.admin-page button:focus-visible, .admin-dialog button:focus-visible { outline: 2px solid #f0d25b; outline-offset: 3px; }
+.admin-page button:disabled, .admin-dialog button:disabled { opacity: .5; cursor: not-allowed; }
+.admin-section-heading { gap: 12px; flex-wrap: wrap; }
+.admin-section-heading h2 { margin-bottom: 0; }
+.admin-users-width { width: 100%; max-width: 800px; }
+.admin-movie-card { min-width: 0; gap: 8px; }
+.admin-movie-edit { flex: 1; min-width: 0; cursor: pointer; }
+.admin-movie-edit > img { flex-shrink: 0; }
+.admin-movie-edit > div { min-width: 0; overflow-wrap: anywhere; }
+.admin-movie-edit span { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+.admin-delete { display: inline-flex; align-items: center; justify-content: center; width: 44px; flex-shrink: 0; border-radius: 8px; cursor: pointer; }
+.admin-delete:hover { background: #ffffff10; }
+.admin-user-row { gap: 12px; }
+.admin-user-row > span { min-width: 0; overflow-wrap: anywhere; }
+.admin-pagination { flex-wrap: wrap; }
+.admin-page [role="alert"], .admin-dialog p { overflow-wrap: anywhere; }
+.admin-dialog .MuiDialog-paper { color: white; background: #1c1f29; border-radius: 16px; }
+.admin-dialog-content { min-width: 0; max-width: none; }
+.admin-dialog-content .grid > div { min-width: 0; }
+.admin-dialog input:not([type="checkbox"]), .admin-dialog textarea { min-width: 0; width: 100%; min-height: 44px; }
+.admin-dialog textarea { resize: vertical; }
+.admin-dialog input[type="checkbox"] { flex-shrink: 0; }
+.admin-dialog label:has(input[type="checkbox"]), .admin-dialog label[for="isSeries"], .admin-dialog label[for="featured"] { display: flex; align-items: center; min-height: 44px; }
+.admin-dialog .flex.items-center { flex-wrap: wrap; }
+.admin-dialog-actions { flex-wrap: wrap; }
+
+@media (max-width: 767px) {
+  .admin-page { margin-top: 80px; padding: 20px 16px 32px; }
+  .admin-page h1 { font-size: 24px; margin-bottom: 12px; }
+  .admin-tabs { gap: 10px; }
+  .admin-tabs button { padding: 10px 8px; font-size: 13px; transform: none; }
+  .admin-section-heading h2 { font-size: 20px; }
+  .admin-section-heading > button { padding: 10px 14px; font-size: 13px; }
+  .admin-movie-grid { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .admin-movie-card { padding: 10px; }
+  .admin-movie-edit { gap: 12px; }
+  .admin-movie-edit > img { width: 52px; height: 76px; }
+  .admin-movie-edit span:first-child { font-size: 14px; }
+  .admin-user-row { padding: 8px 10px; font-size: 13px; }
+  .admin-pagination { gap: 8px; font-size: 12px; }
+  .admin-dialog .MuiDialog-paper { margin: 12px; width: calc(100% - 24px); max-height: calc(100dvh - 24px); }
+  .admin-dialog-content { padding: 20px 16px; }
+  .admin-dialog h3 { font-size: 18px; }
+  .admin-dialog input:not([type="checkbox"]), .admin-dialog textarea { font-size: 16px; }
+  .admin-dialog .grid { grid-template-columns: minmax(0, 1fr); }
+  .admin-dialog .col-span-2 { grid-column: auto; }
+  .admin-dialog-actions button { flex: 1; }
+}
+
+@media (max-height: 500px) {
+  .admin-dialog .MuiDialog-container { align-items: flex-start; }
+  .admin-dialog .MuiDialog-paper { margin-top: 12px; margin-bottom: 12px; max-height: calc(100dvh - 24px); }
+}

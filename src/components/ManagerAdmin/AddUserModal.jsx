@@ -1,3 +1,4 @@
+import Dialog from "@mui/material/Dialog";
 // Bôx thheem tài khoản
 
 export default function AddUserModal({
@@ -16,14 +17,14 @@ export default function AddUserModal({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="w-full max-w-md rounded-2xl border border-white/10 bg-[#1c1f29] p-6 shadow-xl">
-        <h3 className="mb-4 text-xl font-semibold">Tạo tài khoản mới</h3>
+    <Dialog open={open} onClose={() => { if (!busy) onClose(); }} fullWidth maxWidth="xs" className="admin-dialog" aria-labelledby="add-user-title">
+      <div className="admin-dialog-content w-full max-w-md rounded-2xl border border-white/10 bg-[#1c1f29] p-6 shadow-xl">
+        <h3 id="add-user-title" className="mb-4 text-xl font-semibold">Tạo tài khoản mới</h3>
 
         <div className="space-y-3">
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Tên hiển thị</label>
-            <input
+            <label htmlFor="add-user-newName" className="text-sm text-white/70">Tên hiển thị</label>
+            <input id="add-user-newName"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               placeholder="Nhập tên"
@@ -33,8 +34,8 @@ export default function AddUserModal({
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Email</label>
-            <input
+            <label htmlFor="add-user-newEmail" className="text-sm text-white/70">Email</label>
+            <input id="add-user-newEmail"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="email"
               placeholder="Nhập email"
@@ -49,7 +50,7 @@ export default function AddUserModal({
 
           {error && <p className="text-sm text-red-400">{error}</p>}
 
-          <div className="flex justify-end gap-3 pt-2 mt-4">
+          <div className="admin-dialog-actions flex justify-end gap-3 pt-2 mt-4">
             <button type="button" disabled={busy}
             onClick={onClose}
               className="px-4 py-2 text-sm border cursor-pointer rounded-xl border-white/30 hover:bg-white/10"
@@ -65,6 +66,6 @@ export default function AddUserModal({
           </div>
         </div>
       </div>
-    </div>
+    </Dialog>
   );
 }

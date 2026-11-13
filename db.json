@@ -2592,8 +2592,8 @@
       "password": "123",
       "name": "Admin",
       "role": "admin",
-      "avatar": "/images/test/avatar-small.webp",
-      "gender": "unknown"
+      "avatar": "/images/avatarUser/28.jpg",
+      "gender": "male"
     },
     {
       "id": "4173e07f-90b6-4f8b-87c6-bfb6c9ef3de5",
@@ -2614,7 +2614,23 @@
       "gender": "unknown"
     }
   ],
-  "favorites": [],
+  "favorites": [
+    {
+      "id": "admin:61",
+      "userId": "admin",
+      "movieId": "61",
+      "movie": {
+        "id": "61",
+        "title": {
+          "vi": "Quái Thú Vô Hình: Vùng Đất Chết Chóc",
+          "en": "Predator: Badlands"
+        },
+        "poster": "/images/data-json-imgs/predator-badlands/SMALLPOSTER.jpeg",
+        "backdrop": "/images/data-json-imgs/predator-badlands/BACKDROP.webp"
+      },
+      "updatedAt": 1794551213154
+    }
+  ],
   "history": [
     {
       "id": "4173e07f-90b6-4f8b-87c6-bfb6c9ef3de5:60",
@@ -2660,6 +2676,21 @@
         "backdrop": "/images/data-json-imgs/eclipse-of-lllusion/BACKDROP.jpg"
       },
       "updatedAt": 1794315043023
+    },
+    {
+      "id": "admin:40",
+      "userId": "admin",
+      "movieId": "40",
+      "movie": {
+        "id": "40",
+        "title": {
+          "vi": "Thần Đèn ơi, Ước Đi",
+          "en": "Genie, Make a Wish"
+        },
+        "poster": "/images/data-json-imgs/genie-make-wish/SMALLPOSTER.jpg",
+        "backdrop": "/images/data-json-imgs/genie-make-wish/BACKDROP.jpg"
+      },
+      "updatedAt": 1794550212460
     }
   ]
 }

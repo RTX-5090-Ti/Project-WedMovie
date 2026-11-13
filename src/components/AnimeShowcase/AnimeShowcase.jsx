@@ -17,11 +17,11 @@ export default function AnimeShowcase({
 }) {
   return (
     <section className="w-full ">
-      <div className="flex gap-5">
-        <h2 className="mb-4 text-3xl font-bold">Kho Tàng Anime Mới Nhất</h2>
+      <div className="flex items-center gap-5 mb-4">
+        <h2 className="text-3xl font-bold">Kho Tàng Anime Mới Nhất</h2>
         <ButtonHover onClick={onClickButton} />
       </div>
-      <div className="relative rounded-3xl bg-[#1b1e24] ring-1 ring-white/5">
+      <div className="anime-hero relative overflow-hidden rounded-3xl bg-[#1b1e24] ring-1 ring-white/5">
         {/* Background ảnh bên phải */}
         <AnimatePresence mode="wait">
           <Motion.img
@@ -52,7 +52,7 @@ export default function AnimeShowcase({
         />
 
         {/* Content trái */}
-        <div className="relative z-10 px-6 lg:px-10 py-10 lg:py-14 max-w-[760px]">
+        <div className="anime-copy relative z-10 px-6 lg:px-10 py-10 lg:py-14 max-w-[760px]">
           <AnimatePresence mode="wait">
             <Motion.h3
               onClick={onTitleClick}
@@ -109,7 +109,7 @@ export default function AnimeShowcase({
           <AnimatePresence mode="wait">
             <Motion.p
               key={data.desc}
-              className="mb-8 leading-relaxed text-white/80"
+              className="anime-description mb-8 leading-relaxed text-white/80"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -136,15 +136,15 @@ export default function AnimeShowcase({
         </div>
 
         {/* Thumbnails dưới (giữ layout cũ, thêm click + active highlight) */}
-        <div className="relative z-10 px-4 pb-6 lg:px-8">
-          <div className="absolute left-0 right-0 flex justify-center px-2 -bottom-10">
+        <div className="anime-thumbnails relative z-10 px-4 pb-6 lg:px-8">
+          <div className="flex min-w-0 justify-center px-2">
             <Swiper
               modules={[FreeMode]}
               freeMode
               grabCursor
               spaceBetween={14}
               slidesPerView={"auto"}
-              className="!overflow-visible"
+              className="w-full !py-2"
             >
               {thumbs.map((t) => (
                 <SwiperSlide key={t.id} style={{ width: 82 }}>
@@ -168,7 +168,7 @@ export default function AnimeShowcase({
               ))}
             </Swiper>
           </div>
-          <div className="h-12" />
+
         </div>
       </div>
     </section>

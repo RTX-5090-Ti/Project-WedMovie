@@ -25,30 +25,29 @@ export default function MovieManagerSection({
 
   return (
     <div className="mt-8">
-      <div className="flex items-center justify-between mb-3">
+      <div className="admin-section-heading flex items-center justify-between mb-3">
         <h2 className="mb-3 text-2xl font-semibold">Quản lý phim 🎬</h2>
-        <span
+        <button type="button"
           onClick={onOpenAddMovie}
           className="px-6 py-3 font-semibold text-black cursor-pointer rounded-xl bg-yellow-500/80 hover:bg-yellow-400"
         >
           Thêm phim mới
-        </span>
+        </button>
       </div>
 
       {/* Danh sách phim */}
       {currentMovies.length === 0 ? (
         <p className="text-white/70">Không có phim nào.</p>
       ) : (
-        <ul className="grid grid-cols-2 gap-4">
+        <ul className="admin-movie-grid grid grid-cols-2 gap-4">
           {currentMovies.map((m) => (
             <li
               key={m.id}
-              onClick={() => onSelectMovie && onSelectMovie(m)}
-              className="group flex items-center justify-between rounded-lg bg-white/5 px-4 py-3 text-sm 
+              className="admin-movie-card group flex items-center justify-between rounded-lg bg-white/5 px-4 py-3 text-sm
                          transition-all duration-200 hover:bg-white/10 hover:-translate-y-[1px] cursor-pointer"
             >
               {/* Hình smallPoster bên trái */}
-              <div className="flex items-center gap-4">
+              <button type="button" onClick={() => onSelectMovie?.(m)} className="admin-movie-edit flex items-center gap-4 text-left">
                 <img onError={movieImageFallback}
                   src={m.smallPoster || m.poster}
                   alt={m.title?.vi || m.title?.en || "movie"}
@@ -64,23 +63,12 @@ export default function MovieManagerSection({
                     {m.title?.en || "English title"}
                   </span>
                 </div>
-              </div>
+              </button>
 
-              {/* Nút X xoá phim */}
-              <div
-                className="px-2 text-lg font-bold text-red-400 hover:text-red-300"
-                title="Gỡ phim này"
-              >
-                <img onError={movieImageFallback}
-                  onClick={(e) => {
-                    onDeleteMovie(m.id);
-                    e.stopPropagation();
-                  }}
-                  className="w-5 cursor-pointer"
-                  src="/images/logo-header/letter-x_9313433.png"
-                  alt="delete"
-                />
-              </div>
+              <button type="button" className="admin-delete" aria-label={`Gỡ phim ${m.title?.vi || m.title?.en || ""}`}
+                onClick={() => onDeleteMovie(m.id)}>
+                <img src="/images/logo-header/letter-x_9313433.png" alt="" className="w-4" />
+              </button>
             </li>
           ))}
         </ul>
@@ -88,8 +76,8 @@ export default function MovieManagerSection({
 
       {/* Pagination */}
       {movies.length > 0 && (
-        <div className="flex items-center justify-center gap-3 mt-6 text-sm">
-          <div
+        <div className="admin-pagination flex items-center justify-center gap-3 mt-6 text-sm">
+          <button type="button"
             onClick={handlePrev}
             disabled={currentPage === 1}
             className={`rounded-lg border px-3 py-1 ${
@@ -99,7 +87,7 @@ export default function MovieManagerSection({
             }`}
           >
             ← Trước
-          </div>
+        </button>
 
           <div className="flex items-center gap-2">
             <span className="text-white/70">
@@ -111,7 +99,7 @@ export default function MovieManagerSection({
             </span>
           </div>
 
-          <div
+          <button type="button"
             onClick={handleNext}
             disabled={currentPage === totalPages}
             className={`rounded-lg border px-3 py-1 ${
@@ -121,7 +109,7 @@ export default function MovieManagerSection({
             }`}
           >
             Sau →
-          </div>
+        </button>
         </div>
       )}
     </div>

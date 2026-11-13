@@ -35,11 +35,12 @@ export default function UserMenu({ user }) {
   return (
     <div ref={ref} className="relative inline-block text-white">
       {/* Avatar */}
-      <div
+      <button type="button" aria-label="Tuỳ chọn tài khoản" aria-expanded={open}
+        onKeyDown={(event) => { if (event.key === "Escape") setOpen(false); }}
         onClick={() => setOpen((value) => !value)}
-        className="w-[42px] h-[42px] rounded-full overflow-hidden border border-white/20 
-                   bg-transparent p-0 appearance-none transition-transform duration-200 
-                   hover:scale-105 hover:ring-2 hover:ring-yellow-400/60 focus:ring-2 
+        className="w-[42px] h-[42px] rounded-full overflow-hidden border border-white/20
+                   bg-transparent p-0 appearance-none transition-transform duration-200
+                   hover:scale-105 hover:ring-2 hover:ring-yellow-400/60 focus:ring-2
                    focus:ring-yellow-400/60 cursor-pointer"
       >
         <img
@@ -49,12 +50,12 @@ export default function UserMenu({ user }) {
           alt="Avatar"
           className="object-center w-[42px] h-[42px] rounded-full"
         />
-      </div>
+      </button>
 
       {/* Dropdown */}
       {open && (
         <div
-          className="absolute right-0 mt-2 w-48 rounded-xl bg-[rgba(0,0,0,0.1)] shadow-lg py-2 
+          className="avatar-dropdown absolute right-0 mt-2 w-48 rounded-xl bg-[rgba(17,24,39,0.95)] shadow-lg py-2
                      border border-white/10 backdrop-blur-md z-50"
         >
           <DropdownItem icon="" text={user} />
@@ -134,12 +135,12 @@ export default function UserMenu({ user }) {
 // Component cho từng item
 function DropdownItem({ icon, text, onClick }) {
   return (
-    <div
+    <button type="button"
       onClick={onClick}
-      className="flex items-center w-full gap-3 px-4 py-2 text-sm text-left transition-colors duration-200 cursor-pointer hover:text-[#f0d25b]"
+      className="flex items-center w-full min-h-11 gap-3 px-4 py-2 text-sm text-left transition-colors duration-200 cursor-pointer hover:text-[#f0d25b]"
     >
       <span className="text-lg">{icon}</span>
-      <span>{text}</span>
-    </div>
+      <span className="min-w-0 break-words">{text}</span>
+    </button>
   );
 }

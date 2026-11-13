@@ -65,14 +65,14 @@ export default function WatchedRow({ titleName = "Phim Đã Xem" }) {
   const goDetail = (m) => navigate(`/movie/${m.id}`);
 
   return (
-    <section className="px-6 mt-8 md:px-8">
+    <section className="home-section watched-section px-6 mt-8 md:px-8">
       <div className="flex items-center justify-between mb-3">
         <h2 className="text-lg font-extrabold tracking-wide md:text-xl">
           {titleName}
         </h2>
       </div>
 
-      <div className="pb-4 overflow-x-auto">
+      <div className="history-scroll pb-4 overflow-x-auto">
         <div className="inline-flex gap-4">
           {list.map((m) => {
             const vi = getTitleVi(m);
@@ -81,7 +81,7 @@ export default function WatchedRow({ titleName = "Phim Đã Xem" }) {
               <div
                 key={m.id}
                 onClick={() => goDetail(m)}
-                className="relative w-[180px] md:w-[200px] shrink-0 cursor-pointer group"
+                className="history-card relative w-[180px] md:w-[200px] shrink-0 cursor-pointer group"
                 title={vi || en || ""}
               >
                 <img onError={movieImageFallback}
@@ -91,14 +91,14 @@ export default function WatchedRow({ titleName = "Phim Đã Xem" }) {
                   loading="lazy"
                 />
 
-                <div
+                <button type="button" disabled={removing === m.id}
                   onClick={(e) => handleRemove(e, m.id)}
-                  className="absolute flex items-center justify-center w-8 h-8 text-sm font-bold text-white transition-opacity duration-200 border rounded-full opacity-0 top-2 right-2 bg-black/60 border-white/20 group-hover:opacity-100 hover:bg-black/80"
+                  className="history-remove absolute flex items-center justify-center w-8 h-8 text-sm font-bold text-white transition-opacity duration-200 border rounded-full opacity-0 top-2 right-2 bg-black/60 border-white/20 group-hover:opacity-100 hover:bg-black/80"
                   aria-label="Xoá khỏi đã xem"
                   title="Xoá khỏi đã xem"
                 >
                   ×
-                </div>
+                </button>
 
                 {/* VI trên, EN dưới */}
                 <div className="mt-2 ">

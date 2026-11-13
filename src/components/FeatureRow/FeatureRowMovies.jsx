@@ -66,7 +66,7 @@ export default function FeatureRowMovies() {
   if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
 
   return (
-    <div className="bg-[#192026] text-white px-6 py-8 mb-[30px]">
+    <div className="home-section bg-[#192026] text-white px-6 py-8 mb-[30px]">
       <FeatureRow
         title="Mãn Nhãn với Phim Chiếu Rạp"
         items={items}

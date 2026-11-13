@@ -6,14 +6,14 @@ export default function UserManagerSection({
 }) {
   return (
     <div className="mt-8">
-      <div className="mb-3 flex w-[50%] items-center justify-between">
+      <div className="admin-section-heading admin-users-width mb-3 flex items-center justify-between">
         <h2 className="mb-3 text-2xl font-semibold">Danh sách tài khoản</h2>
-        <span
+        <button type="button"
           className="px-6 py-3 font-semibold text-black cursor-pointer rounded-xl bg-yellow-500/80 hover:bg-yellow-400"
           onClick={onOpenAddBox}
         >
           Thêm tài khoản
-        </span>
+        </button>
       </div>
 
       {users.length === 0 ? (
@@ -21,21 +21,17 @@ export default function UserManagerSection({
           Hiện chưa có tài khoản nào (ngoại trừ admin).
         </p>
       ) : (
-        <ul className="space-y-2">
+        <ul className="admin-users-width space-y-2">
           {users.map((u) => (
             <li
               key={u.email}
-              className="flex w-[50%] items-center justify-between rounded-lg bg-white/5 px-4 py-2 text-sm"
+              className="admin-user-row flex items-center justify-between rounded-lg bg-white/5 px-4 py-2 text-sm"
             >
               <span>{u.email}</span>
-              <div>
-                <img
-                  onClick={() => onDeleteUser(u.email)}
-                  className="w-5 cursor-pointer"
-                  src="/images/logo-header/letter-x_9313433.png"
-                  alt="delete"
-                />
-              </div>
+              <button type="button" className="admin-delete" aria-label={`Xoá tài khoản ${u.email}`} onClick={() => onDeleteUser(u.email)}>
+                <img src="/images/logo-header/letter-x_9313433.png" alt="" className="w-4" />
+              </button>
+
             </li>
           ))}
         </ul>

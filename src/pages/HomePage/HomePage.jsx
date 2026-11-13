@@ -8,9 +8,11 @@ import GenreRowMovie from "../../components/MenuMovie/GenreRowMovie.jsx";
 import Footer from "../../components/Footer/FooterMovie";
 import WatchedRow from "../../components/MenuMovie/WatchedRow.jsx";
 
+import "./HomePage.css";
+
 export default function HomePage() {
   return (
-    <>
+    <div className="home-page">
       <HeaderPage />
       <ContentMovie />
       <HomeRowMovie titleName="Phim Điện Ảnh Mối Toanh" />
@@ -21,6 +23,6 @@ export default function HomePage() {
       <GenreRowMovie titleName="Phim Hài Cười Mệt" genre="Hài hước" />
       <GenreRowMovie titleName="Phim Kinh Dị Nổi Da Gà" genre="Kinh dị" />
       <Footer />
-    </>
+    </div>
   );
 }

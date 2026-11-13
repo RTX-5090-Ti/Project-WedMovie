@@ -1,0 +1,39 @@
+.account-page { padding-top: 200px; min-height: 100dvh; }
+.account-layout { position: relative; }
+.account-form { min-width: 0; }
+.account-avatar { flex-shrink: 0; }
+.account-saving { position: absolute; top: 8px; left: 24px; font-size: 14px; }
+.account-form p, .account-dialog-content p { overflow-wrap: anywhere; }
+.account-layout button, .account-dialog-content button { min-height: 44px; }
+.account-layout button:disabled, .account-dialog-content button:disabled { opacity: .6; cursor: wait; }
+.account-layout button:focus-visible, .account-dialog-content button:focus-visible { outline: 2px solid #f0d25b; outline-offset: 3px; }
+.account-gender label { min-height: 44px; }
+.account-gender input { width: 16px; height: 16px; accent-color: #d9aa3d; }
+.account-dialog .MuiDialog-paper { background: #1a1d24; color: white; border: 1px solid #ffffff1a; border-radius: 12px; }
+.account-dialog-content { min-width: 0; }
+.account-dialog-content input { min-width: 0; min-height: 44px; }
+.account-dialog-actions { gap: 12px; flex-wrap: wrap; }
+.avatar-options { justify-items: center; }
+.avatar-options .avatar-option { width: 100%; max-width: 100px; height: auto; aspect-ratio: 1; }
+
+@media (max-width: 767px) {
+  .account-page { padding-top: 88px; }
+  .account-layout { flex-direction: column; gap: 28px; padding: 24px 16px 40px; }
+  .account-avatar { order: -1; width: 100%; gap: 12px; }
+  .account-avatar-image { width: 100px; height: 100px; }
+  .account-form h1 { font-size: 22px; }
+  .account-form > p:first-of-type { margin-bottom: 24px; }
+  .account-form input:not([type="radio"]), .account-dialog-content input { font-size: 16px; }
+  .account-form > button { width: 100%; }
+  .account-gender { gap: 4px 18px; }
+  .account-saving { top: 0; left: 16px; }
+  .account-dialog .MuiDialog-paper { margin: 12px; width: calc(100% - 24px); max-height: calc(100dvh - 24px); }
+  .account-dialog-content { padding: 24px 16px; }
+  .account-dialog-actions button { flex: 1; font-size: 14px; padding: 10px 12px; }
+  .avatar-options { gap: 12px; }
+}
+
+@media (max-height: 500px) {
+  .account-dialog .MuiDialog-container { align-items: flex-start; }
+  .account-dialog .MuiDialog-paper { margin-top: 12px; margin-bottom: 12px; max-height: calc(100dvh - 24px); }
+}

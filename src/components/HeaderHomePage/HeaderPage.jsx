@@ -3,7 +3,7 @@ import { movieImageFallback } from "../../lib/imageFallback";
 import useMovies from "../../lib/useMovies";
 import MovieLoadStatus from "../loading/MovieLoadStatus";
 import { useState, useRef, useEffect, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./HeaderHomePage.css";
 import UserMenu from "../dropdownAvatar/DropdownAvatar";
 import { useAuth } from "../../auth/useAuth";
@@ -25,6 +25,11 @@ function normalizePoster(src) {
 }
 
 export default function HeaderPage() {
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [mobileSearch, setMobileSearch] = useState(false);
+  const headerRef = useRef(null);
+  const inputRef = useRef(null);
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
   const [selected, setSelected] = useState("English");
   const [openMenu, setOpenMenu] = useState(null);
@@ -39,6 +44,36 @@ export default function HeaderPage() {
   const { data: allMovies, loading, error, retry } = useMovies();
   const searchRef = useRef(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setMobileMenu(false);
+    setMobileSearch(false);
+    setOpenMenu(null);
+    setIsOpen(false);
+    setShowPanel(false);
+  }, [location.key]);
+
+  useEffect(() => {
+    const close = (event) => {
+      if (event.type === "keydown" && event.key !== "Escape") return;
+      if (event.type === "pointerdown" && headerRef.current?.contains(event.target)) return;
+      setMobileMenu(false);
+      setMobileSearch(false);
+      setOpenMenu(null);
+      setIsOpen(false);
+      setShowPanel(false);
+    };
+    document.addEventListener("pointerdown", close);
+    document.addEventListener("keydown", close);
+    return () => {
+      document.removeEventListener("pointerdown", close);
+      document.removeEventListener("keydown", close);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (mobileSearch) inputRef.current?.focus();
+  }, [mobileSearch]);
 
   // Chuẩn hóa tên để so sánh (bỏ dấu + thường hóa)
   const n = (s) => normalizeText(s || "");
@@ -174,18 +209,19 @@ export default function HeaderPage() {
   const goByGenre = (genre) => { navigate(moviesUrl({ genre })); setOpenMenu(null); };
 
   return (
-    <div className="py-[10px] px-[25px] flex items-center justify-between absolute left-0 right-0 top-0 z-50">
+    <header ref={headerRef} className={`site-header ${mobileMenu ? "menu-open" : ""}`}>
       {/* Logo + Search */}
-      <div className="inline-flex items-center gap-3">
+      <div className="header-brand-search">
         <img onError={movieImageFallback}
-          className="transition-transform cursor-pointer hover:scale-105"
+          role="link" tabIndex={0} onKeyDown={(event) => { if (event.key === "Enter") navigate("/home"); }}
+          className="site-logo transition-transform cursor-pointer hover:scale-105"
           src="/images/logo-header/Logo-0.75.png"
           alt="logo"
           onClick={() => navigate("/home")}
         />
 
         {/* Ô tìm kiếm */}
-        <div ref={searchRef} className="relative w-[300px]">
+        <div ref={searchRef} className={`header-search ${mobileSearch ? "is-open" : ""}`}>
           {(loading || error) && (
             <div className="absolute left-0 right-0 top-full z-50">
               <MovieLoadStatus loading={loading} error={error} retry={retry} />
@@ -194,6 +230,11 @@ export default function HeaderPage() {
           <div className="inline-flex items-center w-full gap-3 search">
             <img onError={movieImageFallback} src="/images/logo-header/Icon.png" alt="search" />
             <input
+              ref={inputRef}
+              aria-label="Tìm kiếm phim"
+              onKeyDown={(event) => {
+                if (event.key === "Enter" && query.trim()) navigate(moviesUrl({ q: query.trim() }));
+              }}
               className="w-full border-none outline-none"
               type="text"
               placeholder="Tìm kiếm phim"
@@ -263,39 +304,39 @@ export default function HeaderPage() {
       </div>
 
       {/* Menu giữa */}
-      <div className="flex justify-between gap-6">
-        <span
+      <nav id="header-navigation" aria-label="Điều hướng chính" className="header-navigation">
+        <button type="button"
           onClick={goHot}
           className="hover:text-[#f0d25b] transition-all cursor-pointer"
         >
           Phim hot
-        </span>
-        <span
+        </button>
+        <button type="button"
           onClick={goSingle}
           className="hover:text-[#f0d25b] transition-all cursor-pointer"
         >
           Phim lẻ
-        </span>
-        <span
+        </button>
+        <button type="button"
           onClick={goSeries}
           className="hover:text-[#f0d25b] transition-all cursor-pointer"
         >
           Phim bộ
-        </span>
+        </button>
 
         {/* Quốc gia */}
         <div
           ref={countryRef}
           className="inline-flex items-center gap-[5px] relative"
         >
-          <span
-            className="cursor-pointer"
+          <button type="button"
+            className="header-filter-control cursor-pointer"
             onClick={() =>
               setOpenMenu(openMenu === "country" ? null : "country")
             }
           >
             Quốc gia
-          </span>
+          </button>
           <img onError={movieImageFallback}
             onClick={() =>
               setOpenMenu(openMenu === "country" ? null : "country")
@@ -307,13 +348,13 @@ export default function HeaderPage() {
           {openMenu === "country" && (
             <div className="absolute top-[30px] right-0 bg-[rgba(0,0,0,0.7)] w-[380px] grid grid-cols-3 gap-[10px] p-3 text-center rounded-[8px]">
               {countries.map((country, i) => (
-                <span
+                <button type="button"
                   onClick={() => goByCountry(country)}
                   key={i}
                   className="hover:text-[#f0d25b] transition-all cursor-pointer"
                 >
                   {country}
-                </span>
+                </button>
               ))}
             </div>
           )}
@@ -324,12 +365,12 @@ export default function HeaderPage() {
           ref={genreRef}
           className="inline-flex items-center gap-[5px] relative"
         >
-          <span
-            className="cursor-pointer"
+          <button type="button"
+            className="header-filter-control cursor-pointer"
             onClick={() => setOpenMenu(openMenu === "genre" ? null : "genre")}
           >
             Thể loại
-          </span>
+          </button>
           <img onError={movieImageFallback}
             onClick={() => setOpenMenu(openMenu === "genre" ? null : "genre")}
             className="w-[12px] cursor-pointer"
@@ -339,23 +380,19 @@ export default function HeaderPage() {
           {openMenu === "genre" && (
             <div className="absolute top-[30px] right-0 bg-[rgba(0,0,0,0.7)] w-[380px] grid grid-cols-3 gap-[10px] p-3 text-center rounded-[8px]">
               {genres.map((g, i) => (
-                <span
+                <button type="button"
                   onClick={() => goByGenre(g)}
                   key={i}
                   className="hover:text-[#f0d25b] transition-all cursor-pointer"
                 >
                   {g}
-                </span>
+                </button>
               ))}
             </div>
           )}
         </div>
-      </div>
-
-      {/* Language + Avatar */}
-      <div className="inline-flex items-center gap-3">
         <div className="language-select">
-          <div
+          <button type="button" aria-expanded={isOpen}
             className="flex items-center justify-between language-select__selected"
             onClick={toggleMenu}
           >
@@ -365,27 +402,40 @@ export default function HeaderPage() {
               src="/images/logo-header/flight_4919659.png"
               alt="world"
             />
-          </div>
+          </button>
           {isOpen && (
             <ul className="language-select__options">
-              <li onClick={() => selectOption("English")}>English</li>
-              <li onClick={() => selectOption("Vietnamese")}>Vietnamese</li>
+              <li><button type="button" onClick={() => selectOption("English")}>English</button></li>
+              <li><button type="button" onClick={() => selectOption("Vietnamese")}>Vietnamese</button></li>
             </ul>
           )}
         </div>
         
 
+      </nav>
+
+      {/* Language + Avatar */}
+      <div className="header-actions">
+        <button type="button" className="header-mobile-button" aria-label="Tìm kiếm" aria-expanded={mobileSearch}
+          onClick={() => { setMobileSearch(!mobileSearch); setMobileMenu(false); }}>
+          {mobileSearch ? "✕" : <img src="/images/logo-header/Icon.png" alt="" />}
+        </button>
         {isGuest || !user ? (
-          <div
+          <button type="button"
             onClick={() => navigate("/login")}
             className="px-4 py-3 text-sm font-medium text-white transition border rounded-full cursor-pointer border-white/10 hover:bg-white/10"
           >
             Đăng nhập
-          </div>
+          </button>
         ) : (
           <UserMenu user={user.name} />
         )}
+        <button type="button" className="header-mobile-button" aria-label={mobileMenu ? "Đóng menu" : "Mở menu"}
+          aria-expanded={mobileMenu} aria-controls="header-navigation"
+          onClick={() => { setMobileMenu(!mobileMenu); setMobileSearch(false); }}>
+          {mobileMenu ? "✕" : "☰"}
+        </button>
       </div>
-    </div>
+    </header>
   );
 }

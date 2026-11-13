@@ -7,18 +7,19 @@ import "swiper/css/free-mode";
 
 export default function Top10Row({ title, items = [], onMovieClick }) {
   return (
-    <section className="w-full ">
+    <section className="top10-row w-full">
       <h2 className="mb-5 text-3xl font-bold">{title}</h2>
 
       <Swiper
         modules={[FreeMode]}
         freeMode
         // grabCursor
-        spaceBetween={24}
-        slidesPerView={"6"}
+        spaceBetween={12}
+        slidesPerView={2.5}
+        breakpoints={{ 480: { slidesPerView: 3.2 }, 768: { slidesPerView: 3.5, spaceBetween: 24 }, 1024: { slidesPerView: 4.5 }, 1440: { slidesPerView: 6 } }}
       >
         {items.map((m, idx) => (
-          <SwiperSlide key={m.id} style={{ width: 300 }}>
+          <SwiperSlide key={m.id}>
             <article className="group">
               {/* Poster */}
               <div
@@ -46,7 +47,7 @@ export default function Top10Row({ title, items = [], onMovieClick }) {
               </div>
 
               {/* Hàng thông tin + số thứ hạng to ở bên trái */}
-              <div className="mt-4 grid grid-cols-[40px_1fr] gap-4 items-start">
+              <div className="mt-4 grid grid-cols-[auto_minmax(0,1fr)] gap-4 items-start">
                 <div className="overflow-hidden text-5xl font-black leading-none text-yellow-600/90">
                   {idx + 1}
                 </div>

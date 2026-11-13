@@ -20,14 +20,14 @@ export default function ManagerTabs({ activeTab, onChange }) {
   }`;
 
   return (
-    <div className="grid grid-cols-2 gap-6">
-      <div className={moviesClass} onClick={() => onChange("movies")}>
+    <div className="admin-tabs grid grid-cols-2 gap-6">
+      <button type="button" aria-pressed={moviesActive} className={moviesClass} onClick={() => onChange("movies")}>
         Quản lý phim 🎬
-      </div>
+      </button>
 
-      <div className={usersClass} onClick={() => onChange("users")}>
+      <button type="button" aria-pressed={usersActive} className={usersClass} onClick={() => onChange("users")}>
         Quản lý người dùng 👤
-      </div>
+      </button>
     </div>
   );
 }

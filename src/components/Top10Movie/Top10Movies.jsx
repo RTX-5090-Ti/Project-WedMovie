@@ -43,7 +43,7 @@ export default function Top10Movies() {
   if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
 
   return (
-    <div className="bg-[#192026] text-white w-full max-w-[100vw] overflow-x-hidden px-6 py-10 mb-[30px]">
+    <div className="home-section bg-[#192026] text-white w-full max-w-[100vw] overflow-x-hidden px-6 py-10 mb-[30px]">
       <Top10Row
         title="Top 10 Phim Hot Hôm Nay"
         items={items}

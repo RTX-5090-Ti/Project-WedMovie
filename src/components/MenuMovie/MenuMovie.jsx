@@ -14,11 +14,12 @@ export default function MenuMovie({ movies = [], onMovieClick }) {
         modules={[FreeMode]}
         freeMode={true}
         grabCursor={false}
-        spaceBetween={18}
-        slidesPerView={"7"} // auto theo độ rộng card
+        spaceBetween={10}
+        slidesPerView={3.1}
+        breakpoints={{ 480: { slidesPerView: 4.1, spaceBetween: 12 }, 768: { slidesPerView: 4.3, spaceBetween: 18 }, 1024: { slidesPerView: 5.3 }, 1440: { slidesPerView: 7 } }}
       >
         {movies.map((m) => (
-          <SwiperSlide key={m.id} style={{ width: 210 }}>
+          <SwiperSlide key={m.id}>
             <article className="group">
               {/* Poster */}
               <div

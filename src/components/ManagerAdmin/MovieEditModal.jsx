@@ -1,3 +1,4 @@
+import Dialog from "@mui/material/Dialog";
 export default function MovieEditModal({
   open,
   busy = false,
@@ -17,15 +18,15 @@ export default function MovieEditModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="w-full max-w-2xl rounded-2xl border border-white/10 bg-[#1c1f29] p-6 shadow-xl">
-        <h3 className="mb-4 text-xl font-semibold">Cập nhật thông tin phim</h3>
+    <Dialog open={open} onClose={() => { if (!busy) onClose(); }} fullWidth maxWidth="sm" className="admin-dialog" aria-labelledby="edit-movie-title">
+      <div className="admin-dialog-content w-full max-w-2xl rounded-2xl border border-white/10 bg-[#1c1f29] p-6 shadow-xl">
+        <h3 id="edit-movie-title" className="mb-4 text-xl font-semibold">Cập nhật thông tin phim</h3>
 
         <div className="grid grid-cols-2 gap-4">
           {/* Title VI */}
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Tiêu đề tiếng Việt</label>
-            <input
+            <label htmlFor="edit-movie-titleVi" className="text-sm text-white/70">Tiêu đề tiếng Việt</label>
+            <input id="edit-movie-titleVi"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               placeholder="Nhập tiêu đề tiếng Việt"
@@ -36,8 +37,8 @@ export default function MovieEditModal({
 
           {/* Title EN */}
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Tiêu đề tiếng Anh</label>
-            <input
+            <label htmlFor="edit-movie-titleEn" className="text-sm text-white/70">Tiêu đề tiếng Anh</label>
+            <input id="edit-movie-titleEn"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               placeholder="Nhập tiêu đề tiếng Anh"
@@ -78,8 +79,8 @@ export default function MovieEditModal({
 
         {/* Description VI */}
         <div className="flex flex-col gap-1 mt-4">
-          <label className="text-sm text-white/70">Mô tả tiếng Việt</label>
-          <textarea
+          <label htmlFor="edit-movie-descVi" className="text-sm text-white/70">Mô tả tiếng Việt</label>
+          <textarea id="edit-movie-descVi"
             className="w-full px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400 min-h-[80px]"
             placeholder="Nhập mô tả tiếng Việt"
             value={form.descVi}
@@ -89,8 +90,8 @@ export default function MovieEditModal({
 
         {/* Description EN */}
         <div className="flex flex-col gap-1 mt-3">
-          <label className="text-sm text-white/70">Mô tả tiếng Anh</label>
-          <textarea
+          <label htmlFor="edit-movie-descEn" className="text-sm text-white/70">Mô tả tiếng Anh</label>
+          <textarea id="edit-movie-descEn"
             className="w-full px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400 min-h-[80px]"
             placeholder="Nhập mô tả tiếng Anh"
             value={form.descEn}
@@ -100,7 +101,7 @@ export default function MovieEditModal({
 
         {error && <p role="alert" className="mt-3 text-red-400">{error}</p>}
         {/* Buttons */}
-        <div className="flex justify-end gap-3 pt-4 mt-4">
+        <div className="admin-dialog-actions flex justify-end gap-3 pt-4 mt-4">
           <button type="button" disabled={busy}
             onClick={onClose}
             className="px-4 py-2 text-sm border cursor-pointer rounded-xl border-white/30 hover:bg-white/10"
@@ -115,6 +116,6 @@ export default function MovieEditModal({
           </button>
         </div>
       </div>
-    </div>
+    </Dialog>
   );
 }

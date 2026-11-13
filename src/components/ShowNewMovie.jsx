@@ -42,19 +42,26 @@ export default function ShowNewMovie({
   );
 
   return (
-    <Box sx={{ bgcolor: "#192026", py: 3, mt: "150px" }}>
-      <Container maxWidth="xl">
-        <Box className="flex items-center justify-between mb-2">
-          <h2 className="text-2xl font-bold text-white">{title}</h2>
-          <p className="text-sm text-white/60">▼ Bộ lọc</p>
+    <Box component="main" sx={{ bgcolor: "#192026", py: { xs: 2, sm: 3 }, mt: { xs: "80px", sm: "96px", lg: "150px" }, minWidth: 0 }}>
+      <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3 } }}>
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 1.5, mb: { xs: 2, sm: 3 } }}>
+          <Typography component="h1" sx={{ fontSize: { xs: 20, sm: 24 }, fontWeight: 700, color: "white", minWidth: 0, overflowWrap: "anywhere" }}>{title}</Typography>
+          <Typography sx={{ fontSize: { xs: 12, sm: 14 }, color: "rgba(255,255,255,.6)", flexShrink: 0 }}>▼ Bộ lọc</Typography>
         </Box>
 
-        {/* 8 phim mỗi hàng, dư tự xuống dòng */}
-        <div
-          style={{
+        {/* Giữ poster đủ rõ trên điện thoại, tăng số cột theo màn hình. */}
+        <Box
+          sx={{
             display: "grid",
-            gridTemplateColumns: "repeat(8, minmax(0,1fr))",
-            gap: "16px",
+            gridTemplateColumns: {
+              xs: "repeat(3, minmax(0, 1fr))",
+              sm: "repeat(4, minmax(0, 1fr))",
+              md: "repeat(5, minmax(0, 1fr))",
+              lg: "repeat(6, minmax(0, 1fr))",
+              xl: "repeat(8, minmax(0, 1fr))",
+            },
+            columnGap: { xs: "10px", sm: "16px" },
+            rowGap: { xs: "20px", sm: "28px" },
           }}
         >
           {list.map((m, idx) => (
@@ -63,13 +70,16 @@ export default function ShowNewMovie({
               elevation={0}
               sx={{
                 bgcolor: "transparent",
-                borderRadius: 3,
+                borderRadius: { xs: 1.5, sm: 3 },
+                minWidth: 0,
                 textAlign: "center",
               }}
             >
               <CardActionArea
+                onClick={() => onTitleClick?.(m.id)}
+                aria-label={getTitleVi(m)}
                 sx={{
-                  borderRadius: 3,
+                  borderRadius: { xs: 1.5, sm: 3 },
                   overflow: "hidden",
                   position: "relative",
                   ":hover img": { transform: "scale(1.05)" },
@@ -77,16 +87,16 @@ export default function ShowNewMovie({
               >
                 <CardMedia
                   onError={movieImageFallback}
-                  onClick={() => onTitleClick?.(m.id)}
                   component="img"
                   image={m.poster}
                   alt={getTitleVi(m)}
+                  loading="lazy"
                   sx={{
                     width: "100%",
                     aspectRatio: "2 / 3",
                     objectFit: "cover",
                     transition: "transform .3s ease",
-                    borderRadius: 3,
+                    borderRadius: { xs: 1.5, sm: 3 },
                     border: "1px solid rgba(255,255,255,0.07)",
                     backgroundColor: "#20262b",
                   }}
@@ -94,12 +104,15 @@ export default function ShowNewMovie({
                 {/* badges */}
                 <Stack
                   direction="row"
-                  spacing={1}
+                  spacing={0.5}
+                  useFlexGap
+                  flexWrap="wrap"
                   sx={{
                     position: "absolute",
-                    left: "50%",
-                    bottom: 10,
-                    transform: "translateX(-50%)",
+                    left: 4,
+                    right: 4,
+                    bottom: { xs: 6, sm: 10 },
+                    justifyContent: "center",
                   }}
                 >
                   {m.badges.map((b, i) => (
@@ -114,6 +127,10 @@ export default function ShowNewMovie({
                             : "rgba(0,0,0,.6)",
                         color: "#fff",
                         fontWeight: 700,
+                        fontSize: { xs: 9, sm: 12 },
+                        height: { xs: 18, sm: 24 },
+                        maxWidth: "100%",
+                        "& .MuiChip-label": { px: { xs: 0.5, sm: 1 } },
                         borderRadius: 1.2,
                         backdropFilter: "blur(6px)",
                       }}
@@ -123,7 +140,7 @@ export default function ShowNewMovie({
                 </Stack>
               </CardActionArea>
 
-              <div style={{ marginTop: 10 }}>
+              <Box sx={{ mt: { xs: 0.75, sm: 1.25 }, "& h3": { fontSize: { xs: 12, sm: 16 } }, "& p": { fontSize: { xs: 10, sm: 14 } } }}>
                 <h3
                   onClick={() => onTitleClick?.(m.id)}
                   className="font-bold text-white whitespace-nowrap overflow-hidden text-ellipsis hover:text-[#f0d25b] cursor-pointer"
@@ -137,10 +154,10 @@ export default function ShowNewMovie({
                 >
                   {getTitleEn(m)}
                 </p>
-              </div>
+              </Box>
             </Card>
           ))}
-        </div>
+        </Box>
       </Container>
     </Box>
   );

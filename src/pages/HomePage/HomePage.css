@@ -1,0 +1,76 @@
+.home-page { width: 100%; min-width: 0; }
+.home-page .home-section { min-width: 0; }
+.home-page .home-section h2 { overflow-wrap: anywhere; }
+.home-page .home-section .more-button { flex-shrink: 0; }
+.home-page .hero-copy > div:first-child { max-width: 900px; }
+.home-page .hero-copy h1 { overflow-wrap: anywhere; }
+.home-page .hero-copy > div:nth-child(2) { flex-wrap: wrap; }
+.home-page .hero-description { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+.home-page .hero-thumbnails { flex-shrink: 0; }
+.home-page .history-scroll { overscroll-behavior-x: contain; scroll-snap-type: x proximity; }
+.home-page .history-card { scroll-snap-align: start; }
+.home-page .history-remove:focus-visible { opacity: 1; }
+.home-page .history-remove { width: 24px; height: 24px; font-size: 12px; top: 6px; right: 6px; }
+.home-page .site-footer a { display: inline-flex; align-items: center; min-height: 44px; }
+
+@media (max-width: 1023px) {
+  .home-page .home-section { padding: 24px 20px; margin-bottom: 8px; }
+  .home-page .home-section h2 { font-size: 24px; }
+  .home-page .home-hero { height: 650px; }
+  .home-page .hero-actions { flex-wrap: wrap; }
+  .home-page .hero-thumbnails { margin-left: 0; gap: 10px; }
+  .home-page .hero-thumbnails button { width: 64px; height: 40px; }
+}
+
+@media (max-width: 639px) {
+  .home-page .home-section { padding: 20px 16px; margin-top: 0; margin-bottom: 0; }
+  .home-page .home-section h2 { font-size: 20px; line-height: 1.4; }
+  .home-page .home-section h3 { font-size: 13px; }
+  .home-page .home-section article > p { font-size: 11px; }
+  .home-page .home-section article .absolute.flex { gap: 4px; }
+  .home-page .home-section article .absolute.flex > span { padding: 3px 5px; font-size: 10px; white-space: nowrap; }
+  .home-page .top10-row article > .grid { gap: 6px; margin-top: 10px; }
+  .home-page .top10-row article > .grid > div:first-child { font-size: 30px; }
+  .home-page .top10-row article > .grid p,
+  .home-page .top10-row article > .grid .text-sm { font-size: 11px; }
+  .home-page .home-section .more-button { width: 30px; height: 30px; align-self: center; }
+  .home-page .home-section .more-button:hover { width: 30px; }
+  .home-page .home-section .more-button span { display: none; }
+  .home-page .home-section .more-button i { font-size: 11px; transform: none; }
+  .home-page .home-hero { height: 600px; height: clamp(540px, 85svh, 680px); margin-bottom: 0; }
+  .home-page .hero-copy { left: 16px; right: 16px; bottom: 28px; }
+  .home-page .hero-copy h1 { font-size: 28px; line-height: 1.2; margin-bottom: 8px; }
+  .home-page .hero-actions { align-items: flex-start; flex-direction: column; gap: 20px; }
+  .home-page .hero-actions > div:first-child,
+  .home-page .anime-copy > div:last-child {
+    min-height: 44px;
+    padding: 8px 14px;
+    gap: 8px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .home-page .hero-actions > div:first-child > img,
+  .home-page .anime-copy > div:last-child > img { width: 24px; height: 24px; }
+  .home-page .hero-thumbnails { width: 100%; justify-content: space-between; padding: 0 3px; }
+  .home-page .hero-thumbnails button { width: calc((100% - 40px) / 5); height: auto; aspect-ratio: 16 / 10; }
+  .home-page .history-card { width: 105px; }
+  .home-page .history-scroll > div { gap: 10px; }
+  .home-page .anime-copy { padding: 28px 18px 20px; }
+  .home-page .anime-copy h3 { font-size: 28px; line-height: 1.2; }
+  .home-page .anime-copy > p { font-size: 14px; }
+  .home-page .anime-description { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; margin-bottom: 20px; }
+  .home-page .anime-hero > img { opacity: .45 !important; }
+  .home-page .site-footer > div { padding: 28px 16px; }
+  .home-page .site-footer nav { gap: 8px 16px; }
+}
+
+@media (hover: none) {
+  .home-page .history-remove { opacity: 1; }
+  .home-page .more-button:hover { width: 44px; }
+  .home-page .more-button span { display: none; }
+  .home-page .more-button i { transform: none; }
+}
+
+@media (max-height: 500px) and (orientation: landscape) {
+  .home-page .home-hero { height: 560px; }
+}

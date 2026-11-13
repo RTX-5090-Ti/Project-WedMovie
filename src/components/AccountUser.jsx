@@ -1,3 +1,4 @@
+import Dialog from "@mui/material/Dialog";
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../auth/useAuth";
 
@@ -66,10 +67,10 @@ export default function AccountUser() {
   };
 
   return (
-    <div className="flex max-w-6xl gap-12 px-6 py-10 mx-auto" aria-busy={busy}>
-      {busy && <p role="status">Đang lưu...</p>}
+    <div className="account-layout flex max-w-6xl gap-12 px-6 py-10 mx-auto" aria-busy={busy}>
+      {busy && <p className="account-saving" role="status">Đang lưu...</p>}
       {/* Cột trái: form */}
-      <div className="flex-1">
+      <div className="account-form flex-1">
         <h1 className="mb-2 text-2xl font-bold">Tài khoản</h1>
         <p className="mb-8 text-sm text-white/60">
           Cập nhật thông tin tài khoản
@@ -77,10 +78,11 @@ export default function AccountUser() {
 
         {/* Email */}
         <div className="mb-5">
-          <label className="block mb-2 text-sm text-white/70">Email</label>
+          <label htmlFor="account-email" className="block mb-2 text-sm text-white/70">Email</label>
           <input
             type="text"
-            value={email}
+            id="account-email" autoComplete="email"
+                value={email}
             readOnly
             className="w-full bg-[#12151b] border border-white/5 rounded-lg px-4 py-3 text-sm outline-none text-white/80"
           />
@@ -91,12 +93,13 @@ export default function AccountUser() {
 
         {/* Tên hiển thị */}
         <div className="mb-5">
-          <label className="block mb-2 text-sm text-white/70">
+          <label htmlFor="account-name" className="block mb-2 text-sm text-white/70">
             Tên hiển thị
           </label>
           <input
             type="text"
-            value={displayName}
+            id="account-name" autoComplete="name"
+                value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
             className="w-full bg-[#12151b] border border-white/5 rounded-lg px-4 py-3 text-sm outline-none text-white placeholder:text-white/20 focus:border-[#d9aa3d]"
             placeholder="Nhập tên của bạn"
@@ -106,20 +109,14 @@ export default function AccountUser() {
         {/* Giới tính */}
         <div className="mb-7">
           <label className="block mb-3 text-sm text-white/70">Giới tính</label>
-          <div className="flex items-center gap-6 text-sm">
+          <div className="account-gender flex flex-wrap items-center gap-6 text-sm">
             {options.map((opt) => (
               <label
                 key={opt.value}
                 className="flex items-center gap-2 cursor-pointer select-none"
-                onClick={() => setGender(opt.value)}
               >
-                <span
-                  className={`inline-block w-3 h-3 rounded-full border transition-all duration-200 ${
-                    gender === opt.value
-                      ? "border-[#d9aa3d] bg-[#d9aa3d]"
-                      : "border-white/30"
-                  }`}
-                />
+                <input type="radio" name="gender" value={opt.value}
+                  checked={gender === opt.value} onChange={() => setGender(opt.value)} />
                 {opt.label}
               </label>
             ))}
@@ -135,13 +132,13 @@ export default function AccountUser() {
         </button>
 
         {passMsg ? (
-          <p className="mt-3 text-sm text-green-400">{passMsg}</p>
+          <p role="status" className="mt-3 text-sm text-green-400">{passMsg}</p>
         ) : null}
 
         {/* link đổi mật khẩu */}
         <p className="text-sm mt-7 text-white/50">
           Đổi mật khẩu, nhấn vào{" "}
-          <span
+          <button type="button"
             onClick={() => {
               setPassMsg(""); // clear msg cũ trước khi mở
               setOpen(true);
@@ -149,25 +146,26 @@ export default function AccountUser() {
             className="text-[#f0d25b] cursor-pointer hover:underline"
           >
             đây
-          </span>
+          </button>
         </p>
       </div>
 
       {/* Modal đổi mật khẩu */}
       {open && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-          <div className="bg-[#1a1d24] rounded-xl p-8 w-[400px] shadow-lg border border-white/10">
-            <h2 className="mb-6 text-lg font-semibold text-center">
+        <Dialog open={open} onClose={() => { if (!busy) setOpen(false); }} className="account-dialog" aria-labelledby="password-dialog-title" fullWidth maxWidth="xs">
+          <div className="account-dialog-content bg-[#1a1d24] p-8">
+            <h2 id="password-dialog-title" className="mb-6 text-lg font-semibold text-center">
               Đổi mật khẩu
             </h2>
 
             {/* Input mật khẩu cũ */}
             <div className="mb-4">
-              <label className="block mb-2 text-sm text-white/70">
+              <label htmlFor="account-old-password" className="block mb-2 text-sm text-white/70">
                 Mật khẩu cũ
               </label>
               <input
                 type="password"
+                id="account-old-password" autoComplete="current-password"
                 value={oldPass}
                 onChange={(e) => setOldPass(e.target.value)}
                 className="w-full px-4 py-2 rounded-md bg-[#12151b] border border-white/10 text-sm outline-none focus:border-[#f0d25b]"
@@ -176,11 +174,12 @@ export default function AccountUser() {
 
             {/* Input mật khẩu mới */}
             <div className="mb-4">
-              <label className="block mb-2 text-sm text-white/70">
+              <label htmlFor="account-new-password" className="block mb-2 text-sm text-white/70">
                 Mật khẩu mới
               </label>
               <input
                 type="password"
+                id="account-new-password" autoComplete="new-password"
                 value={newPass}
                 onChange={(e) => setNewPass(e.target.value)}
                 className="w-full px-4 py-2 rounded-md bg-[#12151b] border border-white/10 text-sm outline-none focus:border-[#f0d25b]"
@@ -189,11 +188,12 @@ export default function AccountUser() {
 
             {/* Xác nhận mật khẩu mới */}
             <div className="mb-6">
-              <label className="block mb-2 text-sm text-white/70">
+              <label htmlFor="account-confirm-password" className="block mb-2 text-sm text-white/70">
                 Xác nhận mật khẩu mới
               </label>
               <input
                 type="password"
+                id="account-confirm-password" autoComplete="new-password"
                 value={confirmPass}
                 onChange={(e) => setConfirmPass(e.target.value)}
                 className="w-full px-4 py-2 rounded-md bg-[#12151b] border border-white/10 text-sm outline-none focus:border-[#f0d25b]"
@@ -205,7 +205,7 @@ export default function AccountUser() {
             ) : null}
 
             {/* Nút hành động */}
-            <div className="flex justify-between">
+            <div className="account-dialog-actions flex justify-between">
               <button type="button" disabled={busy}
                 onClick={handleChangePassword}
                 className="bg-[#f0d25b] text-black font-semibold px-5 py-2 rounded-md hover:bg-[#d9aa3d] transition-colors cursor-pointer inline-flex items-center justify-center"
@@ -226,13 +226,13 @@ export default function AccountUser() {
               </button>
             </div>
           </div>
-        </div>
+        </Dialog>
       )}
 
       {/* Cột phải: avatar */}
-      <div className="w-[260px] flex flex-col items-center gap-5">
+      <div className="account-avatar w-[260px] flex flex-col items-center gap-5">
         {/* Ảnh đang dùng */}
-        <div className="w-[150px] h-[150px] rounded-full overflow-hidden border-4 border-[#1f2127] shadow-[0_0_0_3px_rgba(0,0,0,0.3)]">
+        <div className="account-avatar-image w-[150px] h-[150px] rounded-full overflow-hidden border-4 border-[#1f2127] shadow-[0_0_0_3px_rgba(0,0,0,0.3)]">
           <img
             src={avatar || selected?.src || "/images/test/avatar-small.webp"}
             alt="avatar"
@@ -253,18 +253,18 @@ export default function AccountUser() {
 
         {/* MODAL chọn avatar */}
         {openImg && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
-            <div className="bg-[#1a1d24] rounded-xl p-6 w-[600px] shadow-lg border border-white/10">
-              <h2 className="mb-5 text-lg font-semibold text-center">
+          <Dialog open={openImg} onClose={() => { if (!busy) setOpenImg(false); }} className="account-dialog" aria-labelledby="avatar-dialog-title" fullWidth maxWidth="sm">
+            <div className="account-dialog-content bg-[#1a1d24] p-6">
+              <h2 id="avatar-dialog-title" className="mb-5 text-lg font-semibold text-center">
                 Chọn ảnh đại diện
               </h2>
 
-              <div className="grid grid-cols-3 gap-5 mb-6 sm:grid-cols-4">
+              <div className="avatar-options grid grid-cols-3 gap-5 mb-6 sm:grid-cols-4">
                 {avatarList.map((ava) => (
-                  <div
+                  <button type="button" aria-label={`Avatar ${ava.id}`} aria-pressed={selected?.id === ava.id}
                     key={ava.id}
                     onClick={() => setSelected(ava)}
-                    className={`w-[100px] h-[100px] rounded-full overflow-hidden border-2 cursor-pointer transition-all duration-200 ${
+                    className={`avatar-option w-[100px] h-[100px] rounded-full overflow-hidden border-2 cursor-pointer transition-all duration-200 ${
                       selected?.id === ava.id
                         ? "border-[#f0d25b] scale-105"
                         : "border-transparent hover:border-white/20"
@@ -275,11 +275,11 @@ export default function AccountUser() {
                       alt={`avatar-${ava.id}`}
                       className="object-cover w-full h-full"
                     />
-                  </div>
+                  </button>
                 ))}
               </div>
 
-              <div className="flex justify-end gap-4">
+              <div className="account-dialog-actions flex justify-end gap-4">
                 <button type="button" disabled={busy}
                 onClick={() => setOpenImg(false)}
                   className="inline-flex items-center justify-center px-5 py-2 text-sm transition-colors border rounded-md cursor-pointer border-white/10 hover:bg-white/10"
@@ -304,7 +304,7 @@ export default function AccountUser() {
                 </button>
               </div>
             </div>
-          </div>
+          </Dialog>
         )}
       </div>
     </div>

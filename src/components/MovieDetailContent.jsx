@@ -221,7 +221,7 @@ export default function MovieDetailContent() {
   // Error / Không có dữ liệu
   if (error || !m) {
     return (
-      <Box sx={{ bgcolor: "#0f1317", minHeight: "60vh", color: "white", p: 6 }}>
+      <Box sx={{ bgcolor: "#0f1317", minHeight: "60vh", color: "white", px: { xs: 2, md: 6 }, pt: 14, pb: 6 }}>
         <Container maxWidth="lg">
           <Typography variant="h6" color="error">
             {error || "Không tìm thấy phim."}
@@ -247,7 +247,7 @@ export default function MovieDetailContent() {
         bgcolor: "#0f1317",
         color: "#fff",
         minHeight: "100vh",
-        pb: 10,
+        pb: { xs: 5, md: 10 },
         backgroundImage: m.backdrop
           ? `linear-gradient(to bottom, rgba(15,19,23,0.3), #0f1317), url(${m.backdrop})`
           : undefined,
@@ -255,20 +255,20 @@ export default function MovieDetailContent() {
         backgroundPosition: "center",
       }}
     >
-      <Container maxWidth="xl" sx={{ pt: 10 }}>
+      <Container maxWidth="xl" sx={{ pt: { xs: 12, sm: 14, md: 35 }, px: { xs: 2, sm: 3 } }}>
         <Stack
-          className="mt-[200px]"
           direction={{ xs: "column", md: "row" }}
-          spacing={6}
+          spacing={{ xs: 3, sm: 4, md: 6 }}
         >
           {/* Poster */}
           <Box
-            sx={{ flexShrink: 0, width: { xs: "60%", md: 300 }, mx: "auto" }}
+            sx={{ flexShrink: 0, width: { xs: 170, sm: 220, md: 300 }, maxWidth: "100%", alignSelf: { xs: "center", md: "flex-start" } }}
           >
             <Box
               component="img"
               src={m.poster}
               alt={m.titleMain}
+              onError={movieImageFallback}
               sx={{
                 width: "100%",
                 aspectRatio: "2/3",
@@ -281,9 +281,11 @@ export default function MovieDetailContent() {
               fullWidth
               variant="contained"
               sx={{
-                mt: 3,
+                mt: { xs: 1.5, md: 3 },
                 bgcolor: videoId ? "#b91c1c" : "rgba(255,255,255,0.12)",
-                py: 1.4,
+                py: { xs: 1, md: 1.4 },
+                minHeight: 44,
+                fontSize: { xs: 12, sm: 14 },
                 fontWeight: 700,
                 "&:hover": {
                   bgcolor: videoId ? "#dc2626" : "rgba(255,255,255,0.14)",
@@ -313,6 +315,7 @@ export default function MovieDetailContent() {
               <Button
                 variant="outlined"
                 size="small"
+                sx={{ minHeight: 44, width: { xs: "100%", md: "auto" } }}
                 onClick={() => navigate(-1)}
               >
                 Quay lại
@@ -321,17 +324,19 @@ export default function MovieDetailContent() {
           </Box>
 
           {/* Info */}
-          <Box sx={{ flexGrow: 1, pt: { xs: 2, md: 2 } }}>
-            <Typography variant="h3" fontWeight={800} sx={{ mb: 1 }}>
+          <Box sx={{ flexGrow: 1, minWidth: 0, pt: { xs: 0, md: 2 }, overflowWrap: "anywhere" }}>
+            <Typography component="h1" variant="h3" fontWeight={800} sx={{ mb: 1, fontSize: { xs: 28, sm: 36, md: 48 }, lineHeight: 1.2 }}>
               {m.titleMain}
             </Typography>
-            <Typography variant="h6" sx={{ color: "#93c5fd", mb: 2 }}>
+            <Typography variant="h6" sx={{ color: "#93c5fd", mb: 2, fontSize: { xs: 16, sm: 20 } }}>
               {m.subtitle}
             </Typography>
 
             <Stack
               direction="row"
               spacing={2}
+              useFlexGap
+              flexWrap="wrap"
               alignItems="center"
               sx={{ mb: 2 }}
             >
@@ -353,7 +358,7 @@ export default function MovieDetailContent() {
               </Stack>
             </Stack>
 
-            <Stack spacing={1.2} sx={{ mb: 3 }}>
+            <Stack spacing={1.2} sx={{ mb: 3, "& .MuiTypography-root": { fontSize: { xs: 14, sm: 16 } } }}>
               {m.nation && (
                 <Typography>
                   <strong>QUỐC GIA:</strong> {m.nation}
@@ -371,14 +376,15 @@ export default function MovieDetailContent() {
                 lineHeight: 1.8,
                 color: "rgba(255,255,255,0.9)",
                 maxWidth: 900,
+                fontSize: { xs: 14, sm: 16 },
               }}
             >
               {m.desc || "Chưa có mô tả."}
             </Typography>
 
-            <Divider sx={{ my: 4, borderColor: "rgba(255,255,255,0.12)" }} />
+            <Divider sx={{ my: { xs: 2.5, md: 4 }, borderColor: "rgba(255,255,255,0.12)" }} />
 
-            <Stack direction="row" spacing={1.5} flexWrap="wrap">
+            <Stack direction="row" spacing={1} useFlexGap flexWrap="wrap">
               {m.genres.map((g, i) => (
                 <Chip
                   key={i}
@@ -387,15 +393,20 @@ export default function MovieDetailContent() {
                     bgcolor: "rgba(255,255,255,0.06)",
                     color: "#fff",
                     fontWeight: 700,
+                    maxWidth: "100%",
+                    height: "auto",
+                    minHeight: 32,
+                    "& .MuiChip-label": { whiteSpace: "normal", py: 0.5 },
                   }}
                 />
               ))}
             </Stack>
 
-            <div
+            <button type="button"
               disabled={favoriteBusy}
+              aria-pressed={fav}
               onClick={handleAddFavorite}
-              className={`group inline-flex items-center gap-3 mt-5 rounded-[12px] p-2 cursor-pointer
+              className={`group inline-flex min-h-11 max-w-full items-center gap-2 md:gap-3 text-sm md:text-base mt-5 rounded-[12px] p-2 cursor-pointer disabled:opacity-60 disabled:cursor-wait
               transition-all duration-300 active:scale-95 focus:outline-none focus:ring-2 focus:ring-white/20
                border ${
                  fav
@@ -411,7 +422,7 @@ export default function MovieDetailContent() {
               }
             >
               <img onError={movieImageFallback}
-                className={`w-[30px] transition-transform duration-300 ${
+                className={`w-6 h-6 md:w-[30px] md:h-[30px] shrink-0 transition-transform duration-300 ${
                   fav ? "rotate-90" : "group-hover:rotate-90"
                 }`}
                 src="/images/logo/plus.gif"
@@ -426,7 +437,7 @@ export default function MovieDetailContent() {
               >
                 {fav ? "Đã thêm" : "Add to favorite"}
               </span>
-            </div>
+            </button>
           </Box>
         </Stack>
       </Container>
@@ -436,14 +447,16 @@ export default function MovieDetailContent() {
         open={openPlayer}
         onClose={() => setOpenPlayer(false)}
         fullScreen
-        PaperProps={{ sx: { bgcolor: "black" } }}
+        PaperProps={{ sx: { bgcolor: "black", height: "100dvh", display: "flex", alignItems: "center", justifyContent: "center", pt: "calc(56px + env(safe-area-inset-top))", pb: "env(safe-area-inset-bottom)" } }}
       >
         <IconButton
           onClick={() => setOpenPlayer(false)}
           sx={{
             position: "fixed",
-            top: 12,
-            right: 12,
+            top: "max(8px, env(safe-area-inset-top))",
+            right: "max(8px, env(safe-area-inset-right))",
+            width: 44,
+            height: 44,
             zIndex: 2000,
             color: "#fff",
             bgcolor: "rgba(255,255,255,0.04)",
@@ -454,14 +467,16 @@ export default function MovieDetailContent() {
         </IconButton>
 
         {embedUrl ? (
-          <iframe
+          <Box component="iframe"
             src={embedUrl}
             title={`${m.titleMain} - player`}
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             allowFullScreen
-            style={{
-              width: "100%",
-              height: "100vh",
+            sx={{
+              width: "min(100%, calc((100dvh - 56px - env(safe-area-inset-top) - env(safe-area-inset-bottom)) * 16 / 9))",
+              aspectRatio: "16 / 9",
+              height: "auto",
+              flexShrink: 0,
               border: 0,
               background: "black",
             }}
@@ -495,6 +510,7 @@ export default function MovieDetailContent() {
           },
         }}
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        sx={{ bottom: { xs: "max(12px, env(safe-area-inset-bottom))", sm: 24 }, left: { xs: 12, sm: "50%" }, right: { xs: 12, sm: "auto" } }}
       >
         <Alert
           onClose={() => setToastOpen(false)}
@@ -506,6 +522,8 @@ export default function MovieDetailContent() {
             border: "1px solid rgba(255,255,255,0.1)",
             boxShadow: "0 10px 30px rgba(0,0,0,0.4)",
             backdropFilter: "blur(6px)",
+            maxWidth: "100%",
+            "& .MuiAlert-message": { minWidth: 0, overflowWrap: "anywhere" },
             "& .MuiAlert-icon": { color: "#facc15" },
           }}
         >

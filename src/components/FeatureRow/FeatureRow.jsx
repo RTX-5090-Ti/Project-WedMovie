@@ -104,12 +104,12 @@ export default function FeatureRow({
         // grabCursor
         speed={550}
         breakpoints={{
-          320: { slidesPerView: 1 },
-          640: { slidesPerView: 2 },
+          320: { slidesPerView: 1.45, spaceBetween: 12 },
+          640: { slidesPerView: 2.15, spaceBetween: 24 },
           1024: { slidesPerView: 3 },
           1536: { slidesPerView: 4 },
         }}
-        className="!overflow-visible"
+        className="feature-slider"
       >
         {items.map((it) => (
           <SwiperSlide key={it.id}>

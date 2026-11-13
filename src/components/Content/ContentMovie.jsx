@@ -88,7 +88,7 @@ export default function ContentMovie() {
   if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
 
   return (
-    <div className="relative w-full h-[680px] md:h-[720px] overflow-hidden rounded-none md:rounded-2xl mb-8">
+    <div className="home-hero relative w-full h-[680px] md:h-[720px] overflow-hidden rounded-none md:rounded-2xl mb-8">
       {/* Backdrop + transition */}
       <AnimatePresence mode="wait">
         <Motion.img
@@ -96,7 +96,7 @@ export default function ContentMovie() {
           src={backdrop}
           alt={title}
           onError={backdropFallback}
-          className="absolute inset-0 object-fill w-full h-full"
+          className="absolute inset-0 object-cover w-full h-full"
           initial={{ opacity: 0, scale: 1.04 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 1.02 }}
@@ -109,7 +109,7 @@ export default function ContentMovie() {
       <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/65 via-black/30 to-transparent" />
 
       {/* Content */}
-      <div className="absolute z-10 bottom-10 md:bottom-16 left-6 md:left-12 right-6 md:right-10">
+      <div className="hero-copy absolute z-10 bottom-10 md:bottom-16 left-6 md:left-12 right-6 md:right-10">
         {/* Title + lang toggle */}
         <div className="flex items-center gap-4 mb-3">
           <AnimatePresence mode="wait">
@@ -151,7 +151,7 @@ export default function ContentMovie() {
         <AnimatePresence mode="wait">
           <Motion.p
             key={desc + index}
-            className="max-w-[700px] leading-relaxed text-sm md:text-base text-white/90  mb-5 text-shadow-[0_1px_4px_rgba(0,0,0,0.4)]"
+            className="hero-description max-w-[700px] leading-relaxed text-sm md:text-base text-white/90  mb-5 text-shadow-[0_1px_4px_rgba(0,0,0,0.4)]"
             initial={{ y: 8, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: -8, opacity: 0 }}
@@ -162,7 +162,7 @@ export default function ContentMovie() {
         </AnimatePresence>
 
         {/* Actions */}
-        <div className="flex items-center justify-between gap-4">
+        <div className="hero-actions flex items-center justify-between gap-4">
           <div
             onClick={() => current?.id && navigate(`/movie/${current.id}`)}
             className="flex items-center gap-3 px-5 py-3 font-semibold text-white transition rounded-full bg-[rgba(255,255,255,0.3)] cursor-pointer hover:opacity-90"
@@ -178,9 +178,9 @@ export default function ContentMovie() {
 
           {/* Dots indicator (clickable) */}
           
-          <div className="flex items-center gap-2 ml-2">
+          <div className="hero-thumbnails flex items-center gap-2 ml-2">
             {slides.map((m, i) => (
-              <div
+              <button type="button" aria-label={`Slide ${i + 1}`} aria-pressed={i === index}
                 key={i}
                 onClick={() => goTo(i)}
                 className={`relative w-[90px] h-[50px] rounded overflow-hidden cursor-pointer transition-all duration-300 ${
@@ -202,7 +202,7 @@ export default function ContentMovie() {
                 {i !== index && (
                   <div className="absolute inset-0 bg-black/30"></div>
                 )}
-              </div>
+              </button>
             ))}
           </div>
         </div>

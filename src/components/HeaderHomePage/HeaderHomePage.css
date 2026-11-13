@@ -8,3 +8,53 @@
 .search:focus-within {
   border-color: rgb(255, 255, 255, 0.7);
 }
+
+.site-header { position: absolute; inset: 0 0 auto; z-index: 50; display: flex; align-items: center; gap: 20px; padding: 10px 25px; }
+.header-brand-search { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.site-logo { width: 160px; flex-shrink: 0; object-fit: contain; }
+.header-search { position: relative; width: clamp(180px, 20vw, 300px); }
+.header-search input { min-width: 0; font-size: 16px; min-height: 32px; }
+.header-search .search > img { width: 20px; flex-shrink: 0; }
+.header-search li > div { min-width: 0; overflow-wrap: anywhere; }
+.header-search li > div > div:last-child { flex-wrap: wrap; }
+.header-navigation { display: flex; align-items: center; justify-content: flex-end; gap: 20px; flex: 1; }
+.header-navigation > button, .header-navigation > div > span { white-space: nowrap; cursor: pointer; }
+.header-navigation button { min-height: 44px; }
+.header-navigation .language-select__selected { width: 100%; }
+.header-navigation .language-select__options li { padding: 0; }
+.header-navigation .language-select__options button { width: 100%; padding: 10px; text-align: left; cursor: pointer; }
+.header-filter-control { white-space: nowrap; }
+.header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.header-mobile-button { display: none; }
+.site-header .avatar-dropdown { max-width: calc(100vw - 32px); max-height: calc(100dvh - 90px); overflow-y: auto; }
+.site-header button:focus-visible { outline: 2px solid #f0d25b; outline-offset: 3px; }
+
+@media (max-width: 1279px) {
+  .site-header { padding: 12px 20px; justify-content: space-between; gap: 12px; background: linear-gradient(#10151dee, #10151d55); }
+  .site-logo { width: 145px; }
+  .header-brand-search { flex: 1; }
+  .header-mobile-button { display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; font-size: 23px; border-radius: 8px; background: #ffffff0d; cursor: pointer; }
+  .header-mobile-button img { width: 20px; }
+  .header-search { display: none; position: absolute; left: 20px; right: 20px; top: calc(100% + 8px); width: auto; }
+  .header-search.is-open { display: block; }
+  .header-search .search { background: #151c26; min-height: 48px; }
+  .header-search > div:last-child:not(.search) { max-height: min(420px, 60dvh); background-color: #111827; }
+  .header-navigation { display: none; position: absolute; top: 100%; left: 20px; right: 20px; padding: 16px; border: 1px solid #ffffff20; border-radius: 12px; background: #111827fa; max-height: calc(100dvh - 90px); overflow-y: auto; }
+  .menu-open .header-navigation { display: flex; flex-direction: column; align-items: stretch; gap: 4px; }
+  .header-navigation > button { text-align: left; }
+  .header-navigation > div:not(.language-select) { display: flex; flex-wrap: wrap; min-height: 44px; }
+  .header-navigation > div > span { display: flex; align-items: center; min-height: 44px; }
+  .header-navigation > div > div { position: static; width: 100%; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 4px; text-align: left; }
+  .header-navigation > div > div > button { min-height: 44px; display: flex; align-items: center; overflow-wrap: anywhere; }
+  .header-navigation .language-select { margin-top: 8px; width: 100%; }
+  .header-navigation .language-select__options { position: static; background: #1b2534; }
+}
+
+@media (max-width: 479px) {
+  .site-header { padding: 10px 12px; gap: 8px; }
+  .site-logo { width: clamp(95px, 28vw, 130px); }
+  .header-actions { gap: 4px; }
+  .header-actions > button:not(.header-mobile-button) { padding: 12px 8px; white-space: nowrap; }
+  .header-search { left: 12px; right: 12px; }
+  .header-navigation { left: 12px; right: 12px; }
+}

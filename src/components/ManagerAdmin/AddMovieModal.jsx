@@ -1,3 +1,4 @@
+import Dialog from "@mui/material/Dialog";
 // AddMovieModal.jsx
 export default function AddMovieModal({
   open,
@@ -18,18 +19,18 @@ export default function AddMovieModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-2xl border border-white/10 bg-[#1c1f29] p-6 shadow-xl">
-        <h3 className="mb-4 text-xl font-semibold">Thêm phim mới</h3>
+    <Dialog open={open} onClose={() => { if (!busy) onClose(); }} fullWidth maxWidth="md" className="admin-dialog" aria-labelledby="add-movie-title">
+      <div className="admin-dialog-content w-full max-w-3xl rounded-2xl border border-white/10 bg-[#1c1f29] p-6 shadow-xl">
+        <h3 id="add-movie-title" className="mb-4 text-xl font-semibold">Thêm phim mới</h3>
 
         {/* Title + nation + year */}
         <div className="grid grid-cols-2 gap-4">
           {/* Title VI */}
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">
+            <label htmlFor="add-movie-titleVi" className="text-sm text-white/70">
               Tiêu đề tiếng Việt *
             </label>
-            <input
+            <input id="add-movie-titleVi"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               value={form.titleVi}
@@ -39,8 +40,8 @@ export default function AddMovieModal({
 
           {/* Title EN */}
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Tiêu đề tiếng Anh *</label>
-            <input
+            <label htmlFor="add-movie-titleEn" className="text-sm text-white/70">Tiêu đề tiếng Anh *</label>
+            <input id="add-movie-titleEn"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               value={form.titleEn}
@@ -50,8 +51,8 @@ export default function AddMovieModal({
 
           {/* Nation VI */}
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Quốc gia (VI)</label>
-            <input
+            <label htmlFor="add-movie-nationVi" className="text-sm text-white/70">Quốc gia (VI)</label>
+            <input id="add-movie-nationVi"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               value={form.nationVi}
@@ -61,8 +62,8 @@ export default function AddMovieModal({
 
           {/* Nation EN */}
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Nation (EN)</label>
-            <input
+            <label htmlFor="add-movie-nationEn" className="text-sm text-white/70">Nation (EN)</label>
+            <input id="add-movie-nationEn"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               value={form.nationEn}
@@ -72,8 +73,8 @@ export default function AddMovieModal({
 
           {/* Year */}
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Năm</label>
-            <input
+            <label htmlFor="add-movie-year" className="text-sm text-white/70">Năm</label>
+            <input id="add-movie-year"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="number"
               value={form.year}
@@ -83,8 +84,8 @@ export default function AddMovieModal({
 
           {/* Duration */}
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Thời lượng</label>
-            <input
+            <label htmlFor="add-movie-duration" className="text-sm text-white/70">Thời lượng</label>
+            <input id="add-movie-duration"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               placeholder="vd: 1h 45m"
@@ -121,8 +122,8 @@ export default function AddMovieModal({
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Rating</label>
-            <input
+            <label htmlFor="add-movie-rating" className="text-sm text-white/70">Rating</label>
+            <input id="add-movie-rating"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="number"
               step="0.1"
@@ -135,8 +136,8 @@ export default function AddMovieModal({
         {/* Poster paths */}
         <div className="grid grid-cols-2 gap-4 mt-4">
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Poster (path)</label>
-            <input
+            <label htmlFor="add-movie-poster" className="text-sm text-white/70">Poster (path)</label>
+            <input id="add-movie-poster"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               placeholder="./public/images/..."
@@ -146,8 +147,8 @@ export default function AddMovieModal({
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Small poster (path)</label>
-            <input
+            <label htmlFor="add-movie-smallPoster" className="text-sm text-white/70">Small poster (path)</label>
+            <input id="add-movie-smallPoster"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               placeholder="./public/images/..."
@@ -157,8 +158,8 @@ export default function AddMovieModal({
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Backdrop (path)</label>
-            <input
+            <label htmlFor="add-movie-backdrop" className="text-sm text-white/70">Backdrop (path)</label>
+            <input id="add-movie-backdrop"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               placeholder="./public/images/..."
@@ -168,8 +169,8 @@ export default function AddMovieModal({
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">Trailer (URL)</label>
-            <input
+            <label htmlFor="add-movie-trailer" className="text-sm text-white/70">Trailer (URL)</label>
+            <input id="add-movie-trailer"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               placeholder="https://www.youtube.com/..."
@@ -182,10 +183,10 @@ export default function AddMovieModal({
         {/* Genres */}
         <div className="grid grid-cols-2 gap-4 mt-4">
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">
+            <label htmlFor="add-movie-genresVi" className="text-sm text-white/70">
               Thể loại (VI) – cách nhau bởi dấu phẩy
             </label>
-            <input
+            <input id="add-movie-genresVi"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               placeholder="Hành động, Khoa học, Phiêu lưu"
@@ -195,10 +196,10 @@ export default function AddMovieModal({
           </div>
 
           <div className="flex flex-col gap-1">
-            <label className="text-sm text-white/70">
+            <label htmlFor="add-movie-genresEn" className="text-sm text-white/70">
               Genres (EN) – tương ứng, cách nhau bởi dấu phẩy
             </label>
-            <input
+            <input id="add-movie-genresEn"
               className="px-3 py-2 text-sm bg-transparent border rounded-lg outline-none border-white/20 placeholder:text-white/40 focus:border-yellow-400"
               type="text"
               placeholder="Action, Sci-Fi, Adventure"
@@ -210,8 +211,8 @@ export default function AddMovieModal({
 
         {/* Descriptions */}
         <div className="flex flex-col gap-1 mt-4">
-          <label className="text-sm text-white/70">Mô tả tiếng Việt</label>
-          <textarea
+          <label htmlFor="add-movie-descVi" className="text-sm text-white/70">Mô tả tiếng Việt</label>
+          <textarea id="add-movie-descVi"
             className="min-h-[80px] w-full rounded-lg border border-white/20 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-white/40 focus:border-yellow-400"
             value={form.descVi}
             onChange={(e) => handleChange("descVi", e.target.value)}
@@ -219,8 +220,8 @@ export default function AddMovieModal({
         </div>
 
         <div className="flex flex-col gap-1 mt-3">
-          <label className="text-sm text-white/70">Mô tả tiếng Anh</label>
-          <textarea
+          <label htmlFor="add-movie-descEn" className="text-sm text-white/70">Mô tả tiếng Anh</label>
+          <textarea id="add-movie-descEn"
             className="min-h-[80px] w-full rounded-lg border border-white/20 bg-transparent px-3 py-2 text-sm outline-none placeholder:text-white/40 focus:border-yellow-400"
             value={form.descEn}
             onChange={(e) => handleChange("descEn", e.target.value)}
@@ -229,7 +230,7 @@ export default function AddMovieModal({
 
         {error && <p role="alert" className="mt-3 text-red-400">{error}</p>}
         {/* Buttons */}
-        <div className="flex justify-end gap-3 pt-2 mt-4">
+        <div className="admin-dialog-actions flex justify-end gap-3 pt-2 mt-4">
           <button type="button" disabled={busy}
             onClick={onClose}
             className="px-4 py-2 text-sm border cursor-pointer rounded-xl border-white/30 hover:bg-white/10"
@@ -244,6 +245,6 @@ export default function AddMovieModal({
           </button>
         </div>
       </div>
-    </div>
+    </Dialog>
   );
 }

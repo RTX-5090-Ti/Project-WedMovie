@@ -5,6 +5,8 @@ export default function useCanvasCursor(canvasRef) {
     const canvas = canvasRef.current;
     const context = canvas?.getContext("2d");
     if (!context) return;
+    const desktopPointer = window.matchMedia("(hover: hover) and (pointer: fine)");
+    let enabled = false;
 
     const settings = { friction: 0.5, trails: 20, size: 50, dampening: 0.25, tension: 0.98 };
     const position = { x: 0, y: 0 };
@@ -58,7 +60,7 @@ export default function useCanvasCursor(canvasRef) {
 
     function render() {
       frameId = null;
-      if (disposed || !focused || !lines.length) return;
+      if (disposed || !enabled || !focused || !lines.length) return;
       context.globalCompositeOperation = "source-over";
       context.clearRect(0, 0, canvas.width, canvas.height);
       context.globalCompositeOperation = "lighter";
@@ -68,14 +70,15 @@ export default function useCanvasCursor(canvasRef) {
       frameId = window.requestAnimationFrame(render);
     }
     function start() {
-      if (!disposed && focused && lines.length && frameId === null) frameId = window.requestAnimationFrame(render);
+      if (!disposed && enabled && focused && lines.length && frameId === null) frameId = window.requestAnimationFrame(render);
     }
     function stop() {
       if (frameId !== null) window.cancelAnimationFrame(frameId);
       frameId = null;
     }
     function move(event) {
-      const pointer = event.touches?.[0] || event;
+      if (!enabled || event.pointerType !== "mouse") return;
+      const pointer = event;
       if (typeof pointer.clientX !== "number") return;
       position.x = pointer.clientX;
       position.y = pointer.clientY;
@@ -86,25 +89,33 @@ export default function useCanvasCursor(canvasRef) {
     function focus() { focused = true; start(); }
     function blur() { focused = false; stop(); }
 
-    document.addEventListener("mousemove", move);
-    document.addEventListener("touchstart", move, { passive: true });
-    document.addEventListener("touchmove", move, { passive: true });
-    window.addEventListener("resize", resize);
-    window.addEventListener("orientationchange", resize);
-    window.addEventListener("focus", focus);
-    window.addEventListener("blur", blur);
-    resize();
-    return () => {
-      disposed = true;
-      stop();
-      document.removeEventListener("mousemove", move);
-      document.removeEventListener("touchstart", move);
-      document.removeEventListener("touchmove", move);
+    function detach() {
+      document.removeEventListener("pointermove", move);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("orientationchange", resize);
       window.removeEventListener("focus", focus);
       window.removeEventListener("blur", blur);
+      stop();
+      lines = [];
       context.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    function syncDevice() {
+      detach();
+      enabled = desktopPointer.matches;
+      canvas.hidden = !enabled;
+      if (!enabled) return;
+      focused = document.hasFocus();
+      resize();
+      document.addEventListener("pointermove", move);
+      window.addEventListener("resize", resize);
+      window.addEventListener("focus", focus);
+      window.addEventListener("blur", blur);
+    }
+    desktopPointer.addEventListener("change", syncDevice);
+    syncDevice();
+    return () => {
+      disposed = true;
+      desktopPointer.removeEventListener("change", syncDevice);
+      detach();
     };
   }, [canvasRef]);
 }

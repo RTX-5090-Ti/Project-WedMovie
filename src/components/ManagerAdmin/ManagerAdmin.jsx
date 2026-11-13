@@ -1,3 +1,4 @@
+import "./ManagerAdmin.css";
 import { useState, useRef, useMemo } from "react";
 import ManagerTabs from "./ManagerTabs";
 import UserManagerSection from "./UserManagerSection";
@@ -101,7 +102,7 @@ export default function ManagerAdmin() {
     catch (err) { setMovieError(err.message); } finally { finish(); }
   };
   return (
-    <div className="mt-[100px] p-10 text-white">
+    <div className="admin-page mt-[100px] p-10 text-white">
       <h1 className="mb-5 text-3xl font-bold">Trang Quản Lý</h1>
 
       <p className="mb-4">Chào mừng Admin!</p>

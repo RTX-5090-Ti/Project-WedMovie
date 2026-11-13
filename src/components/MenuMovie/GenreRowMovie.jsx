@@ -77,7 +77,7 @@ export default function GenreRowMovie({ titleName, genre, limit = 10 }) {
   if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
 
   return (
-    <div className="bg-[#192026] text-white px-6 py-10 w-full max-w-[100vw] overflow-x-hidden">
+    <div className="home-section bg-[#192026] text-white px-6 py-10 w-full max-w-[100vw] overflow-x-hidden">
       <div className="flex gap-4 mb-6">
         <h2 className="text-2xl font-bold">
           {titleName ||

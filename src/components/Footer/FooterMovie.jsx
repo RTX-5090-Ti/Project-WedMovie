@@ -15,7 +15,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="text-gray-400 bg-[#192026] border-t border-white/10">
+    <footer className="site-footer text-gray-400 bg-[#192026] border-t border-white/10">
       <div className="w-full px-6 py-10 mx-auto max-w-7xl">
         {/* hotline / contact line */}
         <p className="mb-6 text-sm">

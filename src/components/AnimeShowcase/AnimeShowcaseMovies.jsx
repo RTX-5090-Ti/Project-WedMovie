@@ -84,7 +84,7 @@ export default function AnimeShowcaseMovies() {
   if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
 
   return (
-    <div className="bg-[#192026] text-white mb-[60px] p-6 ">
+    <div className="home-section bg-[#192026] text-white mb-[60px] p-6 ">
       {hero && (
         <AnimeShowcase
           data={hero}
