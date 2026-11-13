@@ -1,12 +1,20 @@
-.head {
-  /* background-color: white; */
-  position: absolute;
+.login-header {
+  position: relative;
   z-index: 10;
-  left: 0;
-  right: 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 15px 50px;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: max(15px, env(safe-area-inset-top)) clamp(16px, 4vw, 50px) 15px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0));
+}
+.login-header > img { width: clamp(110px, 22vw, 220px); height: auto; object-fit: contain; }
+.login-header .language-select__selected { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; min-height: 44px; font: inherit; }
+.login-header .language-select__options button { display: block; width: 100%; min-height: 44px; padding: 10px; text-align: left; color: white; background: transparent; border: 0; cursor: pointer; }
+.login-header .language-select__options li { padding: 0; }
+.login-header .language-select__options button:focus-visible { outline: 2px solid #f0d25b; outline-offset: -2px; }
+@media (max-width: 480px) {
+  .login-header .language-select { width: 136px; }
+  .login-header { gap: 8px; }
 }

@@ -1,101 +1,56 @@
-.video {
-  width: 100%;
-  display: block;
-}
-.box {
+/* Keep login styles scoped so lazy-loaded CSS cannot affect other pages. */
+.login-page {
   position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-}
-.overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  background-color: rgb(0, 0, 0, 0.6);
-}
-button {
-  background-color: rgb(25, 32, 38, 0.25);
-}
-/* .login {
-  position: absolute;
-  z-index: 4;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 500px;
-  width: 100%;
-  background-color: rgba(188, 193, 199, 0.2);
-  padding: 20px 30px;
-  border-radius: 12px;
-}
-.login-box {
+  isolation: isolate;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 30px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  background: #192026;
 }
-.login-title {
-  font-size: 36px;
-  font-weight: 700;
-  text-align: center;
-  margin-block: 30px;
-}
-.login-email,
-.login-password {
-  border: none;
-  outline: none;
-  background-color: transparent;
-  border-bottom: 2px solid #ffffff;
-  padding: 5px;
-  font-size: 18px;
-  color: #ffffff;
-}
-.login-forgot {
-  cursor: pointer;
-}
-.login-butt {
-  padding: 15px;
-  cursor: pointer;
-  border-radius: 12px;
-  border: none;
-  font-size: 18px;
-  font-weight: 600;
-}
-.login-text span {
-  cursor: pointer;
-} */
-/*  */
-.wrapper {
+.login-page .login-video,
+.login-page .login-overlay {
   position: absolute;
-  z-index: 4;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.login-page .login-video { z-index: -2; object-fit: cover; }
+.login-page .login-overlay { z-index: -1; background: rgba(0, 0, 0, 0.6); }
+.login-page .login-notice {
+  margin: 0;
+  padding: 12px 16px;
+  background: #111827;
+  color: white;
+  overflow-wrap: anywhere;
+}
+.login-page .login-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 16px max(32px, env(safe-area-inset-bottom));
+}
+.login-page .wrapper,
+.login-page .register-box {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  flex-shrink: 0;
   border-radius: 8px;
   padding: 30px;
   text-align: center;
   border: 1px solid rgba(255, 255, 255, 0.5);
+  background: rgba(17, 24, 39, 0.2);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
-form {
-  display: flex;
-  flex-direction: column;
-}
-h2 {
-  font-size: 2rem;
-  margin-bottom: 20px;
-  color: #fff;
-}
-.input-field {
-  position: relative;
-  border-bottom: 2px solid #ccc;
-  margin: 15px 0;
-}
-.input-field label {
+.login-page form { display: flex; flex-direction: column; min-width: 0; }
+.login-page form h2 { font-size: 2rem; margin-bottom: 20px; color: #fff; }
+.login-page .input-field { position: relative; border-bottom: 2px solid #ccc; margin: 15px 0; }
+.login-page .input-field label {
   position: absolute;
   top: 50%;
   left: 0;
@@ -105,50 +60,44 @@ h2 {
   pointer-events: none;
   transition: 0.15s ease;
 }
-.input-field input {
+.login-page .input-field input {
   width: 100%;
-  height: 40px;
+  min-width: 0;
+  height: 44px;
   background: transparent;
   border: none;
   outline: none;
   font-size: 18px;
   color: #fff;
 }
-.input-field input:focus ~ label,
-.input-field input:valid ~ label {
+.login-page .input-field input:focus ~ label,
+.login-page .input-field input:not(:placeholder-shown) ~ label {
   font-size: 0.8rem;
   top: 10px;
   transform: translateY(-120%);
 }
-.forget {
+.login-page .input-field:focus-within { border-color: #f0d25b; }
+.login-page .forget {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  margin: 25px 0 35px 0;
+  gap: 4px 12px;
+  margin: 16px 0 24px;
   color: #fff;
 }
-#remember {
-  accent-color: #fff;
-}
-.forget label {
-  display: flex;
-  align-items: center;
-}
-.forget label p {
-  margin-left: 8px;
-}
-.wrapper a {
-  color: #efefef;
-  text-decoration: none;
-}
-.wrapper a:hover {
-  text-decoration: underline;
-}
-button {
+.login-page #remember { accent-color: #fff; width: 18px; height: 18px; }
+.login-page .forget label { display: flex; align-items: center; min-height: 44px; cursor: pointer; }
+.login-page .forget label p { margin-left: 8px; }
+.login-page form a { color: #efefef; text-decoration: none; }
+.login-page form a:hover { text-decoration: underline; }
+.login-page .forget a,
+.login-page .register a { display: inline-flex; align-items: center; min-height: 44px; }
+.login-page form button[type="submit"] {
+  min-height: 48px;
   background: #fff;
   color: #000;
   font-weight: 600;
-  border: none;
   padding: 12px 20px;
   cursor: pointer;
   border-radius: 3px;
@@ -156,43 +105,23 @@ button {
   border: 2px solid transparent;
   transition: 0.3s ease;
 }
-button:hover {
-  color: #fff;
-  border-color: #fff;
-  background: rgba(255, 255, 255, 0.15);
+.login-page form button[type="submit"]:hover { color: #fff; border-color: #fff; background: rgba(255, 255, 255, 0.15); }
+.login-page form button:disabled { opacity: 0.6; cursor: wait; }
+.login-page a:focus-visible,
+.login-page button:focus-visible { outline: 2px solid #f0d25b; outline-offset: 4px; }
+.login-page .register { text-align: center; margin-top: 20px; color: #fff; }
+.login-page .guest { margin-top: 8px; font-size: 18px; }
+.login-page .err { margin-top: 10px; }
+.login-page form p { overflow-wrap: anywhere; }
+@media (max-width: 480px) {
+  .login-page .login-content { padding: 24px 16px max(24px, env(safe-area-inset-bottom)); }
+  .login-page .wrapper,
+  .login-page .register-box { padding: 24px 20px; }
+  .login-page form h2 { font-size: 1.75rem; }
+  .login-page .forget { font-size: 14px; }
 }
-.register {
-  text-align: center;
-  margin-top: 30px;
-  color: #fff;
-}
-/*  */
-.register-box {
-  position: absolute;
-  z-index: 6;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  border-radius: 8px;
-  padding: 30px;
-  text-align: center;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-.register-box a {
-  color: #efefef;
-  text-decoration: none;
-}
-.register-box a:hover {
-  text-decoration: underline;
-}
-.guest {
-  display: inline-block;
-  margin-top: 20px;
-  font-size: 18px;
-}
-.err {
-  margin-top: 10px;
+@media (max-height: 600px) {
+  .login-page .login-content { padding-top: 20px; padding-bottom: 20px; }
+  .login-page .wrapper,
+  .login-page .register-box { margin-top: 0; margin-bottom: 0; }
 }

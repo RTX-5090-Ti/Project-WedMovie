@@ -61,14 +61,15 @@ export function LoginPage() {
   }
 
   return (
-    <div className="box">
-      {notice && <p role="status" className="fixed top-0 z-50 p-3 text-white bg-black">{notice}</p>}
+    <div className="login-page">
+      {notice && <p role="status" className="login-notice">{notice}</p>}
       <LogoAndLanguage></LogoAndLanguage>
-      <video className="video" autoPlay loop muted>
+      <video className="login-video" autoPlay loop muted playsInline aria-hidden="true">
         <source src={backgroundVideo} type="video/mp4" />
         Trình duyệt của bạn không hỗ trợ video.
       </video>
-      <div className="overlay"></div>
+      <div className="login-overlay" aria-hidden="true"></div>
+      <main className="login-content">
       {/*Login page */}
       {loginMode && (
         <div className="wrapper">
@@ -76,21 +77,29 @@ export function LoginPage() {
             <h2>Login</h2>
             <div className="input-field">
               <input
+                id="login-email"
                 type="email"
+                autoComplete="email"
+                inputMode="email"
+                autoCapitalize="none"
+                placeholder=" "
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label>Enter your email</label>
+              <label htmlFor="login-email">Enter your email</label>
             </div>
             <div className="input-field">
               <input
+                id="login-password"
                 type="password"
+                autoComplete="current-password"
+                placeholder=" "
                 required
                 value={pw}
                 onChange={(e) => setPw(e.target.value)}
               />
-              <label>Enter your password</label>
+              <label htmlFor="login-password">Enter your password</label>
             </div>
             <div className="forget">
               <label>
@@ -135,30 +144,41 @@ export function LoginPage() {
             <h2>Register</h2>
             <div className="input-field">
               <input
+                id="register-name"
                 type="text"
+                autoComplete="name"
+                placeholder=" "
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <label>Enter your name</label>
+              <label htmlFor="register-name">Enter your name</label>
             </div>
             <div className="input-field">
               <input
+                id="register-email"
                 type="email"
+                autoComplete="email"
+                inputMode="email"
+                autoCapitalize="none"
+                placeholder=" "
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label>Enter your email</label>
+              <label htmlFor="register-email">Enter your email</label>
             </div>
             <div className="input-field">
               <input
+                id="register-password"
                 type="password"
+                autoComplete="new-password"
+                placeholder=" "
                 required
                 value={pw}
                 onChange={(e) => setPw(e.target.value)}
               />
-              <label>Enter your password</label>
+              <label htmlFor="register-password">Enter your password</label>
             </div>
             <div className="forget"></div>
             <button type="submit" disabled={busy}>{busy ? "Đang gửi..." : "Create account"}</button>
@@ -181,6 +201,7 @@ export function LoginPage() {
           </form>
         </div>
       )}
+      </main>
       <Snackbar
         key={toastKey}
         open={toastOpen}

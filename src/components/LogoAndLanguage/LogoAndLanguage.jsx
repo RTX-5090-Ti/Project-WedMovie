@@ -13,10 +13,14 @@ export default function LogoAndLanguage() {
   };
 
   return (
-    <div className="head">
-      <img src="/images/logo/Logo.png" alt="" />
-      <div className="language-select">
-        <div
+    <div className="login-header">
+      <img src="/images/logo/Logo.png" alt="SteamViBe" />
+      <div className="language-select" onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setIsOpen(false); }} onKeyDown={(event) => { if (event.key === "Escape") setIsOpen(false); }}>
+        <button
+          type="button"
+          aria-expanded={isOpen}
+          aria-controls="login-language-options"
+          aria-label="Language"
           className="flex items-center justify-between language-select__selected"
           onClick={toggleMenu}
         >
@@ -26,12 +30,12 @@ export default function LogoAndLanguage() {
             src="/images/logo-header/flight_4919659.png"
             alt="world"
           />
-        </div>
+        </button>
 
         {isOpen && (
-          <ul className="language-select__options">
-            <li onClick={() => selectOption("English")}>English</li>
-            <li onClick={() => selectOption("Vietnamese")}>Vietnamese</li>
+          <ul id="login-language-options" className="language-select__options">
+            <li><button type="button" onClick={() => selectOption("English")}>English</button></li>
+            <li><button type="button" onClick={() => selectOption("Vietnamese")}>Vietnamese</button></li>
           </ul>
         )}
       </div>
