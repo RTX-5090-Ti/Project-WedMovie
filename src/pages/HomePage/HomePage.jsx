@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import HeaderPage from "../../components/HeaderHomePage/HeaderPage";
 import ContentMovie from "../../components/Content/ContentMovie.jsx";
 import HomeRowMovie from "../../components/MenuMovie/HomeRowMovie";
@@ -11,17 +13,19 @@ import WatchedRow from "../../components/MenuMovie/WatchedRow.jsx";
 import "./HomePage.css";
 
 export default function HomePage() {
+  const { t } = useTranslation();
+  useEffect(() => { document.title = t("home.pageTitle"); }, [t]);
   return (
     <div className="home-page">
       <HeaderPage />
       <ContentMovie />
-      <HomeRowMovie titleName="Phim Điện Ảnh Mối Toanh" />
-      <WatchedRow titleName="Phim Đã Xem" />
+      <HomeRowMovie titleName={t("home.new")} />
+      <WatchedRow titleName={t("home.watched")} />
       <Top10Movies />
       <FeatureRowMovies />
       <AnimeShowcaseMovies />
-      <GenreRowMovie titleName="Phim Hài Cười Mệt" genre="Hài hước" />
-      <GenreRowMovie titleName="Phim Kinh Dị Nổi Da Gà" genre="Kinh dị" />
+      <GenreRowMovie titleName={t("home.comedy")} genre="Hài hước" />
+      <GenreRowMovie titleName={t("home.horror")} genre="Kinh dị" />
       <Footer />
     </div>
   );

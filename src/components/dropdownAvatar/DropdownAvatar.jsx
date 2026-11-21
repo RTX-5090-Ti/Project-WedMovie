@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useState, useRef, useEffect } from "react";
 import { useAuth } from "../../auth/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,7 @@ import Alert from "@mui/material/Alert";
 
 
 export default function UserMenu({ user }) {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const [toastOpen, setToastOpen] = useState(false);
   const [toastKey, setToastKey] = useState(0);
@@ -35,7 +37,7 @@ export default function UserMenu({ user }) {
   return (
     <div ref={ref} className="relative inline-block text-white">
       {/* Avatar */}
-      <button type="button" aria-label="Tuỳ chọn tài khoản" aria-expanded={open}
+      <button type="button" aria-label={t("userMenu.label")} aria-expanded={open}
         onKeyDown={(event) => { if (event.key === "Escape") setOpen(false); }}
         onClick={() => setOpen((value) => !value)}
         className="w-[42px] h-[42px] rounded-full overflow-hidden border border-white/20
@@ -62,15 +64,15 @@ export default function UserMenu({ user }) {
 
           <DropdownItem
             icon="❤️"
-            text="Yêu thích"
+            text={t("userMenu.favorites")}
             onClick={() => { setOpen(false); navigate("/all-movies?type=favorites"); }}
           />
-          <DropdownItem icon="➕" text="Danh sách" onClick={showDevelopmentToast} />
-          <DropdownItem icon="🔁" text="Xem tiếp" onClick={showDevelopmentToast} />
+          <DropdownItem icon="➕" text={t("userMenu.list")} onClick={showDevelopmentToast} />
+          <DropdownItem icon="🔁" text={t("userMenu.continue")} onClick={showDevelopmentToast} />
 
           <DropdownItem
             icon="👤"
-            text="Tài khoản"
+            text={t("userMenu.account")}
             onClick={() => navigate("/account")}
           />
           <div className="my-1 border-t border-white/10" />
@@ -85,7 +87,7 @@ export default function UserMenu({ user }) {
                   alt="admin-manage"
                 />
               }
-              text="Quản lý"
+              text={t("userMenu.admin")}
               onClick={() => navigate("/admin")}
             />
           )}
@@ -101,7 +103,7 @@ export default function UserMenu({ user }) {
                 alt="log-out"
               />
             }
-            text="Thoát"
+            text={t("userMenu.logout")}
           />
         </div>
       )}
@@ -113,6 +115,7 @@ export default function UserMenu({ user }) {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
         <Alert
+          closeText={t("auth.close")}
           severity="info"
           variant="filled"
           onClose={() => setToastOpen(false)}
@@ -125,7 +128,7 @@ export default function UserMenu({ user }) {
             "& .MuiAlert-icon": { color: "#facc15" },
           }}
         >
-          Tính năng này đang phát triển
+          {t("auth.inDevelopment")}
         </Alert>
       </Snackbar>
     </div>

@@ -1,3 +1,5 @@
+import { movieTitles, movieBadge } from "../../lib/movieLanguage";
+import { useTranslation } from "react-i18next";
 import { movieImageFallback } from "../../lib/imageFallback";
 // MovieRow.jsx
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,6 +8,8 @@ import "swiper/css";
 import "swiper/css/free-mode";
 
 export default function MenuMovie({ movies = [], onMovieClick }) {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "vi";
   return (
     <section className="w-full">
       
@@ -18,7 +22,7 @@ export default function MenuMovie({ movies = [], onMovieClick }) {
         slidesPerView={3.1}
         breakpoints={{ 480: { slidesPerView: 4.1, spaceBetween: 12 }, 768: { slidesPerView: 4.3, spaceBetween: 18 }, 1024: { slidesPerView: 5.3 }, 1440: { slidesPerView: 7 } }}
       >
-        {movies.map((m) => (
+        {movies.map((item) => ({ ...item, ...movieTitles(item.sourceTitle || { vi: item.title, en: item.subtitle }, language) })).map((m) => (
           <SwiperSlide key={m.id}>
             <article className="group">
               {/* Poster */}
@@ -41,7 +45,7 @@ export default function MenuMovie({ movies = [], onMovieClick }) {
                       className={`px-2.5 py-1 rounded-md text-xs font-semibold 
                                   bg-black/60 backdrop-blur ${b.color ?? ""}`}
                     >
-                      {b.text}
+                      {movieBadge(b.text, t)}
                     </span>
                   ))}
                 </div>
@@ -57,12 +61,12 @@ export default function MenuMovie({ movies = [], onMovieClick }) {
               >
                 {m.title}
               </h3>
-              <p
+              {m.subtitle && <p
                 onClick={() => onMovieClick?.(m.id)}
                 className="text-sm text-center cursor-pointer text-white/60 line-clamp-1"
               >
                 {m.subtitle}
-              </p>
+              </p>}
             </article>
           </SwiperSlide>
         ))}

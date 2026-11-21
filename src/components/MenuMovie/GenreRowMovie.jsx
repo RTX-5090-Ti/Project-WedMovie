@@ -60,6 +60,7 @@ export default function GenreRowMovie({ titleName, genre, limit = 10 }) {
         // map sang format cho MenuMovie
         const mapped = filtered.slice(0, limit).map((m) => ({
           id: m.id,
+          sourceTitle: m.title,
           poster: normalizePoster(m.poster),
           title: m?.title?.vi || m?.title?.en || "",
           subtitle: m?.title?.en || m?.title?.vi || "",

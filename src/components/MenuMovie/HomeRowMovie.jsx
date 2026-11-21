@@ -45,6 +45,7 @@ export default function HomeRowMovie({ titleName }) {
         // Map sang format MenuMovie cần: { id, poster, title (VI), subtitle (EN), badges }
         const mapped = picked.map((m) => ({
           id: m.id,
+          sourceTitle: m.title,
           poster: normalizePoster(m.poster),
           title: m?.title?.vi || m?.title?.en || "",
           subtitle: m?.title?.en || m?.title?.vi || "",

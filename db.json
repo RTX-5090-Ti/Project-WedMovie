@@ -2614,23 +2614,7 @@
       "gender": "unknown"
     }
   ],
-  "favorites": [
-    {
-      "id": "admin:61",
-      "userId": "admin",
-      "movieId": "61",
-      "movie": {
-        "id": "61",
-        "title": {
-          "vi": "Quái Thú Vô Hình: Vùng Đất Chết Chóc",
-          "en": "Predator: Badlands"
-        },
-        "poster": "/images/data-json-imgs/predator-badlands/SMALLPOSTER.jpeg",
-        "backdrop": "/images/data-json-imgs/predator-badlands/BACKDROP.webp"
-      },
-      "updatedAt": 1794551213154
-    }
-  ],
+  "favorites": [],
   "history": [
     {
       "id": "4173e07f-90b6-4f8b-87c6-bfb6c9ef3de5:60",

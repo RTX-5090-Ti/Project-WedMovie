@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+import { movieText, movieTitles, movieBadge } from "../../lib/movieLanguage";
 import "../LanguageSelect/LanguageSelect.css";
 import { movieImageFallback } from "../../lib/imageFallback";
 import useMovies from "../../lib/useMovies";
@@ -25,13 +27,14 @@ function normalizePoster(src) {
 }
 
 export default function HeaderPage() {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "vi";
   const [mobileMenu, setMobileMenu] = useState(false);
   const [mobileSearch, setMobileSearch] = useState(false);
   const headerRef = useRef(null);
   const inputRef = useRef(null);
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
-  const [selected, setSelected] = useState("English");
   const [openMenu, setOpenMenu] = useState(null);
   const genreRef = useRef(null);
   const countryRef = useRef(null);
@@ -101,8 +104,7 @@ export default function HeaderPage() {
       const mapped = matched.slice(0, 8).map((m) => ({
         id: m.id,
         poster: normalizePoster(m.smallPoster || m.poster),
-        titleVi: m?.title?.vi || "",
-        titleEn: m?.title?.en || "",
+        sourceTitle: m.title,
         tags: [
           m?.badges?.[0]?.text || "",
           m?.year ? String(m.year) : "",
@@ -146,7 +148,7 @@ export default function HeaderPage() {
   // UI PHẦN TRÊN
   const toggleMenu = () => setIsOpen((v) => !v);
   const selectOption = (option) => {
-    setSelected(option);
+    i18n.changeLanguage(option);
     setIsOpen(false);
   };
 
@@ -162,13 +164,13 @@ export default function HeaderPage() {
 
         const key = n(label); // normalizeText
         if (!map.has(key)) {
-          map.set(key, label);
+          map.set(key, { value: label, label: movieText(g, language) });
         }
       });
     });
 
     return Array.from(map.values());
-  }, [allMovies]);
+  }, [allMovies, language]);
 
 
   // Lấy danh sách quốc gia tự động từ allMovies
@@ -194,13 +196,13 @@ export default function HeaderPage() {
 
         const key = n(label);
         if (!map.has(key)) {
-          map.set(key, label);
+          map.set(key, { value: label, label: movieText(c, language) });
         }
       });
     });
 
     return Array.from(map.values());
-  }, [allMovies]);
+  }, [allMovies, language]);
 
   const goHot = () => navigate(moviesUrl({ type: "hot" }));
   const goSingle = () => navigate(moviesUrl({ type: "single" }));
@@ -216,7 +218,7 @@ export default function HeaderPage() {
           role="link" tabIndex={0} onKeyDown={(event) => { if (event.key === "Enter") navigate("/home"); }}
           className="site-logo transition-transform cursor-pointer hover:scale-105"
           src="/images/logo-header/Logo-0.75.png"
-          alt="logo"
+          alt={t("nav.home")}
           onClick={() => navigate("/home")}
         />
 
@@ -231,13 +233,13 @@ export default function HeaderPage() {
             <img onError={movieImageFallback} src="/images/logo-header/Icon.png" alt="search" />
             <input
               ref={inputRef}
-              aria-label="Tìm kiếm phim"
+              aria-label={t("nav.search")}
               onKeyDown={(event) => {
                 if (event.key === "Enter" && query.trim()) navigate(moviesUrl({ q: query.trim() }));
               }}
               className="w-full border-none outline-none"
               type="text"
-              placeholder="Tìm kiếm phim"
+              placeholder={t("nav.search")}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onFocus={() => query.trim().length >= 2 && setShowPanel(true)}
@@ -261,11 +263,11 @@ export default function HeaderPage() {
             <div className="absolute left-0 right-0 mt-2 rounded-xl bg-[rgba(0,0,0,0.8)] ring-1 ring-white/10 backdrop-blur p-4 max-h-[420px] overflow-auto">
               {results.length === 0 ? (
                 <div className="py-3 text-sm text-center text-white/50">
-                  Không tìm thấy phim phù hợp.
+                  {t("nav.noResults")}
                 </div>
               ) : (
                 <ul className="space-y-3">
-                  {results.map((m) => (
+                  {results.map((item) => ({ ...item, ...movieTitles(item.sourceTitle, language) })).map((m) => (
                     <li
                       key={m.id}
                       onClick={() => onPickMovie(m.id)}
@@ -273,23 +275,23 @@ export default function HeaderPage() {
                     >
                       <img onError={movieImageFallback}
                         src={m.poster}
-                        alt={m.titleVi || m.titleEn}
+                        alt={m.title}
                         className="object-cover w-12 h-16 rounded-md ring-1 ring-black/30"
                       />
                       <div>
                         <div className="font-semibold leading-tight text-[15px]">
-                          {m.titleVi || m.titleEn}
+                          {m.title}
                         </div>
-                        <div className="text-sm leading-tight text-white/60">
-                          {m.titleEn || m.titleVi}
-                        </div>
+                        {m.subtitle && <div className="text-sm leading-tight text-white/60">
+                          {m.subtitle}
+                        </div>}
                         <div className="flex items-center gap-2 mt-1 text-xs text-white/70">
-                          {m.tags.map((t, i) => (
+                          {m.tags.map((tag, i) => (
                             <span key={i} className="flex items-center gap-2">
                               {i !== 0 && (
                                 <span className="inline-block w-1 h-1 rounded-full bg-white/40" />
                               )}
-                              <span>{t}</span>
+                              <span>{movieBadge(tag, t)}</span>
                             </span>
                           ))}
                         </div>
@@ -304,24 +306,27 @@ export default function HeaderPage() {
       </div>
 
       {/* Menu giữa */}
-      <nav id="header-navigation" aria-label="Điều hướng chính" className="header-navigation">
+      <nav id="header-navigation" aria-label={t("nav.main")} className="header-navigation">
         <button type="button"
           onClick={goHot}
           className="hover:text-[#f0d25b] transition-all cursor-pointer"
         >
-          Phim hot
+          {t("nav.hot")}
+
         </button>
         <button type="button"
           onClick={goSingle}
           className="hover:text-[#f0d25b] transition-all cursor-pointer"
         >
-          Phim lẻ
+          {t("nav.single")}
+
         </button>
         <button type="button"
           onClick={goSeries}
           className="hover:text-[#f0d25b] transition-all cursor-pointer"
         >
-          Phim bộ
+          {t("nav.series")}
+
         </button>
 
         {/* Quốc gia */}
@@ -335,7 +340,8 @@ export default function HeaderPage() {
               setOpenMenu(openMenu === "country" ? null : "country")
             }
           >
-            Quốc gia
+            {t("nav.country")}
+
           </button>
           <img onError={movieImageFallback}
             onClick={() =>
@@ -349,11 +355,11 @@ export default function HeaderPage() {
             <div className="absolute top-[30px] right-0 bg-[rgba(0,0,0,0.7)] w-[380px] grid grid-cols-3 gap-[10px] p-3 text-center rounded-[8px]">
               {countries.map((country, i) => (
                 <button type="button"
-                  onClick={() => goByCountry(country)}
+                  onClick={() => goByCountry(country.value)}
                   key={i}
                   className="hover:text-[#f0d25b] transition-all cursor-pointer"
                 >
-                  {country}
+                  {country.label}
                 </button>
               ))}
             </div>
@@ -369,7 +375,8 @@ export default function HeaderPage() {
             className="header-filter-control cursor-pointer"
             onClick={() => setOpenMenu(openMenu === "genre" ? null : "genre")}
           >
-            Thể loại
+            {t("nav.genre")}
+
           </button>
           <img onError={movieImageFallback}
             onClick={() => setOpenMenu(openMenu === "genre" ? null : "genre")}
@@ -381,22 +388,22 @@ export default function HeaderPage() {
             <div className="absolute top-[30px] right-0 bg-[rgba(0,0,0,0.7)] w-[380px] grid grid-cols-3 gap-[10px] p-3 text-center rounded-[8px]">
               {genres.map((g, i) => (
                 <button type="button"
-                  onClick={() => goByGenre(g)}
+                  onClick={() => goByGenre(g.value)}
                   key={i}
                   className="hover:text-[#f0d25b] transition-all cursor-pointer"
                 >
-                  {g}
+                  {g.label}
                 </button>
               ))}
             </div>
           )}
         </div>
         <div className="language-select">
-          <button type="button" aria-expanded={isOpen}
+          <button type="button" aria-label={t("language.label")} aria-expanded={isOpen}
             className="flex items-center justify-between language-select__selected"
             onClick={toggleMenu}
           >
-            <span>{selected}</span>
+            <span>{t(`language.${language}`)}</span>
             <img onError={movieImageFallback}
               className="w-[20px]"
               src="/images/logo-header/flight_4919659.png"
@@ -405,8 +412,8 @@ export default function HeaderPage() {
           </button>
           {isOpen && (
             <ul className="language-select__options">
-              <li><button type="button" onClick={() => selectOption("English")}>English</button></li>
-              <li><button type="button" onClick={() => selectOption("Vietnamese")}>Vietnamese</button></li>
+              <li><button type="button" onClick={() => selectOption("en")}>English</button></li>
+              <li><button type="button" onClick={() => selectOption("vi")}>Tiếng Việt</button></li>
             </ul>
           )}
         </div>
@@ -416,7 +423,7 @@ export default function HeaderPage() {
 
       {/* Language + Avatar */}
       <div className="header-actions">
-        <button type="button" className="header-mobile-button" aria-label="Tìm kiếm" aria-expanded={mobileSearch}
+        <button type="button" className="header-mobile-button" aria-label={t("nav.search")} aria-expanded={mobileSearch}
           onClick={() => { setMobileSearch(!mobileSearch); setMobileMenu(false); }}>
           {mobileSearch ? "✕" : <img src="/images/logo-header/Icon.png" alt="" />}
         </button>
@@ -425,12 +432,12 @@ export default function HeaderPage() {
             onClick={() => navigate("/login")}
             className="px-4 py-3 text-sm font-medium text-white transition border rounded-full cursor-pointer border-white/10 hover:bg-white/10"
           >
-            Đăng nhập
+            {t("auth.login")}
           </button>
         ) : (
           <UserMenu user={user.name} />
         )}
-        <button type="button" className="header-mobile-button" aria-label={mobileMenu ? "Đóng menu" : "Mở menu"}
+        <button type="button" className="header-mobile-button" aria-label={t(mobileMenu ? "nav.closeMenu" : "nav.openMenu")}
           aria-expanded={mobileMenu} aria-controls="header-navigation"
           onClick={() => { setMobileMenu(!mobileMenu); setMobileSearch(false); }}>
           {mobileMenu ? "✕" : "☰"}

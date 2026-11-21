@@ -1,25 +1,15 @@
+import { useTranslation } from "react-i18next";
 export default function Footer() {
-  const links = [
-    "FAQ",
-    "Trung tâm trợ giúp",
-    "Tài khoản",
-    "Trung tâm đa phương tiện",
-    "Quan hệ nhà đầu tư",
-    "Việc làm",
-    "Điều khoản sử dụng",
-    "Quyền riêng tư",
-    "Tùy chọn cookie",
-    "Thông tin doanh nghiệp",
-    "Liên hệ",
-    "Chỉ số tốc độ",
-  ];
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "vi";
+  const links = t("footer.links", { returnObjects: true });
 
   return (
     <footer className="site-footer text-gray-400 bg-[#192026] border-t border-white/10">
       <div className="w-full px-6 py-10 mx-auto max-w-7xl">
         {/* hotline / contact line */}
         <p className="mb-6 text-sm">
-          Câu hỏi? Liên hệ:{" "}
+          {t("footer.contact")}{" "}
           <a href="tel:0123456789" className="underline hover:text-gray-200">
             0123 456 789
           </a>
@@ -52,7 +42,8 @@ export default function Footer() {
             </svg>
             <select
               className="px-2 py-1 text-gray-200 bg-transparent border rounded border-white/20 focus:outline-none focus:ring-1 focus:ring-white/40"
-              defaultValue="vi"
+              aria-label={t("language.label")}
+              value={language} onChange={(event) => i18n.changeLanguage(event.target.value)}
             >
               <option value="vi">Tiếng Việt</option>
               <option value="en">English</option>
@@ -60,8 +51,8 @@ export default function Footer() {
           </label>
 
           <div className="text-xs text-gray-500">
-            © {new Date().getFullYear()} MovieVerse. Một sản phẩm học tập.
-            <span className="ml-2">Việt Nam</span>
+            © {new Date().getFullYear()} SteamViBe. {t("footer.legal")}
+            <span className="ml-2">{t("footer.country")}</span>
           </div>
         </div>
       </div>

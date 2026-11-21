@@ -1,3 +1,6 @@
+import { useTranslation } from "react-i18next";
+import { movieText, movieTitles } from "../lib/movieLanguage";
+import { translateAuthMessage } from "../lib/authMessage";
 import { getMovie } from "../lib/api";
 import { movieImageFallback } from "../lib/imageFallback";
 import { useEffect, useMemo, useState, useRef } from "react";
@@ -54,6 +57,8 @@ function getYouTubeId(url = "") {
 }
 
 export default function MovieDetailContent() {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "vi";
   const { id } = useParams();
   const { state } = useLocation(); // có thể có { movie }
   const navigate = useNavigate();
@@ -76,9 +81,7 @@ export default function MovieDetailContent() {
   const [favoriteBusy, setFavoriteBusy] = useState(false);
   const favoriteLock = useRef(false);
 
-  function ToastTransition(props) {
-    return <Slide {...props} direction="up" />;
-  }
+  useEffect(() => () => clearTimeout(toastResetRef.current), []);
 
   const showToast = (msg) => {
     setToastMsg(msg);
@@ -96,32 +99,33 @@ export default function MovieDetailContent() {
   // Map dữ liệu để render
   const m = useMemo(() => {
     if (!raw) return null;
+    const titles = movieTitles(raw.title, language);
+    const nations = raw.countries?.length ? raw.countries : Array.isArray(raw.nation) ? raw.nation : [raw.nation];
     return {
       id: raw.id,
       backdrop: normPath(raw.backdrop, ""),
       poster: normPath(raw.smallPoster || raw.poster),
-      titleMain: raw?.title?.en || raw?.title?.vi || "",
-      subtitle:
-        (raw?.title?.vi || raw?.title?.en || "") +
-        (raw?.year ? ` (${raw.year})` : ""),
+      titleMain: titles.title,
+      subtitle: titles.subtitle,
       duration: raw?.duration || "",
       rating: raw?.rating ?? "",
-      nation: raw?.nation?.vi || raw?.nation?.en || "",
+      nation: nations.map((nation) => movieText(nation, language)).filter(Boolean).join(", "),
       release: raw?.year ? String(raw.year) : "",
-      desc: raw?.description?.vi || raw?.description?.en || "",
-      genres: (raw?.genres || []).map((g) => g?.vi || g?.en).filter(Boolean),
+      desc: movieText(raw.description, language),
+      genres: (raw?.genres || []).map((g) => movieText(g, language)).filter(Boolean),
       trailer: raw?.trailer || raw?.video || "",
     };
-  }, [raw]);
+  }, [raw, language]);
+  const movieId = m?.id;
 
   const handleAddFavorite = async () => {
     if (favoriteLock.current) return;
     if (isGuest) {
-      showToast("Bạn cần đăng nhập để sử dụng tính năng này.");
+      showToast("detail.loginRequired");
       return;
     }
     if (!user) {
-      showToast("Phiên đăng nhập không hợp lệ. Vui lòng đăng nhập lại.");
+      showToast("detail.invalidSession");
       return;
     }
     const favPayload = {
@@ -134,23 +138,23 @@ export default function MovieDetailContent() {
     try {
       const { added } = await toggleFav(user.id, favPayload);
       setFav(added);
-      showToast(added ? "Đã thêm vào Yêu thích" : "Đã bỏ khỏi Yêu thích");
-    } catch (error) { showToast(error.message); }
+      showToast(added ? "detail.favoriteAdded" : "detail.favoriteRemoved");
+    } catch (error) { showToast({ error: error.message }); }
     finally { favoriteLock.current = false; setFavoriteBusy(false); }
   };
   useEffect(() => {
     let active = true;
     setFav(false);
-    if (!m || !user?.id || isGuest) return;
+    if (!movieId || !user?.id || isGuest) return;
     const refresh = () => {
-      isFav(user.id, m.id).then((value) => { if (active) setFav(value); }).catch(() => {
-        if (active) { setToastMsg("Không tải được trạng thái yêu thích. Bạn có thể thử lại bằng nút Yêu thích."); setToastOpen(true); }
+      isFav(user.id, movieId).then((value) => { if (active) setFav(value); }).catch(() => {
+        if (active) { setToastMsg("detail.favoriteLoadError"); setToastOpen(true); }
       });
     };
     refresh();
     window.addEventListener("focus", refresh);
     return () => { active = false; window.removeEventListener("focus", refresh); };
-  }, [m, user?.id, isGuest]);
+  }, [movieId, user?.id, isGuest]);
 
   // Tải chi tiết theo ID khi không có dữ liệu điều hướng.
   useEffect(() => {
@@ -180,7 +184,7 @@ export default function MovieDetailContent() {
         if (!mounted) return;
         console.error("Load movie failed:", e);
         setRaw(null);
-        setError("Không tải được phim. Phim có thể đã bị xóa hoặc kết nối đang gặp lỗi.");
+        setError("detail.loadError");
       } finally {
         clearTimeout(timeout);
         if (mounted) setLoading(false);
@@ -213,7 +217,7 @@ export default function MovieDetailContent() {
           justifyContent: "center",
         }}
       >
-        <CircularProgress color="inherit" />
+        <CircularProgress color="inherit" aria-label={t("movie.loading")} />
       </Box>
     );
   }
@@ -224,17 +228,17 @@ export default function MovieDetailContent() {
       <Box sx={{ bgcolor: "#0f1317", minHeight: "60vh", color: "white", px: { xs: 2, md: 6 }, pt: 14, pb: 6 }}>
         <Container maxWidth="lg">
           <Typography variant="h6" color="error">
-            {error || "Không tìm thấy phim."}
+            {t(error || "detail.notFound")}
           </Typography>
           <Button onClick={() => setRetryCount((count) => count + 1)}>
-            Thử lại
+            {t("movie.retry")}
           </Button>
           <Button
             variant="contained"
             sx={{ mt: 2 }}
             onClick={() => navigate(-1)}
           >
-            Quay lại
+            {t("detail.back")}
           </Button>
         </Container>
       </Box>
@@ -304,12 +308,12 @@ export default function MovieDetailContent() {
                     },
                     poster: m.poster,
                     backdrop: m.backdrop,
-                  }).catch((error) => showToast(error.message));
+                  }).catch((error) => showToast({ error: error.message }));
                 }
               }}
               disabled={!videoId}
             >
-              {videoId ? "XEM PHIM" : "KHÔNG CÓ LINK VIDEO"}
+              {t(videoId ? "detail.watch" : "detail.noVideo")}
             </Button>
             <Stack direction="row" spacing={1} sx={{ mt: 2 }}>
               <Button
@@ -318,7 +322,7 @@ export default function MovieDetailContent() {
                 sx={{ minHeight: 44, width: { xs: "100%", md: "auto" } }}
                 onClick={() => navigate(-1)}
               >
-                Quay lại
+                {t("detail.back")}
               </Button>
             </Stack>
           </Box>
@@ -328,9 +332,9 @@ export default function MovieDetailContent() {
             <Typography component="h1" variant="h3" fontWeight={800} sx={{ mb: 1, fontSize: { xs: 28, sm: 36, md: 48 }, lineHeight: 1.2 }}>
               {m.titleMain}
             </Typography>
-            <Typography variant="h6" sx={{ color: "#93c5fd", mb: 2, fontSize: { xs: 16, sm: 20 } }}>
+            {m.subtitle && <Typography variant="h6" sx={{ color: "#93c5fd", mb: 2, fontSize: { xs: 16, sm: 20 } }}>
               {m.subtitle}
-            </Typography>
+            </Typography>}
 
             <Stack
               direction="row"
@@ -361,12 +365,12 @@ export default function MovieDetailContent() {
             <Stack spacing={1.2} sx={{ mb: 3, "& .MuiTypography-root": { fontSize: { xs: 14, sm: 16 } } }}>
               {m.nation && (
                 <Typography>
-                  <strong>QUỐC GIA:</strong> {m.nation}
+                  <strong>{t("detail.country")}</strong> {m.nation}
                 </Typography>
               )}
               {m.release && (
                 <Typography>
-                  <strong>KHỞI CHIẾU:</strong> {m.release}
+                  <strong>{t("detail.release")}</strong> {m.release}
                 </Typography>
               )}
             </Stack>
@@ -379,7 +383,7 @@ export default function MovieDetailContent() {
                 fontSize: { xs: 14, sm: 16 },
               }}
             >
-              {m.desc || "Chưa có mô tả."}
+              {m.desc || t("movie.noDescription")}
             </Typography>
 
             <Divider sx={{ my: { xs: 2.5, md: 4 }, borderColor: "rgba(255,255,255,0.12)" }} />
@@ -415,10 +419,10 @@ export default function MovieDetailContent() {
                }`}
               title={
                 isGuest
-                  ? "Đăng nhập để sử dụng"
+                  ? t("detail.loginHint")
                   : fav
-                  ? "Bỏ khỏi Yêu thích"
-                  : "Thêm vào Yêu thích"
+                  ? t("detail.removeFavorite")
+                  : t("detail.addFavorite")
               }
             >
               <img onError={movieImageFallback}
@@ -435,7 +439,7 @@ export default function MovieDetailContent() {
                     : "text-white/80 group-hover:text-white"
                 }`}
               >
-                {fav ? "Đã thêm" : "Add to favorite"}
+                {t(favoriteBusy ? "detail.saving" : fav ? "detail.favorited" : "detail.addFavorite")}
               </span>
             </button>
           </Box>
@@ -461,7 +465,7 @@ export default function MovieDetailContent() {
             color: "#fff",
             bgcolor: "rgba(255,255,255,0.04)",
           }}
-          aria-label="close player"
+          aria-label={t("detail.closePlayer")}
         >
           <CloseIcon />
         </IconButton>
@@ -469,7 +473,7 @@ export default function MovieDetailContent() {
         {embedUrl ? (
           <Box component="iframe"
             src={embedUrl}
-            title={`${m.titleMain} - player`}
+            title={t("detail.playerTitle", { title: m.titleMain })}
             allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
             allowFullScreen
             sx={{
@@ -483,13 +487,13 @@ export default function MovieDetailContent() {
           />
         ) : (
           <Box sx={{ color: "white", p: 4 }}>
-            <Typography>Không tìm thấy video hợp lệ để phát.</Typography>
+            <Typography>{t("detail.invalidVideo")}</Typography>
             <Button
               sx={{ mt: 2 }}
               variant="outlined"
               onClick={() => setOpenPlayer(false)}
             >
-              Đóng
+              {t("detail.close")}
             </Button>
           </Box>
         )}
@@ -513,6 +517,7 @@ export default function MovieDetailContent() {
         sx={{ bottom: { xs: "max(12px, env(safe-area-inset-bottom))", sm: 24 }, left: { xs: 12, sm: "50%" }, right: { xs: 12, sm: "auto" } }}
       >
         <Alert
+          closeText={t("auth.close")}
           onClose={() => setToastOpen(false)}
           severity="info"
           variant="filled"
@@ -527,7 +532,7 @@ export default function MovieDetailContent() {
             "& .MuiAlert-icon": { color: "#facc15" },
           }}
         >
-          {toastMsg}
+          {typeof toastMsg === "string" ? (toastMsg ? t(toastMsg) : "") : translateAuthMessage(toastMsg.error, t)}
         </Alert>
       </Snackbar>
     </Box>

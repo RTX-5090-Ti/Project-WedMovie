@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+import { translateAuthMessage } from "../../lib/authMessage";
 import { normalizeEmail, validateAccount } from "../../lib/validation";
 import { useState, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,6 +11,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 
 export function LoginPage() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { state } = useLocation();
   const from = state?.from;
@@ -62,19 +65,19 @@ export function LoginPage() {
 
   return (
     <div className="login-page">
-      {notice && <p role="status" className="login-notice">{notice}</p>}
+      {notice && <p role="status" className="login-notice">{translateAuthMessage(notice, t)}</p>}
       <LogoAndLanguage></LogoAndLanguage>
       <video className="login-video" autoPlay loop muted playsInline aria-hidden="true">
         <source src={backgroundVideo} type="video/mp4" />
-        Trình duyệt của bạn không hỗ trợ video.
+        {t("auth.videoUnsupported")}
       </video>
       <div className="login-overlay" aria-hidden="true"></div>
       <main className="login-content">
       {/*Login page */}
       {loginMode && (
         <div className="wrapper">
-          <form action="#" onSubmit={handleSubmit}>
-            <h2>Login</h2>
+          <form action="#" onSubmit={handleSubmit} noValidate>
+            <h2>{t("auth.loginTitle")}</h2>
             <div className="input-field">
               <input
                 id="login-email"
@@ -87,7 +90,7 @@ export function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label htmlFor="login-email">Enter your email</label>
+              <label htmlFor="login-email">{t("auth.email")}</label>
             </div>
             <div className="input-field">
               <input
@@ -99,25 +102,25 @@ export function LoginPage() {
                 value={pw}
                 onChange={(e) => setPw(e.target.value)}
               />
-              <label htmlFor="login-password">Enter your password</label>
+              <label htmlFor="login-password">{t("auth.password")}</label>
             </div>
             <div className="forget">
               <label>
                 <input type="checkbox" id="remember" />
-                <p>Remember me</p>
+                <p>{t("auth.remember")}</p>
               </label>
-              <a href="#" onClick={handleForgotPassword}>Forgot password?</a>
+              <a href="#" onClick={handleForgotPassword}>{t("auth.forgotPassword")}</a>
             </div>
-            <button type="submit" disabled={busy}>Log In</button>
+            <button type="submit" disabled={busy}>{t(busy ? "auth.loggingIn" : "auth.login")}</button>
             {err && (
-              <p className="err" style={{ color: "red" }}>
-                {err}
+              <p role="status" className="err" style={{ color: "red" }}>
+                {translateAuthMessage(err, t)}
               </p>
             )}
 
             <div className="register">
               <p>
-                Don't have an account?{" "}
+                {t("auth.noAccount")}{" "}
                 <a
                   href="#"
                   onClick={(e) => {
@@ -127,11 +130,11 @@ export function LoginPage() {
                     setLoginMode(false);
                   }}
                 >
-                  Register
+                  {t("auth.register")}
                 </a>
               </p>
               <a href="#" className="guest" onClick={handleGuest}>
-                Join as a guest
+                {t("auth.guest")}
               </a>
             </div>
           </form>
@@ -140,8 +143,8 @@ export function LoginPage() {
       {/* Register page */}
       {!loginMode && (
         <div className="register-box">
-          <form action="#" onSubmit={handleSubmit}>
-            <h2>Register</h2>
+          <form action="#" onSubmit={handleSubmit} noValidate>
+            <h2>{t("auth.registerTitle")}</h2>
             <div className="input-field">
               <input
                 id="register-name"
@@ -152,7 +155,7 @@ export function LoginPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <label htmlFor="register-name">Enter your name</label>
+              <label htmlFor="register-name">{t("auth.name")}</label>
             </div>
             <div className="input-field">
               <input
@@ -166,7 +169,7 @@ export function LoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
-              <label htmlFor="register-email">Enter your email</label>
+              <label htmlFor="register-email">{t("auth.email")}</label>
             </div>
             <div className="input-field">
               <input
@@ -178,11 +181,11 @@ export function LoginPage() {
                 value={pw}
                 onChange={(e) => setPw(e.target.value)}
               />
-              <label htmlFor="register-password">Enter your password</label>
+              <label htmlFor="register-password">{t("auth.password")}</label>
             </div>
             <div className="forget"></div>
-            <button type="submit" disabled={busy}>{busy ? "Đang gửi..." : "Create account"}</button>
-            {err && <p role="alert" className="text-red-400">{err}</p>}
+            <button type="submit" disabled={busy}>{t(busy ? "auth.submitting" : "auth.createAccount")}</button>
+            {err && <p role="alert" className="text-red-400">{translateAuthMessage(err, t)}</p>}
             <div className="register">
               <p>
                 <a
@@ -194,7 +197,7 @@ export function LoginPage() {
                     setLoginMode(true);
                   }}
                 >
-                  Back to Login
+                  {t("auth.backToLogin")}
                 </a>
               </p>
             </div>
@@ -212,6 +215,7 @@ export function LoginPage() {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
       >
         <Alert
+          closeText={t("auth.close")}
           severity="info"
           variant="filled"
           onClose={() => setToastOpen(false)}
@@ -224,7 +228,7 @@ export function LoginPage() {
             "& .MuiAlert-icon": { color: "#facc15" },
           }}
         >
-          Tính năng này đang phát triển
+          {t("auth.inDevelopment")}
         </Alert>
       </Snackbar>
     </div>

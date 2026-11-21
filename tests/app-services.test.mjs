@@ -7,6 +7,63 @@ import { join, dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { build } from "esbuild";
 import vm from "node:vm";
+import { movieText, movieTitles, movieBadge } from "../src/lib/movieLanguage.js";
+
+test("movie language switches title order, falls back, and suppresses duplicate subtitles", () => {
+  const titles = { vi: "Trò chơi thao túng", en: "The Manipulated" };
+  assert.deepEqual(movieTitles(titles, "vi"), { title: titles.vi, subtitle: titles.en });
+  assert.deepEqual(movieTitles(titles, "en"), { title: titles.en, subtitle: titles.vi });
+  assert.deepEqual(movieTitles({ vi: "Anime", en: "anime" }, "en"), { title: "anime", subtitle: "" });
+  assert.deepEqual(movieTitles({ vi: "Chỉ có tiếng Việt" }, "en"), { title: "Chỉ có tiếng Việt", subtitle: "" });
+  assert.equal(movieText({ vi: "   ", en: "English" }, "vi"), "English");
+  assert.equal(movieText({ vi: "Việt Nam", en: "Vietnam" }, "en-US"), "Vietnam");
+  assert.equal(movieText(undefined, "en"), "");
+  assert.equal(movieBadge("P.Đề", (key) => key), "movie.subtitles");
+  assert.equal(movieBadge("4K", (key) => key), "4K");
+});
+
+test("login language defaults to Vietnamese, persists English, and translates visible errors", async () => {
+  const bundled = await build({
+    stdin: { contents: 'export { default as i18n } from "./src/i18n.js"; export { translateAuthMessage } from "./src/lib/authMessage.js"; export { validateAccount } from "./src/lib/validation.js";', resolveDir: process.cwd() },
+    bundle: true, write: false, platform: "browser", format: "iife", globalName: "localeTest",
+    define: { "process.env.NODE_ENV": '"production"' },
+  });
+  const storage = new Map();
+  function mount(blockStorage = false) {
+    const sandbox = {
+      setTimeout, clearTimeout, console,
+      document: { documentElement: {} },
+      localStorage: {
+        getItem(key) { if (blockStorage) throw new Error("Blocked"); return storage.get(key) ?? null; },
+        setItem(key, value) { if (blockStorage) throw new Error("Blocked"); storage.set(key, value); },
+      },
+    };
+    vm.createContext(sandbox);
+    vm.runInContext(bundled.outputFiles[0].text, sandbox);
+    return sandbox;
+  }
+  const app = mount();
+  const { i18n, translateAuthMessage, validateAccount } = app.localeTest;
+  const error = validateAccount({ email: "invalid", password: "123456" }, { login: true });
+  assert.equal(i18n.t("auth.login"), "Đăng nhập");
+  assert.equal(translateAuthMessage(error, i18n.t), "Vui lòng nhập email hợp lệ.");
+  await i18n.changeLanguage("en");
+  assert.equal(app.document.documentElement.lang, "en");
+  assert.equal(translateAuthMessage(error, i18n.t), "Please enter a valid email address.");
+  assert.equal(translateAuthMessage("Email hoặc mật khẩu không đúng.", i18n.t), "Incorrect email or password.");
+  assert.equal(translateAuthMessage("Không thực hiện được yêu cầu (HTTP 503).", i18n.t), "Unable to complete the request (HTTP 503).");
+  assert.equal(mount().localeTest.i18n.t("auth.login"), "Log in");
+  storage.set("steamvibe.language", "unsupported");
+  assert.equal(mount().localeTest.i18n.resolvedLanguage, "vi");
+  const blocked = mount(true);
+  await blocked.localeTest.i18n.changeLanguage("en");
+  assert.equal(blocked.localeTest.i18n.t("auth.register"), "Register");
+  const vi = JSON.parse(await readFile("src/locales/vi.json", "utf8"));
+  const en = JSON.parse(await readFile("src/locales/en.json", "utf8"));
+  for (const namespace of Object.keys(vi)) {
+    assert.deepEqual(Object.keys(en[namespace]).sort(), Object.keys(vi[namespace]).sort());
+  }
+});
 
 test("cursor cleans up listeners and keeps one animation loop across focus and remount", async () => {
   class Events extends EventTarget {

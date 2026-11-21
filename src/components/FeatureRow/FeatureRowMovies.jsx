@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { moviesUrl } from "../../lib/movieFilters";
 import useMovies from "../../lib/useMovies";
 import MovieLoadStatus from "../loading/MovieLoadStatus";
@@ -13,6 +14,7 @@ function normalize(src, fallback = "") {
 }
 
 export default function FeatureRowMovies() {
+  const { t } = useTranslation();
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
@@ -41,16 +43,18 @@ export default function FeatureRowMovies() {
 
           const year = m?.year ? String(m.year) : "";
           const duration = m?.duration ? String(m.duration) : "";
-          const nationVi = m?.nation?.vi || "";
+          const nation = m.nation;
 
           return {
             id: m.id,
+          sourceTitle: m.title,
             banner,
             poster, // FeatureRow dùng key "poster" cho tấm nhỏ góc trái
             badges, // FeatureRow.jsx đang đọc item.badge
             title: m?.title?.vi || m?.title?.en || "",
             subtitle: m?.title?.en || m?.title?.vi || "",
-            meta: [nationVi, year, duration].filter(Boolean),
+            nation,
+            meta: [year, duration].filter(Boolean),
           };
         });
 
@@ -68,7 +72,7 @@ export default function FeatureRowMovies() {
   return (
     <div className="home-section bg-[#192026] text-white px-6 py-8 mb-[30px]">
       <FeatureRow
-        title="Mãn Nhãn với Phim Chiếu Rạp"
+        title={t("home.theaters")}
         items={items}
         onClickButton={goToAllMovies} // truyền vào đây
         onMovieClick={goDetail}

@@ -1,3 +1,5 @@
+import { movieTitles, movieBadge, movieText } from "../../lib/movieLanguage";
+import { useTranslation } from "react-i18next";
 import { movieImageFallback } from "../../lib/imageFallback";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -6,6 +8,10 @@ import "swiper/css/navigation";
 import ButtonHover from "../ButtonHover";
 
 function FeatureCard({ item, onMovieClick }) {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "vi";
+  const titles = movieTitles(item.sourceTitle || { vi: item.title, en: item.subtitle }, language);
+  const meta = [movieText(item.nation, language), ...(item.meta || [])].filter(Boolean);
   const go = () => onMovieClick?.(item.id);
 
   return (
@@ -17,7 +23,7 @@ function FeatureCard({ item, onMovieClick }) {
       >
         <img onError={movieImageFallback}
           src={item.banner}
-          alt={item.title}
+          alt={titles.title}
           className="w-full aspect-[16/6] object-cover transition-transform duration-500 group-hover:scale-[1.02] rounded-2xl"
         />
 
@@ -25,7 +31,7 @@ function FeatureCard({ item, onMovieClick }) {
         <div className="absolute -bottom-6 left-4">
           <img onError={movieImageFallback}
             src={item.poster}
-            alt={item.title}
+            alt={titles.title}
             className="w-16 md:w-20 aspect-[2/3] object-cover rounded-xl shadow-xl ring-1 ring-black/30"
           />
         </div>
@@ -40,7 +46,7 @@ function FeatureCard({ item, onMovieClick }) {
                   b.color || "bg-black/60"
                 }`}
               >
-                {b.text}
+                {movieBadge(b.text, t)}
               </span>
             ))}
           </div>
@@ -57,19 +63,19 @@ function FeatureCard({ item, onMovieClick }) {
           onClick={go}
           className="text-lg font-semibold line-clamp-1 cursor-pointer hover:text-[#f0d25b]"
         >
-          {item.title}
+          {titles.title}
         </h3>
-        <p
+        {titles.subtitle && <p
           onClick={go}
           className="text-sm cursor-pointer text-white/60 line-clamp-1"
         >
-          {item.subtitle}
-        </p>
+          {titles.subtitle}
+        </p>}
 
         {/* meta: dạng chấm ngăn cách */}
-        {item.meta?.length > 0 && (
+        {meta.length > 0 && (
           <div className="flex flex-wrap items-center mt-1 text-sm gap-x-2 text-white/70">
-            {item.meta.map((m, i) => (
+            {meta.map((m, i) => (
               <span key={i} className="flex items-center gap-2">
                 {i !== 0 && (
                   <span className="inline-block w-1 h-1 rounded-full bg-white/40" />

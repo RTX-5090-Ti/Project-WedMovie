@@ -1,3 +1,5 @@
+import { movieTitles, movieBadge } from "../../lib/movieLanguage";
+import { useTranslation } from "react-i18next";
 import { movieImageFallback } from "../../lib/imageFallback";
 // Top10Row.jsx
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -6,6 +8,8 @@ import "swiper/css";
 import "swiper/css/free-mode";
 
 export default function Top10Row({ title, items = [], onMovieClick }) {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "vi";
   return (
     <section className="top10-row w-full">
       <h2 className="mb-5 text-3xl font-bold">{title}</h2>
@@ -18,7 +22,7 @@ export default function Top10Row({ title, items = [], onMovieClick }) {
         slidesPerView={2.5}
         breakpoints={{ 480: { slidesPerView: 3.2 }, 768: { slidesPerView: 3.5, spaceBetween: 24 }, 1024: { slidesPerView: 4.5 }, 1440: { slidesPerView: 6 } }}
       >
-        {items.map((m, idx) => (
+        {items.map((item) => ({ ...item, ...movieTitles(item.sourceTitle || { vi: item.title, en: item.subtitle }, language) })).map((m, idx) => (
           <SwiperSlide key={m.id}>
             <article className="group">
               {/* Poster */}
@@ -40,7 +44,7 @@ export default function Top10Row({ title, items = [], onMovieClick }) {
                       className={`px-2.5 py-1 rounded-md text-xs font-semibold 
                                   bg-black/60 backdrop-blur ${b.color ?? ""}`}
                     >
-                      {b.text}
+                      {movieBadge(b.text, t)}
                     </span>
                   ))}
                 </div>
@@ -58,12 +62,12 @@ export default function Top10Row({ title, items = [], onMovieClick }) {
                   >
                     {m.title}
                   </h3>
-                  <p
+                  {m.subtitle && <p
                     onClick={() => onMovieClick?.(m.id)}
                     className="text-sm cursor-pointer text-white/60 line-clamp-1"
                   >
                     {m.subtitle}
-                  </p>
+                  </p>}
                   {/* hàng nhãn nhỏ như T16  |  Phần 1  |  Tập 28 */}
                   <div className="flex flex-wrap mt-1 text-sm gap-x-4 gap-y-1 text-white/70">
                     {m.meta?.map((x, i) => (

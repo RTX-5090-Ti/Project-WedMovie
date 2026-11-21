@@ -1,3 +1,5 @@
+import { movieTitles } from "../../lib/movieLanguage";
+import { useTranslation } from "react-i18next";
 import MovieLoadStatus from "../loading/MovieLoadStatus";
 import { movieImageFallback } from "../../lib/imageFallback";
 // src/components/MenuMovie/WatchedRow.jsx
@@ -24,6 +26,8 @@ const getPoster = (m) =>
   m?.poster || m?.backdrop || "/images/default-poster.svg";
 
 export default function WatchedRow({ titleName = "Phim Đã Xem" }) {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "vi";
   const { user, isGuest } = useAuth();
   const [list, setList] = useState([]);
   const navigate = useNavigate();
@@ -75,8 +79,7 @@ export default function WatchedRow({ titleName = "Phim Đã Xem" }) {
       <div className="history-scroll pb-4 overflow-x-auto">
         <div className="inline-flex gap-4">
           {list.map((m) => {
-            const vi = getTitleVi(m);
-            const en = getTitleEn(m);
+            const { title: vi, subtitle: en } = movieTitles(m.title, language);
             return (
               <div
                 key={m.id}
@@ -94,8 +97,8 @@ export default function WatchedRow({ titleName = "Phim Đã Xem" }) {
                 <button type="button" disabled={removing === m.id}
                   onClick={(e) => handleRemove(e, m.id)}
                   className="history-remove absolute flex items-center justify-center w-8 h-8 text-sm font-bold text-white transition-opacity duration-200 border rounded-full opacity-0 top-2 right-2 bg-black/60 border-white/20 group-hover:opacity-100 hover:bg-black/80"
-                  aria-label="Xoá khỏi đã xem"
-                  title="Xoá khỏi đã xem"
+                  aria-label={t("home.removeHistory")}
+                  title={t("home.removeHistory")}
                 >
                   ×
                 </button>

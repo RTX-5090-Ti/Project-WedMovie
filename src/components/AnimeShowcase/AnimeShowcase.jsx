@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { movieImageFallback } from "../../lib/imageFallback";
 // src/components/AnimeShowcase.jsx
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,10 +16,11 @@ export default function AnimeShowcase({
   onClickButton,
   onTitleClick,
 }) {
+  const { t } = useTranslation();
   return (
     <section className="w-full ">
       <div className="flex items-center gap-5 mb-4">
-        <h2 className="text-3xl font-bold">Kho Tàng Anime Mới Nhất</h2>
+        <h2 className="text-3xl font-bold">{t("home.anime")}</h2>
         <ButtonHover onClick={onClickButton} />
       </div>
       <div className="anime-hero relative overflow-hidden rounded-3xl bg-[#1b1e24] ring-1 ring-white/5">
@@ -67,7 +69,7 @@ export default function AnimeShowcase({
             </Motion.h3>
           </AnimatePresence>
 
-          <Motion.p
+          {data.subtitle && <Motion.p
             key={data.subtitle}
             className="mb-4 text-lg text-white/70"
             initial={{ y: 6, opacity: 0 }}
@@ -75,7 +77,7 @@ export default function AnimeShowcase({
             transition={{ duration: 0.28 }}
           >
             {data.subtitle}
-          </Motion.p>
+          </Motion.p>}
 
           {/* badges hàng 1: IMDb + [year, duration, nation.vi] */}
           <div className="flex flex-wrap gap-2 mb-3">
@@ -131,7 +133,7 @@ export default function AnimeShowcase({
               alt="play"
               onError={(e) => (e.currentTarget.style.display = "none")}
             />
-            Xem ngay
+            {t("movie.watch")}
           </div>
         </div>
 

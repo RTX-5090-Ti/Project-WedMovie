@@ -1,3 +1,5 @@
+import { movieText } from "../../lib/movieLanguage";
+import { useTranslation } from "react-i18next";
 import { backdropFallback } from "../../lib/imageFallback";
 import useMovies from "../../lib/useMovies";
 import MovieLoadStatus from "../loading/MovieLoadStatus";
@@ -24,10 +26,12 @@ function shuffle(arr) {
 }
 
 export default function ContentMovie() {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "vi";
   const [slides, setSlides] = useState([]); // 5 phim featured ngẫu nhiên
   const [index, setIndex] = useState(0);
   const navigate = useNavigate();
-  const lang = "vi";
+  const lang = language;
   const timerRef = useRef(null);
   const [timerReset, setTimerReset] = useState(0);
 
@@ -64,7 +68,7 @@ export default function ContentMovie() {
   );
 
   const title =
-    (current?.title && (current.title[lang] || current.title.en)) || "—";
+    movieText(current?.title, lang) || "—";
 
   const year = current?.year ?? "—";
   const rating =
@@ -81,9 +85,7 @@ export default function ContentMovie() {
     : [];
 
   const desc =
-    current?.description?.[lang] ||
-    current?.description?.en ||
-    "No description.";
+    movieText(current?.description, lang) || t("movie.noDescription");
 
   if (loading || error) return <MovieLoadStatus loading={loading} error={error} retry={retry} />;
 
@@ -141,7 +143,7 @@ export default function ContentMovie() {
                 key={`${g.en}-${i}`}
                 className="py-[4px] px-[10px] rounded bg-white/10 border border-white/25 text-xs"
               >
-                {g[lang] || g.en}
+                {movieText(g, lang)}
               </span>
             ))}
           </div>
@@ -173,14 +175,14 @@ export default function ContentMovie() {
               alt="play"
               onError={(e) => (e.currentTarget.style.display = "none")}
             />
-            Xem ngay
+            {t("movie.watch")}
           </div>
 
           {/* Dots indicator (clickable) */}
           
           <div className="hero-thumbnails flex items-center gap-2 ml-2">
             {slides.map((m, i) => (
-              <button type="button" aria-label={`Slide ${i + 1}`} aria-pressed={i === index}
+              <button type="button" aria-label={t("movie.slide", { number: i + 1 })} aria-pressed={i === index}
                 key={i}
                 onClick={() => goTo(i)}
                 className={`relative w-[90px] h-[50px] rounded overflow-hidden cursor-pointer transition-all duration-300 ${
@@ -194,7 +196,7 @@ export default function ContentMovie() {
                     (m.backdrop && m.backdrop.replace("./public", "")) ||
                     "/images/default-backdrop.svg"
                   }
-                  alt={m.title?.vi || m.title?.en}
+                  alt={movieText(m.title, lang)}
                   className="object-cover w-full h-full"
                   onError={backdropFallback}
                 />

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import useMovies from "../../lib/useMovies";
 import MovieLoadStatus from "../loading/MovieLoadStatus";
 import { useEffect, useState } from "react";
@@ -12,6 +13,7 @@ function normalizePoster(src) {
 }
 
 export default function Top10Movies() {
+  const { t } = useTranslation();
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
 
@@ -20,6 +22,7 @@ export default function Top10Movies() {
   useEffect(() => {
         const top10 = data.slice(0, 10).map((m) => ({
           id: m.id,
+          sourceTitle: m.title,
           poster: normalizePoster(m.poster),
           // Tên hiển thị: dòng trên VI, dòng dưới EN (Top10Row dùng title/subtitle)
           title: m?.title?.vi || m?.title?.en || "",
@@ -45,7 +48,7 @@ export default function Top10Movies() {
   return (
     <div className="home-section bg-[#192026] text-white w-full max-w-[100vw] overflow-x-hidden px-6 py-10 mb-[30px]">
       <Top10Row
-        title="Top 10 Phim Hot Hôm Nay"
+        title={t("home.top10")}
         items={items}
         onMovieClick={goDetail}
       />

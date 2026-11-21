@@ -1,3 +1,5 @@
+import { movieText, movieTitles } from "../../lib/movieLanguage";
+import { useTranslation } from "react-i18next";
 import { moviesUrl } from "../../lib/movieFilters";
 import useMovies from "../../lib/useMovies";
 import MovieLoadStatus from "../loading/MovieLoadStatus";
@@ -14,38 +16,39 @@ function normalize(src, fallback = "") {
 }
 
 // Map 1 movie từ DB -> dữ liệu hero AnimeShowcase cần
-function toHeroData(m) {
+function toHeroData(m, language) {
   return {
     bg: normalize(m.backdrop, "/images/default-backdrop.svg"),
-    title: m?.title?.vi || m?.title?.en || "",
-    subtitle: m?.title?.en || m?.title?.vi || "",
+    ...movieTitles(m.title, language),
     score:
       typeof m?.rating === "number" ? m.rating.toFixed(1) : m?.rating || "",
     // tags1: đổi từ fake -> [year, duration, nation.vi]
     tags1: [
       m?.year ? String(m.year) : "",
       m?.duration ? String(m.duration) : "",
-      m?.nation?.vi || "",
+      movieText(m.nation, language),
     ].filter(Boolean),
     genres: Array.isArray(m?.genres)
-      ? m.genres.map((g) => g?.vi || g?.en).filter(Boolean)
+      ? m.genres.map((g) => movieText(g, language)).filter(Boolean)
       : [],
     // desc: lấy tiếng Việt
-    desc: (m?.description && (m.description.vi || m.description.en)) || "",
+    desc: movieText(m.description, language),
   };
 }
 
 // Map 1 movie -> thumbnail nhỏ
-function toThumb(m) {
+function toThumb(m, language) {
   const small = normalize(m.smallPoster);
   return {
     id: m.id,
-    title: m?.title?.vi || m?.title?.en || "",
+    title: movieText(m.title, language),
     poster: small || normalize(m.poster, "/images/default-poster.svg"),
   };
 }
 
 export default function AnimeShowcaseMovies() {
+  const { i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "vi";
   const [anime, setAnime] = useState([]);
   const [index, setIndex] = useState(0);
   const navigate = useNavigate();
@@ -66,11 +69,11 @@ export default function AnimeShowcaseMovies() {
   }, [data]);
 
   const hero = useMemo(
-    () => (anime[index] ? toHeroData(anime[index]) : null),
-    [anime, index]
+    () => (anime[index] ? toHeroData(anime[index], language) : null),
+    [anime, index, language]
   );
 
-  const thumbs = useMemo(() => anime.map(toThumb), [anime]);
+  const thumbs = useMemo(() => anime.map((m) => toThumb(m, language)), [anime, language]);
 
   //  Khi bấm nút “Xem thêm”
   const goToAllMovies = () => navigate(moviesUrl({ genre: "Anime" }));
