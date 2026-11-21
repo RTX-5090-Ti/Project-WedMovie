@@ -1,5 +1,23 @@
 # Movie Website ? React + JSON Server
 
+## Screenshots
+
+### Home Page
+
+![Home page with a featured movie banner and navigation](public/images/demo/trang-chu.png)
+
+### Movie Collections
+
+![Fresh movie picks and today's top 10 movies](public/images/demo/card-mopvie.png)
+
+### Movie Catalog
+
+![Movie catalog with poster cards and bilingual titles](public/images/demo/rending-movie.png)
+
+### Login Page
+
+![Login page with language selection and guest access](public/images/demo/login-page.png)
+
 ## Requirements
 
 - Node.js **20.19+ on the 20.x branch**, or **22.12 or later**, as required by the installed Vite version.
