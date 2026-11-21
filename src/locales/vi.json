@@ -1,4 +1,14 @@
 {
+  "catalog": {
+    "all": "Tất cả phim",
+    "favorites": "Phim yêu thích",
+    "genre": "Thể loại: {{genres}}",
+    "country": "Phim {{country}}",
+    "search": "Kết quả tìm kiếm: {{query}}",
+    "filters": "▼ Bộ lọc",
+    "loginRequired": "Vui lòng đăng nhập để xem phim yêu thích.",
+    "empty": "Chưa có phim trong danh sách này."
+  },
   "language": {
     "label": "Ngôn ngữ",
     "vi": "Tiếng Việt",
@@ -54,6 +64,7 @@
     "closeMenu": "Đóng menu"
   },
   "home": {
+    "backToTop": "Lên đầu trang",
     "pageTitle": "SteamViBe xem phim chất lượng",
     "new": "Phim Điện Ảnh Mới Toanh",
     "watched": "Phim Đã Xem",

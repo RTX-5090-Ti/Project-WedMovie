@@ -7,7 +7,16 @@ import { join, dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { build } from "esbuild";
 import vm from "node:vm";
-import { movieText, movieTitles, movieBadge } from "../src/lib/movieLanguage.js";
+import { movieText, movieTitles, movieBadge, movieFilterLabel } from "../src/lib/movieLanguage.js";
+
+test("catalog filter labels switch language without changing stored filters", () => {
+  const params = new URLSearchParams("genre=Hành động&country=Japan");
+  const original = params.toString();
+  assert.equal(movieFilterLabel(params.get("genre"), [{ vi: "Hành động", en: "Action" }], "en"), "Action");
+  assert.equal(movieFilterLabel(params.get("country"), [undefined, { vi: "Nhật Bản", en: "Japan" }], "vi"), "Nhật Bản");
+  assert.equal(movieFilterLabel("Unknown", [], "en"), "Unknown");
+  assert.equal(params.toString(), original);
+});
 
 test("movie language switches title order, falls back, and suppresses duplicate subtitles", () => {
   const titles = { vi: "Trò chơi thao túng", en: "The Manipulated" };

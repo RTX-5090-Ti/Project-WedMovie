@@ -9,6 +9,7 @@ import AnimeShowcaseMovies from "../../components/AnimeShowcase/AnimeShowcaseMov
 import GenreRowMovie from "../../components/MenuMovie/GenreRowMovie.jsx";
 import Footer from "../../components/Footer/FooterMovie";
 import WatchedRow from "../../components/MenuMovie/WatchedRow.jsx";
+import BackToTop from "../../components/BackToTop";
 
 import "./HomePage.css";
 
@@ -27,6 +28,7 @@ export default function HomePage() {
       <GenreRowMovie titleName={t("home.comedy")} genre="Hài hước" />
       <GenreRowMovie titleName={t("home.horror")} genre="Kinh dị" />
       <Footer />
+      <BackToTop />
     </div>
   );
 }

@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+import { movieTitles, movieBadge } from "../lib/movieLanguage";
 // ShowNewMovie.jsx
 import { useMemo } from "react";
 import { movieImageFallback } from "../lib/imageFallback";
@@ -12,41 +14,32 @@ import {
   Stack,
 } from "@mui/material";
 
-function getTitleVi(m) {
-  return typeof m.title === "string"
-    ? m.title
-    : m.title?.vi || m.title?.en || "";
-}
-function getTitleEn(m) {
-  // m.subtitle (nếu được map sẵn) hoặc title.en
-  if (typeof m.subtitle === "string") return m.subtitle;
-  if (typeof m.title === "object") return m.title?.en || m.title?.vi || "";
-  return "";
-}
-
 export default function ShowNewMovie({
-  title = "Danh sách",
+  title,
   movies = [],
   onTitleClick,
 }) {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "vi";
   // Nếu muốn đảm bảo đủ field, có thể chuẩn hóa nhẹ:
 
   const list = useMemo(
     () =>
       (movies || []).map((m) => ({
         ...m,
+        titles: movieTitles(typeof m.title === "string" ? { vi: m.title, en: m.subtitle } : m.title, language),
         poster: (m.smallPoster || m.poster || "/images/default-poster.svg").replace(/^\.\/public\//, "/"),
         badges: m.badges || [],
       })),
-    [movies]
+    [movies, language]
   );
 
   return (
     <Box component="main" sx={{ bgcolor: "#192026", py: { xs: 2, sm: 3 }, mt: { xs: "80px", sm: "96px", lg: "150px" }, minWidth: 0 }}>
       <Container maxWidth="xl" sx={{ px: { xs: 2, sm: 3 } }}>
         <Box sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 1.5, mb: { xs: 2, sm: 3 } }}>
-          <Typography component="h1" sx={{ fontSize: { xs: 20, sm: 24 }, fontWeight: 700, color: "white", minWidth: 0, overflowWrap: "anywhere" }}>{title}</Typography>
-          <Typography sx={{ fontSize: { xs: 12, sm: 14 }, color: "rgba(255,255,255,.6)", flexShrink: 0 }}>▼ Bộ lọc</Typography>
+          <Typography component="h1" sx={{ fontSize: { xs: 20, sm: 24 }, fontWeight: 700, color: "white", minWidth: 0, overflowWrap: "anywhere" }}>{title || t("catalog.all")}</Typography>
+          <Typography sx={{ fontSize: { xs: 12, sm: 14 }, color: "rgba(255,255,255,.6)", flexShrink: 0 }}>{t("catalog.filters")}</Typography>
         </Box>
 
         {/* Giữ poster đủ rõ trên điện thoại, tăng số cột theo màn hình. */}
@@ -77,7 +70,7 @@ export default function ShowNewMovie({
             >
               <CardActionArea
                 onClick={() => onTitleClick?.(m.id)}
-                aria-label={getTitleVi(m)}
+                aria-label={m.titles.title}
                 sx={{
                   borderRadius: { xs: 1.5, sm: 3 },
                   overflow: "hidden",
@@ -89,7 +82,7 @@ export default function ShowNewMovie({
                   onError={movieImageFallback}
                   component="img"
                   image={m.poster}
-                  alt={getTitleVi(m)}
+                  alt={m.titles.title}
                   loading="lazy"
                   sx={{
                     width: "100%",
@@ -118,7 +111,7 @@ export default function ShowNewMovie({
                   {m.badges.map((b, i) => (
                     <Chip
                       key={i}
-                      label={b.text}
+                      label={movieBadge(b.text, t)}
                       size="small"
                       sx={{
                         bgcolor:
@@ -144,16 +137,16 @@ export default function ShowNewMovie({
                 <h3
                   onClick={() => onTitleClick?.(m.id)}
                   className="font-bold text-white whitespace-nowrap overflow-hidden text-ellipsis hover:text-[#f0d25b] cursor-pointer"
-                  title={getTitleVi(m)}
+                  title={m.titles.title}
                 >
-                  {getTitleVi(m)}
+                  {m.titles.title}
                 </h3>
-                <p
+                {m.titles.subtitle && <p
                   className="overflow-hidden text-sm text-white/60 whitespace-nowrap text-ellipsis"
-                  title={getTitleEn(m)}
+                  title={m.titles.subtitle}
                 >
-                  {getTitleEn(m)}
-                </p>
+                  {m.titles.subtitle}
+                </p>}
               </Box>
             </Card>
           ))}

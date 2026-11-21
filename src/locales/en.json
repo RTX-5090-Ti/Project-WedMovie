@@ -1,4 +1,14 @@
 {
+  "catalog": {
+    "all": "All Movies",
+    "favorites": "Favorite Movies",
+    "genre": "Genres: {{genres}}",
+    "country": "Movies from {{country}}",
+    "search": "Search results: {{query}}",
+    "filters": "▼ Filters",
+    "loginRequired": "Please log in to view your favorite movies.",
+    "empty": "There are no movies in this list yet."
+  },
   "language": {
     "label": "Language",
     "vi": "Tiếng Việt",
@@ -54,6 +64,7 @@
     "closeMenu": "Close menu"
   },
   "home": {
+    "backToTop": "Back to top",
     "pageTitle": "SteamViBe — Quality movies",
     "new": "Fresh Movie Picks",
     "watched": "Watch History",

@@ -1,4 +1,36 @@
 .home-page { width: 100%; min-width: 0; }
+.home-page .back-to-top {
+  position: fixed;
+  right: max(24px, env(safe-area-inset-right));
+  bottom: max(24px, env(safe-area-inset-bottom));
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #ffe99a;
+  border-radius: 50%;
+  background: #f0d25b;
+  color: #192026;
+  box-shadow: 0 4px 20px #0008, 0 0 16px #f0d25b40;
+  cursor: pointer;
+  transition: transform .2s, background-color .2s;
+}
+.home-page .back-to-top:hover { background: #ffe58a; transform: translateY(-3px); }
+.home-page .back-to-top:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+@media (max-width: 639px) {
+  .home-page .back-to-top {
+    width: 36px;
+    height: 36px;
+    right: max(16px, env(safe-area-inset-right));
+    bottom: max(16px, env(safe-area-inset-bottom));
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-page .back-to-top { transition: none; }
+  .home-page .back-to-top:hover { transform: none; }
+}
 .home-page .home-section { min-width: 0; }
 .home-page .home-section h2 { overflow-wrap: anywhere; }
 .home-page .home-section .more-button { flex-shrink: 0; }

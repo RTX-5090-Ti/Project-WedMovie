@@ -7,7 +7,11 @@ import useMovies from "../../lib/useMovies";
 import { filterMovies } from "../../lib/movieFilters";
 import { loadFavorites } from "../../lib/favorites";
 import { useAuth } from "../../auth/useAuth";
+import { useTranslation } from "react-i18next";
+import { movieFilterLabel } from "../../lib/movieLanguage";
 export default function AllMoviesClick() {
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage || "vi";
   const [params] = useSearchParams();
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -17,8 +21,15 @@ export default function AllMoviesClick() {
   const [error, setError] = useState("");
   const [attempt, setAttempt] = useState(0);
   const isFavorites = params.get("type") === "favorites";
-  const typeTitles = { hot: "Phim hot", single: "Phim lẻ", series: "Phim bộ", new: "Phim điện ảnh mới toanh", favorites: "Phim yêu thích" };
-  const title = typeTitles[params.get("type")] || (params.has("genre") ? `Thể loại: ${params.getAll("genre").join(", ")}` : params.has("country") ? `Phim ${params.get("country")}` : "Tất cả phim");
+  const typeTitles = { hot: "nav.hot", single: "nav.single", series: "nav.series", new: "home.new", favorites: "catalog.favorites" };
+  const genreLabels = catalog.data.flatMap((movie) => movie.genres || []);
+  const countryLabels = catalog.data.flatMap((movie) => movie.countries?.length ? movie.countries : Array.isArray(movie.nation) ? movie.nation : [movie.nation]);
+  const typeTitle = typeTitles[params.get("type")];
+  const title = typeTitle ? t(typeTitle)
+    : params.has("genre") ? t("catalog.genre", { genres: params.getAll("genre").map((genre) => movieFilterLabel(genre, genreLabels, language)).join(", ") })
+    : params.has("country") ? t("catalog.country", { country: movieFilterLabel(params.get("country"), countryLabels, language) })
+    : params.get("q")?.trim() ? t("catalog.search", { query: params.get("q").trim() })
+    : t("catalog.all");
   useEffect(() => {
     const previousTitle = document.title;
     document.title = title;
@@ -43,9 +54,9 @@ export default function AllMoviesClick() {
   const movies = isFavorites ? favorites.map((saved) => catalog.data.find((movie) => String(movie.id) === String(saved.id)) || saved) : filterMovies(catalog.data, params);
   const status = isFavorites ? { loading, error, retry: () => setAttempt((value) => value + 1) } : catalog;
   return <><HeaderPage />
-    {status.loading || status.error ? <div className="mt-28"><MovieLoadStatus {...status} /></div> : isFavorites && !user ? <p className="p-8 mt-28 text-white">Vui lòng đăng nhập để xem phim yêu thích.</p> : <>
+    {status.loading || status.error ? <div className="mt-28"><MovieLoadStatus {...status} /></div> : isFavorites && !user ? <p className="p-8 mt-28 text-white">{t("catalog.loginRequired")}</p> : <>
       <ShowNewMovie title={title} movies={movies} onTitleClick={(id) => navigate(`/movie/${id}`)} />
-      {!movies.length && <p className="p-8 text-center text-white/70">Chưa có phim trong danh sách này.</p>}
+      {!movies.length && <p className="p-8 text-center text-white/70">{t("catalog.empty")}</p>}
     </>}
   </>;
 }

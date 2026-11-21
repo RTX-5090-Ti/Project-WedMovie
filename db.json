@@ -2592,7 +2592,7 @@
       "password": "123",
       "name": "Admin",
       "role": "admin",
-      "avatar": "/images/avatarUser/28.jpg",
+      "avatar": "/images/avatarUser/19.jpg",
       "gender": "male"
     },
     {
@@ -2614,7 +2614,23 @@
       "gender": "unknown"
     }
   ],
-  "favorites": [],
+  "favorites": [
+    {
+      "id": "admin:59",
+      "userId": "admin",
+      "movieId": "59",
+      "movie": {
+        "id": "59",
+        "title": {
+          "vi": "Pacific Rim: Trỗi Dậy",
+          "en": "Pacific Rim: Uprising"
+        },
+        "poster": "/images/data-json-imgs/uprising/SMALLPOSTER.webp",
+        "backdrop": "/images/data-json-imgs/uprising/BACKDROP.webp"
+      },
+      "updatedAt": 1795266810605
+    }
+  ],
   "history": [
     {
       "id": "4173e07f-90b6-4f8b-87c6-bfb6c9ef3de5:60",
@@ -2660,21 +2676,6 @@
         "backdrop": "/images/data-json-imgs/eclipse-of-lllusion/BACKDROP.jpg"
       },
       "updatedAt": 1794315043023
-    },
-    {
-      "id": "admin:40",
-      "userId": "admin",
-      "movieId": "40",
-      "movie": {
-        "id": "40",
-        "title": {
-          "vi": "Thần Đèn ơi, Ước Đi",
-          "en": "Genie, Make a Wish"
-        },
-        "poster": "/images/data-json-imgs/genie-make-wish/SMALLPOSTER.jpg",
-        "backdrop": "/images/data-json-imgs/genie-make-wish/BACKDROP.jpg"
-      },
-      "updatedAt": 1794550212460
     }
   ]
 }
