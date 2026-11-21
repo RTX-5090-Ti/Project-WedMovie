@@ -33,7 +33,7 @@ test("movie language switches title order, falls back, and suppresses duplicate 
 
 test("login language defaults to Vietnamese, persists English, and translates visible errors", async () => {
   const bundled = await build({
-    stdin: { contents: 'export { default as i18n } from "./src/i18n.js"; export { translateAuthMessage } from "./src/lib/authMessage.js"; export { validateAccount } from "./src/lib/validation.js";', resolveDir: process.cwd() },
+    stdin: { contents: 'export { default as i18n } from "./src/i18n.js"; export { translateAuthMessage } from "./src/lib/authMessage.js"; export { translateAdminMessage } from "./src/lib/adminMessage.js"; export { validateAccount, validateMovie } from "./src/lib/validation.js";', resolveDir: process.cwd() },
     bundle: true, write: false, platform: "browser", format: "iife", globalName: "localeTest",
     define: { "process.env.NODE_ENV": '"production"' },
   });
@@ -52,7 +52,7 @@ test("login language defaults to Vietnamese, persists English, and translates vi
     return sandbox;
   }
   const app = mount();
-  const { i18n, translateAuthMessage, validateAccount } = app.localeTest;
+  const { i18n, translateAuthMessage, translateAdminMessage, validateAccount, validateMovie } = app.localeTest;
   const error = validateAccount({ email: "invalid", password: "123456" }, { login: true });
   assert.equal(i18n.t("auth.login"), "Đăng nhập");
   assert.equal(translateAuthMessage(error, i18n.t), "Vui lòng nhập email hợp lệ.");
@@ -60,6 +60,9 @@ test("login language defaults to Vietnamese, persists English, and translates vi
   assert.equal(app.document.documentElement.lang, "en");
   assert.equal(translateAuthMessage(error, i18n.t), "Please enter a valid email address.");
   assert.equal(translateAuthMessage("Email hoặc mật khẩu không đúng.", i18n.t), "Incorrect email or password.");
+  assert.equal(i18n.t("account.passwordMismatch"), "The password confirmation does not match.");
+  assert.equal(i18n.t("account.profileSaved"), "Account information updated.");
+  assert.equal(translateAuthMessage("Mật khẩu cũ không đúng hoặc tài khoản đã bị xóa.", i18n.t), "The current password is incorrect or the account has been deleted.");
   assert.equal(translateAuthMessage("Không thực hiện được yêu cầu (HTTP 503).", i18n.t), "Unable to complete the request (HTTP 503).");
   assert.equal(mount().localeTest.i18n.t("auth.login"), "Log in");
   storage.set("steamvibe.language", "unsupported");
@@ -69,6 +72,18 @@ test("login language defaults to Vietnamese, persists English, and translates vi
   assert.equal(blocked.localeTest.i18n.t("auth.register"), "Register");
   const vi = JSON.parse(await readFile("src/locales/vi.json", "utf8"));
   const en = JSON.parse(await readFile("src/locales/en.json", "utf8"));
+  const movieError = validateMovie({});
+  assert.equal(translateAdminMessage(movieError, i18n.t), en.adminMessages.titlesRequired);
+  assert.equal(translateAdminMessage(error, i18n.t), "Please enter a valid email address.");
+  assert.equal(translateAdminMessage("", i18n.t), "");
+  assert.equal(i18n.t("admin.deleteMovie", { title: "Example" }), "Remove movie Example");
+  for (const language of ["vi", "en"]) {
+    await i18n.changeLanguage(language);
+    const messages = language === "vi" ? vi : en;
+    for (const [key, raw] of Object.entries(vi.adminMessages)) {
+      assert.equal(translateAdminMessage(raw, i18n.t), messages.adminMessages[key]);
+    }
+  }
   for (const namespace of Object.keys(vi)) {
     assert.deepEqual(Object.keys(en[namespace]).sort(), Object.keys(vi[namespace]).sort());
   }

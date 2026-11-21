@@ -1,6 +1,8 @@
+import { useTranslation } from "react-i18next";
 // 2 nút Active
 
 export default function ManagerTabs({ activeTab, onChange }) {
+  const { t } = useTranslation();
   const base =
     "inline-flex items-center justify-center px-6 py-3 font-semibold text-sm rounded-xl cursor-pointer transition-all duration-200";
 
@@ -22,11 +24,13 @@ export default function ManagerTabs({ activeTab, onChange }) {
   return (
     <div className="admin-tabs grid grid-cols-2 gap-6">
       <button type="button" aria-pressed={moviesActive} className={moviesClass} onClick={() => onChange("movies")}>
-        Quản lý phim 🎬
+        {t("admin.movies")}
+
       </button>
 
       <button type="button" aria-pressed={usersActive} className={usersClass} onClick={() => onChange("users")}>
-        Quản lý người dùng 👤
+        {t("admin.users")}
+
       </button>
     </div>
   );

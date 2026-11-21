@@ -1,3 +1,5 @@
+import { translateAdminMessage } from "../../lib/adminMessage";
+import { useTranslation } from "react-i18next";
 import "./ManagerAdmin.css";
 import { useState, useRef, useMemo } from "react";
 import ManagerTabs from "./ManagerTabs";
@@ -13,6 +15,7 @@ import { listUsers, createUser, deleteUser } from "../../lib/users";
 import { validateMovie } from "../../lib/validation";
 const emptyMovie = { titleVi: "", titleEn: "", isSeries: false, featured: false, nationVi: "", nationEn: "", year: "", poster: "", smallPoster: "", backdrop: "", genresVi: "", genresEn: "", descVi: "", descEn: "", trailer: "", duration: "", rating: "" };
 export default function ManagerAdmin() {
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState("movies");
   const catalog = useMovies();
   const movies = useMemo(() => [...catalog.data].sort(newestMovieFirst), [catalog.data]);
@@ -84,7 +87,7 @@ export default function ManagerAdmin() {
   const handleTabChange = (tab) => { if (busyRef.current) return; setActiveTab(tab); if (tab === "users") loadUsers(); };
   const handleDeleteUser = async (email) => {
     const user = users.find((item) => item.email === email);
-    if (!user || !window.confirm("Bạn có chắc muốn xóa tài khoản này?") || !begin()) return;
+    if (!user || !window.confirm(t("admin.confirmDeleteUser")) || !begin()) return;
     try { await deleteUser(user.id); await loadUsers(); }
     catch (err) { setUsersError(err.message); } finally { finish(); }
   };
@@ -96,24 +99,24 @@ export default function ManagerAdmin() {
     catch (err) { setError(err.message); } finally { finish(); }
   };
   const handleDeleteMovie = async (id) => {
-    if (!window.confirm("Bạn có chắc muốn gỡ phim này không?") || !begin()) return;
+    if (!window.confirm(t("admin.confirmDeleteMovie")) || !begin()) return;
     setMovieError("");
     try { await deleteMovie(id); setCurrentPage((page) => Math.min(page, Math.max(1, Math.ceil((movies.length - 1) / 14)))); }
     catch (err) { setMovieError(err.message); } finally { finish(); }
   };
   return (
     <div className="admin-page mt-[100px] p-10 text-white">
-      <h1 className="mb-5 text-3xl font-bold">Trang Quản Lý</h1>
+      <h1 className="mb-5 text-3xl font-bold">{t("admin.title")}</h1>
 
-      <p className="mb-4">Chào mừng Admin!</p>
+      <p className="mb-4">{t("admin.welcome")}</p>
 
       {/* 2 nút tab có active state */}
       <ManagerTabs activeTab={activeTab} onChange={handleTabChange} />
 
-      {movieError && !showAddMovie && !editingMovie && <p role="alert" className="text-red-400">{movieError}</p>}
-      {busy && <p role="status">Đang lưu thay đổi...</p>}
+      {movieError && !showAddMovie && !editingMovie && <p role="alert" className="text-red-400">{translateAdminMessage(movieError, t)}</p>}
+      {busy && <p role="status">{t("admin.saving")}</p>}
       {/* Nội dung mỗi tab */}
-      {activeTab === "users" && (usersLoading ? <p role="status">Đang tải tài khoản...</p> : usersError ? <div role="alert"><p>{usersError}</p><button onClick={loadUsers}>Thử lại</button></div> : (
+      {activeTab === "users" && (usersLoading ? <p role="status">{t("admin.loadingUsers")}</p> : usersError ? <div role="alert"><p>{translateAdminMessage(usersError, t)}</p><button onClick={loadUsers}>{t("admin.retry")}</button></div> : (
         <UserManagerSection
           users={users}
           onDeleteUser={handleDeleteUser}
@@ -123,17 +126,19 @@ export default function ManagerAdmin() {
 
       {activeTab === "movies" && (moviesLoading ? (
         <p role="status" className="mt-8 text-white/70">
-          Đang tải danh sách phim...
+          {t("admin.loadingMovies")}
+
         </p>
       ) : moviesError ? (
         <div role="alert" className="mt-8">
-          <p className="text-red-400">{moviesError}</p>
+          <p className="text-red-400">{translateAdminMessage(moviesError, t)}</p>
           <button
             type="button"
             onClick={loadMovies}
             className="px-4 py-2 mt-3 font-semibold text-black bg-yellow-400 rounded-lg cursor-pointer hover:bg-yellow-300"
           >
-            Thử lại
+            {t("admin.retry")}
+
           </button>
         </div>
       ) : (
@@ -152,7 +157,7 @@ export default function ManagerAdmin() {
         open={showAddBox}
         newName={newName}
         newEmail={newEmail}
-        error={error}
+        error={translateAdminMessage(error, t)}
         busy={busy}
         newPassword={newPassword}
         onChangePassword={setNewPassword}
@@ -167,7 +172,7 @@ export default function ManagerAdmin() {
         form={editForm}
         onChange={setEditForm}
         onClose={closeEditMovie}
-        error={movieError}
+        error={translateAdminMessage(movieError, t)}
         busy={busy}
         onSubmit={handleUpdateMovie}
       />
@@ -177,7 +182,7 @@ export default function ManagerAdmin() {
         form={newMovieForm}
         onChange={setNewMovieForm}
         onClose={() => { if (!busy) setShowAddMovie(false); }}
-        error={movieError}
+        error={translateAdminMessage(movieError, t)}
         busy={busy}
         onSubmit={handleCreateMovie}
       />

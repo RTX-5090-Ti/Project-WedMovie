@@ -1,8 +1,11 @@
+import { useTranslation } from "react-i18next";
+import { translateAuthMessage } from "../lib/authMessage";
 import Dialog from "@mui/material/Dialog";
 import { useState, useEffect, useRef } from "react";
 import { useAuth } from "../auth/useAuth";
 
 export default function AccountUser() {
+  const { t } = useTranslation();
   const { user, updateUser, changePassword } = useAuth(); // user trong auth: { email, name } hoặc null
   const [open, setOpen] = useState(false);
   const [openImg, setOpenImg] = useState(false);
@@ -22,9 +25,9 @@ export default function AccountUser() {
 
   // có 3 lựa chọn giới tính
   const options = [
-    { value: "unknown", label: "Không xác định" },
-    { value: "male", label: "Nam" },
-    { value: "female", label: "Nữ" },
+    { value: "unknown", label: "account.unknown" },
+    { value: "male", label: "account.male" },
+    { value: "female", label: "account.female" },
   ];
 
   // mảng avatar mẫu để người dùng chọn
@@ -53,32 +56,33 @@ export default function AccountUser() {
     if (busyRef.current) return;
     busyRef.current = true; setBusy(true); setPassMsg("");
     try { await action(); setPassMsg(success); }
-    catch (error) { setPassMsg(error.message); }
+    catch (error) { setPassMsg({ error: error.message }); }
     finally { busyRef.current = false; setBusy(false); }
   }
   const saveAvatarForUser = (avatarUrl) => save(async () => {
     await updateUser({ avatar: avatarUrl }); setAvatar(avatarUrl);
-  }, "Đã cập nhật ảnh đại diện.");
-  const handleUpdate = () => save(() => updateUser({ name: displayName, gender, avatar: selected?.src || avatar }), "Đã cập nhật thông tin.");
+  }, "account.avatarSaved");
+  const handleUpdate = () => save(() => updateUser({ name: displayName, gender, avatar: selected?.src || avatar }), "account.profileSaved");
   const handleChangePassword = () => {
-    if (!oldPass || !newPass || !confirmPass) { setPassMsg("Vui lòng nhập đủ 3 ô mật khẩu."); return; }
-    if (newPass !== confirmPass) { setPassMsg("Mật khẩu xác nhận không khớp."); return; }
-    save(async () => { await changePassword(oldPass, newPass); setOldPass(""); setNewPass(""); setConfirmPass(""); setOpen(false); }, "Đổi mật khẩu thành công.");
+    if (!oldPass || !newPass || !confirmPass) { setPassMsg("account.passwordRequired"); return; }
+    if (newPass !== confirmPass) { setPassMsg("account.passwordMismatch"); return; }
+    save(async () => { await changePassword(oldPass, newPass); setOldPass(""); setNewPass(""); setConfirmPass(""); setOpen(false); }, "account.passwordSaved");
   };
 
   return (
     <div className="account-layout flex max-w-6xl gap-12 px-6 py-10 mx-auto" aria-busy={busy}>
-      {busy && <p className="account-saving" role="status">Đang lưu...</p>}
+      {busy && <p className="account-saving" role="status">{t("account.saving")}</p>}
       {/* Cột trái: form */}
       <div className="account-form flex-1">
-        <h1 className="mb-2 text-2xl font-bold">Tài khoản</h1>
+        <h1 className="mb-2 text-2xl font-bold">{t("account.title")}</h1>
         <p className="mb-8 text-sm text-white/60">
-          Cập nhật thông tin tài khoản
+          {t("account.intro")}
+
         </p>
 
         {/* Email */}
         <div className="mb-5">
-          <label htmlFor="account-email" className="block mb-2 text-sm text-white/70">Email</label>
+          <label htmlFor="account-email" className="block mb-2 text-sm text-white/70">{t("account.email")}</label>
           <input
             type="text"
             id="account-email" autoComplete="email"
@@ -87,14 +91,16 @@ export default function AccountUser() {
             className="w-full bg-[#12151b] border border-white/5 rounded-lg px-4 py-3 text-sm outline-none text-white/80"
           />
           <p className="mt-1 text-xs text-white/30">
-            Email không thể thay đổi.
+            {t("account.emailReadOnly")}
+
           </p>
         </div>
 
         {/* Tên hiển thị */}
         <div className="mb-5">
           <label htmlFor="account-name" className="block mb-2 text-sm text-white/70">
-            Tên hiển thị
+            {t("account.name")}
+
           </label>
           <input
             type="text"
@@ -102,13 +108,13 @@ export default function AccountUser() {
                 value={displayName}
             onChange={(e) => setDisplayName(e.target.value)}
             className="w-full bg-[#12151b] border border-white/5 rounded-lg px-4 py-3 text-sm outline-none text-white placeholder:text-white/20 focus:border-[#d9aa3d]"
-            placeholder="Nhập tên của bạn"
+            placeholder={t("account.namePlaceholder")}
           />
         </div>
 
         {/* Giới tính */}
         <div className="mb-7">
-          <label className="block mb-3 text-sm text-white/70">Giới tính</label>
+          <label className="block mb-3 text-sm text-white/70">{t("account.gender")}</label>
           <div className="account-gender flex flex-wrap items-center gap-6 text-sm">
             {options.map((opt) => (
               <label
@@ -117,7 +123,7 @@ export default function AccountUser() {
               >
                 <input type="radio" name="gender" value={opt.value}
                   checked={gender === opt.value} onChange={() => setGender(opt.value)} />
-                {opt.label}
+                {t(opt.label)}
               </label>
             ))}
           </div>
@@ -128,16 +134,17 @@ export default function AccountUser() {
                 onClick={handleUpdate}
           className="bg-[#d9aa3d] hover:bg-[#c49731] transition-colors text-sm font-semibold px-8 py-3 rounded-md inline-block cursor-pointer"
         >
-          Cập nhật
+          {t("account.update")}
+
         </button>
 
         {passMsg ? (
-          <p role="status" className="mt-3 text-sm text-green-400">{passMsg}</p>
+          <p role="status" className="mt-3 text-sm text-green-400">{typeof passMsg === "string" ? t(passMsg) : translateAuthMessage(passMsg.error, t)}</p>
         ) : null}
 
         {/* link đổi mật khẩu */}
         <p className="text-sm mt-7 text-white/50">
-          Đổi mật khẩu, nhấn vào{" "}
+          {t("account.passwordPrompt")}{" "}
           <button type="button"
             onClick={() => {
               setPassMsg(""); // clear msg cũ trước khi mở
@@ -145,7 +152,8 @@ export default function AccountUser() {
             }}
             className="text-[#f0d25b] cursor-pointer hover:underline"
           >
-            đây
+            {t("account.here")}
+
           </button>
         </p>
       </div>
@@ -155,13 +163,15 @@ export default function AccountUser() {
         <Dialog open={open} onClose={() => { if (!busy) setOpen(false); }} className="account-dialog" aria-labelledby="password-dialog-title" fullWidth maxWidth="xs">
           <div className="account-dialog-content bg-[#1a1d24] p-8">
             <h2 id="password-dialog-title" className="mb-6 text-lg font-semibold text-center">
-              Đổi mật khẩu
+              {t("account.changePassword")}
+
             </h2>
 
             {/* Input mật khẩu cũ */}
             <div className="mb-4">
               <label htmlFor="account-old-password" className="block mb-2 text-sm text-white/70">
-                Mật khẩu cũ
+                {t("account.oldPassword")}
+
               </label>
               <input
                 type="password"
@@ -175,7 +185,8 @@ export default function AccountUser() {
             {/* Input mật khẩu mới */}
             <div className="mb-4">
               <label htmlFor="account-new-password" className="block mb-2 text-sm text-white/70">
-                Mật khẩu mới
+                {t("account.newPassword")}
+
               </label>
               <input
                 type="password"
@@ -189,7 +200,8 @@ export default function AccountUser() {
             {/* Xác nhận mật khẩu mới */}
             <div className="mb-6">
               <label htmlFor="account-confirm-password" className="block mb-2 text-sm text-white/70">
-                Xác nhận mật khẩu mới
+                {t("account.confirmPassword")}
+
               </label>
               <input
                 type="password"
@@ -201,7 +213,7 @@ export default function AccountUser() {
             </div>
 
             {passMsg ? (
-              <p className="mb-4 text-xs text-center text-red-300">{passMsg}</p>
+              <p className="mb-4 text-xs text-center text-red-300">{typeof passMsg === "string" ? t(passMsg) : translateAuthMessage(passMsg.error, t)}</p>
             ) : null}
 
             {/* Nút hành động */}
@@ -210,7 +222,8 @@ export default function AccountUser() {
                 onClick={handleChangePassword}
                 className="bg-[#f0d25b] text-black font-semibold px-5 py-2 rounded-md hover:bg-[#d9aa3d] transition-colors cursor-pointer inline-flex items-center justify-center"
               >
-                Đổi mật khẩu
+                {t("account.changePassword")}
+
               </button>
               <button type="button" disabled={busy}
                 onClick={() => {
@@ -222,7 +235,8 @@ export default function AccountUser() {
                 }}
                 className="inline-flex items-center justify-center px-5 py-2 transition-colors border rounded-md cursor-pointer border-white/10 hover:bg-white/10"
               >
-                Đóng
+                {t("account.close")}
+
               </button>
             </div>
           </div>
@@ -235,7 +249,7 @@ export default function AccountUser() {
         <div className="account-avatar-image w-[150px] h-[150px] rounded-full overflow-hidden border-4 border-[#1f2127] shadow-[0_0_0_3px_rgba(0,0,0,0.3)]">
           <img
             src={avatar || selected?.src || "/images/test/avatar-small.webp"}
-            alt="avatar"
+            alt={t("account.avatar")}
             className="object-cover w-full h-full"
           />
         </div>
@@ -246,22 +260,24 @@ export default function AccountUser() {
           className="flex items-center gap-2 bg-[#12151b] border border-white/5 hover:border-[#d9aa3d] px-4 py-2 rounded-md text-sm cursor-pointer"
         >
           <span className="text-lg">▦</span>
-          Ảnh có sẵn
+          {t("account.availableAvatars")}
+
         </button>
 
-        <p className="text-xs text-center text-white/30">Chọn ảnh có sẵn</p>
+        <p className="text-xs text-center text-white/30">{t("account.avatarHint")}</p>
 
         {/* MODAL chọn avatar */}
         {openImg && (
           <Dialog open={openImg} onClose={() => { if (!busy) setOpenImg(false); }} className="account-dialog" aria-labelledby="avatar-dialog-title" fullWidth maxWidth="sm">
             <div className="account-dialog-content bg-[#1a1d24] p-6">
               <h2 id="avatar-dialog-title" className="mb-5 text-lg font-semibold text-center">
-                Chọn ảnh đại diện
+                {t("account.chooseAvatar")}
+
               </h2>
 
               <div className="avatar-options grid grid-cols-3 gap-5 mb-6 sm:grid-cols-4">
                 {avatarList.map((ava) => (
-                  <button type="button" aria-label={`Avatar ${ava.id}`} aria-pressed={selected?.id === ava.id}
+                  <button type="button" aria-label={t("account.avatarOption", { number: ava.id })} aria-pressed={selected?.id === ava.id}
                     key={ava.id}
                     onClick={() => setSelected(ava)}
                     className={`avatar-option w-[100px] h-[100px] rounded-full overflow-hidden border-2 cursor-pointer transition-all duration-200 ${
@@ -272,7 +288,7 @@ export default function AccountUser() {
                   >
                     <img
                       src={ava.src || "/images/test/avatar-small.webp"}
-                      alt={`avatar-${ava.id}`}
+                      alt=""
                       className="object-cover w-full h-full"
                     />
                   </button>
@@ -284,7 +300,8 @@ export default function AccountUser() {
                 onClick={() => setOpenImg(false)}
                   className="inline-flex items-center justify-center px-5 py-2 text-sm transition-colors border rounded-md cursor-pointer border-white/10 hover:bg-white/10"
                 >
-                  Đóng
+                  {t("account.close")}
+
                 </button>
                 <button type="button" disabled={busy}
                 onClick={() => {
@@ -300,7 +317,8 @@ export default function AccountUser() {
                   }}
                   className="px-5 py-2 rounded-md text-sm bg-[#f0d25b] text-black font-semibold hover:bg-[#d9aa3d] transition-colors cursor-pointer inline-flex  items-center justify-center"
                 >
-                  Xác nhận
+                  {t("account.confirm")}
+
                 </button>
               </div>
             </div>
