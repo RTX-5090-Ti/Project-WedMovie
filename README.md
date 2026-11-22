@@ -78,14 +78,14 @@ To access the app from another device, the API must have an address reachable fr
 
 ## Available Commands
 
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Start the frontend development server |
-| `npm run server` | Start JSON Server on port 5000 and watch `db.json` |
-| `npm run lint` | Run ESLint |
-| `npm test` | Run automated tests with separate in-memory data |
-| `npm run build` | Generate an optimized frontend build in `dist/` |
-| `npm run preview` | Preview the build, usually on port 4173 |
+| Command           | Purpose                                            |
+| ----------------- | -------------------------------------------------- |
+| `npm run dev`     | Start the frontend development server              |
+| `npm run server`  | Start JSON Server on port 5000 and watch `db.json` |
+| `npm run lint`    | Run ESLint                                         |
+| `npm test`        | Run automated tests with separate in-memory data   |
+| `npm run build`   | Generate an optimized frontend build in `dist/`    |
+| `npm run preview` | Preview the build, usually on port 4173            |
 
 To preview a build, keep the API running in a separate terminal, then run:
 
@@ -138,13 +138,13 @@ Tests run JSON Server on a randomly assigned port with in-memory data; they do n
 
 ## Troubleshooting
 
-| Symptom | What to check |
-| --- | --- |
-| `npm` is not recognized | Install a supported Node.js version, then reopen the terminal |
-| `package.json` cannot be found | Change to the correct `movie-wedsite` directory |
-| Movies fail to load or sign-in fails | Check that the API is running, try opening `/movies`, and confirm that its port matches `VITE_API_BASE` |
-| `EADDRINUSE` on port 5000 | Use a different API port as described above |
-| Vite reports an unsupported Node.js version | Compare `node --version` with the Requirements section |
-| Changes to `.env.local` have no effect | Restart Vite, or rebuild if using `preview` |
-| An old account is missing | Sign in again from the browser where the account was stored to migrate its data; check any server error messages |
-| Imports still reference `libary` or `AcountUser` | The new names are `src/lib/` and `AccountUser`; close the old IDE tabs and open the files at their new paths |
+| Symptom                                          | What to check                                                                                                    |
+| ------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------- |
+| `npm` is not recognized                          | Install a supported Node.js version, then reopen the terminal                                                    |
+| `package.json` cannot be found                   | Change to the correct `movie-wedsite` directory                                                                  |
+| Movies fail to load or sign-in fails             | Check that the API is running, try opening `/movies`, and confirm that its port matches `VITE_API_BASE`          |
+| `EADDRINUSE` on port 5000                        | Use a different API port as described above                                                                      |
+| Vite reports an unsupported Node.js version      | Compare `node --version` with the Requirements section                                                           |
+| Changes to `.env.local` have no effect           | Restart Vite, or rebuild if using `preview`                                                                      |
+| An old account is missing                        | Sign in again from the browser where the account was stored to migrate its data; check any server error messages |
+| Imports still reference `libary` or `AcountUser` | The new names are `src/lib/` and `AccountUser`; close the old IDE tabs and open the files at their new paths     |
